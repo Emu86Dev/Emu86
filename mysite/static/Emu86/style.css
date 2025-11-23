@@ -946,10 +946,8 @@ td#float-cell {
     background: #dde;
 }
 
-td#unwritable {
-    color: white;
+.unwritable {
     background: #936;
-    vertical-align: middle
 }
 
 td#contents, input#flag-cont {
