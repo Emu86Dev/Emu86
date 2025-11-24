@@ -389,6 +389,8 @@ input[type=number], textarea, select, .vTextField {
     border-radius: 4px;
     padding: 5px 6px;
     margin-top: 0;
+    background-color: black;
+    color: white;
 }
 
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus,
