@@ -14,15 +14,17 @@
       <h2>
         Write assembly, run it instantly, and inspect registers, <br/>
         flags, stacks, and memory - right in the browser.
-        <!--Select your dialect of assembler:--></h2>
-      <select name="language" onchange="SetBase(); updateAction()">
-        <option value="intel">Intel</option>
-        <option value="att">AT&amp;T</option>
-        <option value="mips_asm">MIPS Assembly</option>
-        <option value="mips_mml">MIPS Mnemonic Machine Language</option>
-        <option value="riscv">RISC-V</option>
-        <option value="wasm">WASM</option>
-      </select>
+      </h2>
+        <div id="language-buttons">
+          <button type="button" class="lang-btn" data-lang="intel">Intel</button>
+          <button type="button" class="lang-btn" data-lang="att">AT&amp;T</button>
+          <button type="button" class="lang-btn" data-lang="mips_asm">MIPS Assembly</button>
+          <button type="button" class="lang-btn" data-lang="mips_mml">MIPS Mnemonic Machine Language</button>
+          <button type="button" class="lang-btn" data-lang="riscv">RISC-V</button>
+          <button type="button" class="lang-btn" data-lang="wasm">WASM</button>
+        </div>
+        
+        <input type="hidden" name="language" id="language-input" value="intel">
       <br />
       Please select your number system:
       <input
@@ -41,33 +43,40 @@
 
     <script>
       function SetBase() {
-        langBar = document.getElementsByName("language")[0];
-        var language = langBar.options[langBar.selectedIndex].value;
+        const languageInput = document.querySelector('input[name="language"]');
+        const language = languageInput.value;
+    
+        const baseRadios = document.getElementsByName("base");
+    
         if (
-          language == "mips_asm" ||
-          language == "mips_mml" ||
-          language == "riscv"
+          language === "mips_asm" ||
+          language === "mips_mml" ||
+          language === "riscv"
         ) {
-          document.getElementsByName("base")[0].removeAttribute("checked");
-          document.getElementsByName("base")[1].checked = true;
+          baseRadios[0].checked = false;  
+          baseRadios[1].checked = true;   
         } else {
-          document.getElementsByName("base")[0].checked = true;
-          document.getElementsByName("base")[1].removeAttribute("checked");
+          baseRadios[0].checked = true;
+          baseRadios[1].checked = false;
         }
       }
+    
       function updateAction() {
-        const lang = document.getElementsByName("language")[0].value;
+        const lang = document.querySelector('input[name="language"]').value;
         const base = document.querySelector('input[name="base"]:checked').value;
+    
         const slug = `${lang}-${base}`;
-        const url = `{% url 'Emu86:emu_page' slug='SLUG' %}`.replace(
-          "SLUG",
-          slug
-        );
+        const url = `{% url 'Emu86:emu_page' slug='SLUG' %}`.replace("SLUG", slug);
+    
         document.getElementById("langForm").action = url;
       }
-
-      document.addEventListener("DOMContentLoaded", updateAction);
+    
+      document.addEventListener("DOMContentLoaded", () => {
+        SetBase();
+        updateAction();
+      });
     </script>
+    
   </h5>
   </div>
 </body>
