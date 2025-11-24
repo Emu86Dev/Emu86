@@ -1167,9 +1167,9 @@ summary.menu_sum {
 
 /* Highlight for current step instruction */
 .CodeMirror .line-highlight {
-    background-color: #ffffcc !important;
+    background-color: #2a4a2a !important;
 }
 
 .CodeMirror-selected {
-    background-color: #d7d4f0 !important;
+    background-color: #1a3a3a !important;
 }
