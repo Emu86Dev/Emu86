@@ -16,8 +16,8 @@
         flags, stacks, and memory - right in the browser.
       </h2>
         <div id="language-buttons">
-          <button type="button" class="lang-btn" data-lang="intel">Intel</button>
-          <button type="button" class="lang-btn" data-lang="att">AT&amp;T</button>
+          <button type="button" class="lang-btn" data-lang="intel">X86-Intel</button>
+          <button type="button" class="lang-btn" data-lang="att">X86-AT&amp;T</button>
           <button type="button" class="lang-btn" data-lang="mips_asm">MIPS Assembly</button>
           <button type="button" class="lang-btn" data-lang="mips_mml">MIPS Mnemonic Machine Language</button>
           <button type="button" class="lang-btn" data-lang="riscv">RISC-V</button>
@@ -70,11 +70,32 @@
     
         document.getElementById("langForm").action = url;
       }
-    
+  
       document.addEventListener("DOMContentLoaded", () => {
+    const langInput = document.getElementById("language-input");
+    const buttons = document.querySelectorAll(".lang-btn");
+
+    buttons.forEach(btn => {
+      if (btn.dataset.lang === langInput.value) {
+        btn.classList.add("active");
+      }
+    });
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        langInput.value = btn.dataset.lang;
+
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
         SetBase();
         updateAction();
       });
+    });
+
+    SetBase();
+    updateAction();
+  });
     </script>
     
   </h5>
