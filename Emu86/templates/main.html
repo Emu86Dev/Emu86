@@ -243,75 +243,54 @@
                             <table id="registers-table">
                             <tr>
                                 <td colspan="2">
-                                <div class="row-wrapper">
-                                    <span class="label">Registers</span>
-                                    <span class="value">Contents</span>
-                                 </div>
+                                    <div class="row-wrapper">
+                                        <span class="label">Registers</span>
+                                        <span class="value">Contents</span>
+                                    </div>
                                 </td>
-                                {% if int_registers|length > 10 %}
-                                <td colspan="2">
-                                <div class="row-wrapper">
-                                    <span class="label">Registers</span>
-                                    <span class="value">Contents</span>
-                                 </div>
-                                </td>
-                                <td colspan="2">
-                                <div class="row-wrapper">
-                                    <span class="label">Registers</span>
-                                    <span class="value">Contents</span>
-                                 </div>
-                                </td>
-                                {% endif %}
                             </tr>
-                            <tr>
                             {% for reg, cont in int_registers %}
-                                    {% if forloop.first or forloop.counter0|divisibleby:3 %}
-                                <tr class="R">
-                            {% endif %}
+                            <tr class="R">
+                                <td colspan="2">
+                                    <div class="row-wrapper">
+                                        <span class="reg-label {% if reg in unwritable %}unwritable{% endif %}">
+                                            {{ reg }}
+                                        </span>
 
-                <td colspan="2">
-                    <div class="row-wrapper">
-                        <span class="reg-label {% if reg in unwritable %}unwritable{% endif %}">
-                            {{ reg }}
-                                </span>
-
-                                <span class="reg-value {% if reg in changes %}bg-color-yellow{% endif %}">
-                            {% if data_init == "on" %}
-                                <input
-                            {% if reg in unwritable %}
-                                id="unwr-cont"
-                                readonly="readonly"
-                            {% else %}
-                                id="reg-cont"
-                            {% endif %}
-                                value="{{ cont }}"
-                                name="{{ reg }}"
-                                size="10">
-                            {% else %}
-                                <input
-                            {% if reg in unwritable %}
-                                id="unwr-cont"
-                            {% else %}
-                                id="reg-cont"
-                            {% endif %}
-                                value="{{ cont }}"
-                                name="{{ reg }}"
-                                size="10"
-                                readonly="readonly"
-                            {% if reg in changes %}
-                                class="bg-color-yellow"
-                            {% else %}
-                                class="bg-color-white"
-                            {% endif %}
-                                onclick="convert(name,value)">
-                            {% endif %}
-                        </span>
-                    </div>
-                </td>
-
-                            {% if forloop.counter|divisibleby:3 or forloop.last %}
-                </tr>
-                            {% endif %}
+                                        <span class="reg-value {% if reg in changes %}bg-color-yellow{% endif %}">
+                                            {% if data_init == "on" %}
+                                                <input
+                                                    {% if reg in unwritable %}
+                                                        id="unwr-cont"
+                                                        readonly="readonly"
+                                                    {% else %}
+                                                        id="reg-cont"
+                                                    {% endif %}
+                                                    value="{{ cont }}"
+                                                    name="{{ reg }}"
+                                                    size="10">
+                                            {% else %}
+                                                <input
+                                                    {% if reg in unwritable %}
+                                                        id="unwr-cont"
+                                                    {% else %}
+                                                        id="reg-cont"
+                                                    {% endif %}
+                                                    value="{{ cont }}"
+                                                    name="{{ reg }}"
+                                                    size="10"
+                                                    readonly="readonly"
+                                                    {% if reg in changes %}
+                                                        class="bg-color-yellow"
+                                                    {% else %}
+                                                        class="bg-color-white"
+                                                    {% endif %}
+                                                    onclick="convert(name,value)">
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
                             {% endfor %}
                             </tr>
                             <tr>
