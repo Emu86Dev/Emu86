@@ -307,20 +307,18 @@ td {
     padding: 12px 16px;
 
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 6px;
 }
 
 .row-wrapper .label {
-    width: 70px; 
-    flex-shrink: 0; 
-    color: white;
+    width: auto; 
+    color: gray;
 }
 
 .row-wrapper .value {
-    flex: 1; 
-    text-align: right;
-    color: white;
+    text-align: left;
+    color: gray;
 }
 
 
@@ -779,7 +777,7 @@ a.deletelink:focus, a.deletelink:hover {
 }
 
 .dashboard #content {
-    width: 600px;
+    width: calc(95% - 40px);
 }
 
 #content-main {
@@ -992,15 +990,10 @@ td#form-cell {
     border: 1px solid #ffffff;
     border-radius: 4px;
     background-color: #202020;
+    width: 870px;
     /*background: #dde;*/
 }
 
-td#registers-cell {
-    border: 1px solid #ffffff;
-    border-radius: 4px;
-    background-color: #202020;
-    /*background: #edd;*/
-}
 
 
 

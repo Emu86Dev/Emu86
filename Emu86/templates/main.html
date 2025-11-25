@@ -253,11 +253,11 @@
                             <tr class="R">
                                 <td colspan="2">
                                     <div class="row-wrapper">
-                                        <span class="reg-label {% if reg in unwritable %}unwritable{% endif %}">
+                                        <span class="label {% if reg in unwritable %}unwritable{% endif %}">
                                             {{ reg }}
                                         </span>
 
-                                        <span class="reg-value {% if reg in changes %}bg-color-yellow{% endif %}">
+                                        <span class="value {% if reg in changes %}bg-color-yellow{% endif %}">
                                             {% if data_init == "on" %}
                                                 <input
                                                     {% if reg in unwritable %}
