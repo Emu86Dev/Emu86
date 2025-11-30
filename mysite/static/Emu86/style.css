@@ -991,6 +991,7 @@ td#form-cell {
     border-radius: 4px;
     background-color: #202020;
     width: 870px;
+    vertical-align: top;
     /*background: #dde;*/
 }
 
