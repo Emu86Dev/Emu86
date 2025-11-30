@@ -460,19 +460,25 @@ def get_reg_contents(registers, request):
                     else:
                         registers[reg] = hex(int(registers[reg], 2))
                 else:
-                    registers[reg] = float(request.POST[reg])
+                    reg_value = request.POST.get(reg)
+                    if reg_value is not None:
+                        registers[reg] = float(reg_value)
         elif reg[:2] == 'ST':
             registers[reg] = float(registers[reg])
         else:
-            if hex_term:
-                registers[reg] = int(request.POST[reg], 16)
-            else:
-                registers[reg] = int(request.POST[reg])
+            reg_value = request.POST.get(reg)
+            if reg_value is not None:
+                if hex_term:
+                    registers[reg] = int(reg_value, 16)
+                else:
+                    registers[reg] = int(reg_value)
 
 
 def get_flag_contents(flags, request):
     for flag in flags:
-        flags[flag] = request.POST[flag]
+        flag_value = request.POST.get(flag)
+        if flag_value is not None:
+            flags[flag] = flag_value
 
 
 def get_mem_contents(memory, request):
