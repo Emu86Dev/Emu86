@@ -40,6 +40,14 @@ td {
     background: #dff;
 }
 
+.registers-cell {
+  width: 36%;  /* percentage of table width */
+}
+
+.code-cell {
+  width: 64%;  /* percentage of table width */
+}
+
 td#languages {
     color: #dff;
     background: #255;

@@ -113,10 +113,10 @@
             <br>
             <table>
                 <tr colspan = "3">
-                    <td id="form-cell">
+                    <td id="form-cell" class="code-cell">
                         {{ form.as_p }}
                     </td>
-                    <td id="registers-cell">
+                    <td id="registers-cell" class="registers-cell">
                         {% if flavor != "mips_asm" and flavor != "mips_mml" and flavor != "intel" and flavor != "att"%}
                             <table id="registers-table">
                             <tr>
