@@ -70,7 +70,6 @@
                     <td id="form-cell">
                             {% csrf_token %}
                             {{ form.as_p }}
-
                             <button name="clear"
                                 title="Clear the contents of memory and the stack."
                                 id="clear-button"
@@ -105,7 +104,6 @@
                                 onclick="pauseButton()"
                                 onmouseover="displayHelp(this.name)"
                                 onmouseleave="hideHelp()"><i class="fa-solid fa-pause"></i> Pause</button>
-
                             <br>
                             <div class="help-pop">
                                 <span class="help-text" id="help-desc">
@@ -113,6 +111,10 @@
                             </div>
                             <br>
                     </td>
+                </tr>
+            </table>
+            <table>
+                <tr colspan = "3">
 
                     <td id="registers-cell">
                         {% if flavor != 'mips_asm' and flavor != 'mips_mml' and flavor != 'intel' and flavor != 'att'%}
@@ -126,13 +128,13 @@
                                 </td>
                                 {% if registers|length > 10 %}
                                     <th>
-                                    Registers
+                                    Register
                                     </th>
                                     <th>
                                     Contents
                                     </th>
                                     <th>
-                                    Registers
+                                    Register
                                     </th>
                                     <th>
                                     Contents
