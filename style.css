@@ -19,6 +19,12 @@ table {
     border-collapse: collapse;
 }
 
+.button-table{
+  width: 100%;
+  border: none;             /* Removes outer border */
+  table-layout: auto;       /* or 'fixed' if you prefer */
+}
+
 th {
     border: .03125em solid black;
     font-weight: normal;

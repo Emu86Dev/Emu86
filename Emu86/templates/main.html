@@ -4,9 +4,9 @@
 
 {% block content %}
     <div class="module">
-        <table>
+        <table class="button-table">
             <tr colspan = "3">
-                <td id="form-cell">
+                <td id="registers-cell">
                     {% csrf_token %}
                     <button name="clear"
                         title="Clear the contents of memory and the stack."
