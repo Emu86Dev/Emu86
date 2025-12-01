@@ -41,11 +41,11 @@ td {
 }
 
 .registers-cell {
-  width: 36%;  /* percentage of table width */
+  width: 26%;  /* percentage of table width */
 }
 
 .code-cell {
-  width: 64%;  /* percentage of table width */
+  width: 74%;  /* percentage of table width */
 }
 
 td#languages {
