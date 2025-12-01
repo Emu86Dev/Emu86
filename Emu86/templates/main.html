@@ -125,20 +125,6 @@
                                     <span class="label">REGISTERS &amp; FLAGS</span>
                                  </div>
                                 </td>
-                                {% if registers|length > 10 %}
-                                    <th>
-                                    Register
-                                    </th>
-                                    <th>
-                                    Contents
-                                    </th>
-                                    <th>
-                                    Register
-                                    </th>
-                                    <th>
-                                    Contents
-                                    </th>
-                                {% endif %}
                             </tr>
                             <tr>
                             {% for reg, cont in registers.items %}
