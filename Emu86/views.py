@@ -82,7 +82,6 @@ def get_hdr(lang = None, base=None):
     for site in site_list:
         site_hdr = site.header
         break   # since we only expect a single site record!
-    
     #if(lang and base):
     #    site_hdr += f": {ALL_FLAVORS[lang]} {base.upper()}"
     # Remove the extended language name on header to make sure won't 
@@ -237,23 +236,19 @@ def main_page(request, slug = None):
     button = ""
     vm = None
     site_hdr = get_hdr()
-    
     default_slug = 'intel-dec'
-    
+
     def _parse(slug_value):
         parts = slug_value.split("-", 1)
         if len(parts) != 2:
             return None, None
         return parts[0], parts[1]
-    
-    
-    if request.method == 'GET':
-        
 
+
+    if request.method == 'GET':
         machine_reinit()
         machine_flavor_reset()
         # slug: <processor>-<base: hex/dec>
-        
         # if slug:
         if slug == None:
             return redirect('Emu86:emu_page', slug=default_slug)
@@ -273,7 +268,6 @@ def main_page(request, slug = None):
         vm.flavor = lang
         vm.base = base
         site_hdr = get_hdr(lang, base)
-        
         form = MainForm()
     else:
         # vm = None
@@ -283,10 +277,7 @@ def main_page(request, slug = None):
             machine_flavor_reset()
             form = MainForm()
             lang = request.POST['language']
-            
             site_hdr = get_hdr(lang, base)
-            
-            
             if lang in MIPS:
                 vm = mips_machine
             if lang in INTEL:
@@ -296,7 +287,6 @@ def main_page(request, slug = None):
             if lang in WASM:
                 wasm_machine.flavor = lang
                 wasm_machine.base = base
-                
                 # wasm does not have registers so it should not be calling
                 # hex_conversion(wasm_machine)
                 # r_reg, f_reg = processRegisters(wasm_machine.registers)
