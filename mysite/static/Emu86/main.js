@@ -525,7 +525,7 @@ function displayHelp(buttonType){
         run: "Execute all lines of code.",
         demo: "Demo code line by line.",
         save: "Save code as a file.",
-        pause: "Pauses and resets code where demo leaves off from."
+        pause: "Pauses code."
     }
 
     const spanNode = document.getElementById("help-desc");
