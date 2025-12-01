@@ -31,6 +31,7 @@
             <input type="hidden" name="mem_data" value="">
             <input type="hidden" name="base" value="{{ base }}">
 
+            {% comment %}
             {% if data_init == "on" %}
                 <br>
                 Set a memory location: <input type="text" id="memText">
@@ -41,6 +42,7 @@
                 <input type="button" id="setMem" value="Set" onclick="AddMem()">
                 <br> <br>
             {% endif %}
+            {% endcomment %}
             Sample programs:
             <select id="sample" name="sample" onchange="selectSample()">
                 {% for prog_nm, descr in sample_progs.items %}
@@ -52,7 +54,7 @@
                     {% endfor %}
                 {% endif %}
                 {% if base == "dec" %}
-                    {% if flavor == "intel" or flavor == 'att' or flavor == "mips_asm"  %}
+                    {% if flavor == "intel" or flavor == "att" or flavor == "mips_asm"  %}
                         {% for prog_nm, descr in fp_sample_progs.items %}
                             {% option_maybe_selected prog_nm descr sample %}
                         {% endfor %}
