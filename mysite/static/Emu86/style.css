@@ -321,6 +321,7 @@ td {
 
 .row-wrapper .label {
     width: auto; 
+    color: gray;
 }
 
 .row-wrapper .value {
