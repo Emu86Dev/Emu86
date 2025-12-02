@@ -972,7 +972,7 @@ td#float-cell {
 }
 
 .unwritable {
-    background: #936;
+    color: #c58;
 }
 
 td#contents, input#flag-cont {
