@@ -27,6 +27,10 @@ table {
     border-spacing: 2px 2px;
 }
 
+.button-cell {
+    width: 10%;
+}
+
 th {
     border: .03125em solid black;
     font-weight: normal;
