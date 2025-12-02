@@ -24,7 +24,7 @@ table {
     border: none;             /* Removes outer border */
     table-layout: auto;       /* or 'fixed' if you prefer */
     border-bottom: 1px solid #ffffff;
-    border-spacing: 40px 2px;
+    border-spacing: 20px 2px;
 }
 
 th {

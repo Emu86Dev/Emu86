@@ -5,15 +5,19 @@
 {% block content %}
     <div class="module">
         <table class="button-table">
-            <tr colspan = "3">
+            <tr>
                 <td id="buttons-cell">
+                    {% comment %}
                     {% csrf_token %}
+                    {% endcomment %}
                     <button name="clear"
                         title="Clear the contents of memory and the stack."
                         id="clear-button"
                         onclick="clearButton()"
                         onmouseover="displayHelp(this.name)"
                         onmouseleave="hideHelp()"><i class="fa-solid fa-rotate-left"></i> Reinit</button>
+                </td>
+                <td id="buttons-cell">
                     <button name="run"
                         value="Run Code"
                         title="Execute all lines of code"
@@ -21,6 +25,8 @@
                         onclick="runButton()"
                         onmouseover="displayHelp(this.name)"
                         onmouseleave="hideHelp()"><i class="fa-solid fa-play"></i> Run</button>
+                </td>
+                <td id="buttons-cell">
                     <button name="step"
                         value="Step Code"
                         title="Execute one instruction at a time."
@@ -28,6 +34,8 @@
                         onclick="stepButton()"
                         onmouseover="displayHelp(this.name)"
                         onmouseleave="hideHelp()"><i class="fa-solid fa-forward-step"></i> Step</button>
+                </td>
+                <td id="buttons-cell">
                     <button name="save"
                         value="Save Code"
                         id="save-button"
@@ -42,12 +50,6 @@
                         onclick="pauseButton()"
                         onmouseover="displayHelp(this.name)"
                         onmouseleave="hideHelp()"><i class="fa-solid fa-pause"></i> Pause</button>
-                    <br>
-                    <div class="help-pop">
-                        <span class="help-text" id="help-desc">
-                        </span>
-                    </div>
-                    <br>
                 </td>
             </tr>
         </table>
