@@ -23,8 +23,8 @@ table {
     width: 100%;
     border: none;             /* Removes outer border */
     table-layout: auto;       /* or 'fixed' if you prefer */
-    border-bottom: 1px solid #ffffff;
-    border-spacing: 20px 2px;
+    /* border-bottom: 1px solid #ffffff; */
+    border-spacing: 2px 2px;
 }
 
 th {
