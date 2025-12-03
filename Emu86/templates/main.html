@@ -131,6 +131,7 @@
             <table>
                 <tr>
                     <td id="form-cell" class="code-cell" rowspan="8">
+                        {% csrf_token %}
                         {{ form.as_p }}
                     </td>
                     <td id="registers-cell" class="registers-cell">
