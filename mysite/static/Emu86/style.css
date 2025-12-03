@@ -532,6 +532,10 @@ input[type=button][disabled].default {
     padding:  10px;
     margin-bottom: 30px;
     background: #131313;
+
+    display: flex;          
+    gap: 20px;            
+    align-items: stretch; ;
 }
 
 .module_start h1{
@@ -544,6 +548,19 @@ input[type=button][disabled].default {
     color:#929292;
     font-weight: normal;
     font-size: 16px;
+}
+
+.module_left {
+    flex: 1;
+}
+
+/* right-side box */
+.module_start .right-box {
+    flex: 1;                /* roughly half for now */
+    background: #000;      
+    border-radius: 8px;    
+    padding: 15px;      
+    box-sizing: border-box;   
 }
 
 
