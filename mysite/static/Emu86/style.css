@@ -999,9 +999,6 @@ td#form-cell {
     /*background: #dde;*/
 }
 
-
-
-
 #user-tools {
     float: right;
     padding: 0;
@@ -1009,8 +1006,6 @@ td#form-cell {
     font-weight: 300;
     font-size: 1.0em;
     letter-spacing: 1px;
-    font-family: serif;
-    /*text-transform: uppercase;*/
     text-align: right;
 }
 
