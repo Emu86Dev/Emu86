@@ -290,6 +290,10 @@ table {
     border-spacing: 2px 2px;
 }
 
+.transparent-table {
+    background-color: transparent;
+}
+
 /* For the table holding code and regsiters. */
 .register-cell {
   width: 26%;  /* percentage of table width */
