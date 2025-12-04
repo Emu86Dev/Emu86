@@ -170,7 +170,7 @@
                                 </td>
 
                                 {% if reg in changes %}
-                                    <td id="contents" class="bg-color-yellow">
+                                    <td id="contents" class="changed-register">
                                 {% else %}
                                     <td id="contents">
                                 {% endif %}
@@ -198,9 +198,9 @@
                                         size="10"
                                         readonly="readonly"
                                         {% if reg in changes %}
-                                            class="bg-color-yellow"
+                                            class="changed-register"
                                         {% else %}
-                                            class="bg-color-white"
+                                            class="unchanged-register"
                                         {% endif %}
                                     onclick=convert(name,value)>
                                 {% endif %}
@@ -258,7 +258,7 @@
                                             {{ reg }}
                                         </span>
 
-                                        <span class="value {% if reg in changes %}bg-color-yellow{% endif %}">
+                                        <span class="value {% if reg in changes %}changed-register{% endif %}">
                                             {% if data_init == "on" %}
                                                 <input
                                                     {% if reg in unwritable %}
@@ -282,9 +282,9 @@
                                                     size="10"
                                                     readonly="readonly"
                                                     {% if reg in changes %}
-                                                        class="bg-color-yellow"
+                                                        class="changed-register"
                                                     {% else %}
-                                                        class="bg-color-white"
+                                                        class="unchanged-register"
                                                     {% endif %}
                                                     onclick="convert(name,value)">
                                             {% endif %}
@@ -383,7 +383,7 @@
                                         {{ addr }}
                                     </td>
                                     {% if "MEM"|add:addr in changes %}
-                                        <td id="contents" class="bg-color-yellow">
+                                        <td id="contents" class="changed-memory-table">
                                     {% else %}
                                         <td id="contents">
                                     {% endif %}
@@ -394,9 +394,9 @@
                                             size="5"
                                             readonly="readonly"
                                             {% if "MEM"|add:addr in changes %}
-                                                class="bg-color-yellow"
+                                                class="changed-memory-table"
                                             {% else %}
-                                                class="bg-color-white"
+                                                class="unchanged-memory-table"
                                             {% endif %}
                                         >
                                     </td>
@@ -414,7 +414,7 @@
                                         {{ addr }}
                                     </td>
                                     {% if "STACK"|add:addr in changes %}
-                                        <td id="contents" class="bg-color-yellow">
+                                        <td id="contents" class="changed-stack">
                                     {% else %}
                                         <td id="contents">
                                     {% endif %}
@@ -433,9 +433,9 @@
                                                 size="5"
                                                 readonly="readonly"
                                                 {% if "STACK"|add:addr in changes %}
-                                                    class="bg-color-yellow"
+                                                    class="changed-stack"
                                                 {% else %}
-                                                    class="bg-color-white"
+                                                    class="unchanged-stack"
                                                 {% endif %}
                                             >
                                         {% endif %}

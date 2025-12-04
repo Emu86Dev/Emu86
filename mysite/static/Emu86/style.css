@@ -1172,3 +1172,43 @@ summary.menu_sum {
 .CodeMirror-selected {
     background-color: #1a3a3a !important;
 }
+
+.changed-stack {
+    background-color: yellow;
+}
+
+.unchanged-stack {
+    background-color: white;
+}
+
+.changed-register {
+    background-color: yellow;
+}
+
+.unchanged-register {
+    background-color: white;
+}
+
+.changed-globalvar {
+    background-color: yellow;
+}
+
+.unchanged-globalvar {
+    background-color: white;
+}
+
+.changed-localvar {
+    background-color: yellow;
+}
+
+.unchanged-localvar {
+    background-color: white;
+}
+
+.changed-memory-table {
+    background-color: yellow;
+}
+
+.unchanged-memory-table {
+    background-color: white;
+}
