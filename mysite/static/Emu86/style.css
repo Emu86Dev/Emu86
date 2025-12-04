@@ -991,7 +991,7 @@ td#float-cell {
     color: #c58;
 }
 
-td#contents, input#flag-cont {
+input#flag-cont {
     background: #eff;
 }
 
@@ -1223,4 +1223,19 @@ summary.menu_sum {
 
 .unchanged-memory-table {
     background-color: white;
+}
+
+#stack-table, #flags-table {
+  background: black;
+  border: 1px solid white;
+  border-radius: 10px; 
+  border-collapse: separate; 
+  border-spacing: 0;
+  overflow: hidden; 
+}
+
+#stack-table td {
+  border-bottom: 1px solid white;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
