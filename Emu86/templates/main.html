@@ -94,6 +94,18 @@
             <input type="hidden" name="mem_data" value="">
             <input type="hidden" name="base" value="{{ base }}">
 
+            {% comment %}
+            {% if data_init == "on" %}
+                <br>
+                Set a memory location: <input type="text" id="memText">
+                <br>&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+                Value:&ensp;&ensp;&ensp;<input type="text" id="valueText">
+                <br>&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+                Repeat:&ensp;&ensp;<input type="text" id="repeatText" value="1">
+                <input type="button" id="setMem" value="Set" onclick="AddMem()">
+                <br> <br>
+            {% endif %}
+            {% endcomment %}
             Sample programs:
             <select id="sample" name="sample" onchange="selectSample()">
                 {% for prog_nm, descr in sample_progs.items %}
@@ -118,115 +130,118 @@
             <br>
             <table>
                 <tr>
-                    <td id="form-cell" class="code-cell" rowspan="12">
+                    <td id="form-cell" class="code-cell" rowspan="8">
                         {% csrf_token %}
                         {{ form.as_p }}
                     </td>
-                    <td id="registers-cell" class="register-cell">
+                    <td id="register-cell" class="register-cell">
                         {% if flavor != "mips_asm" and flavor != "mips_mml" and flavor != "intel" and flavor != "att"%}
-                            <table id="registers-table">
-                                <tr>
-                                    <th colspan="2">
-                                        REGISTERS &amp; FLAGS
-                                    </td>
-                                </tr>
-                                <tr>
-                                {% for reg, cont in registers.items %}
-                                    {% if registers|length > 10 %}
-                                        {% if reg == "R9" %}
-                                            <td id="register"></td><td id="contents"></td></tr><tr class ={{reg.0}}>
-                                        {% elif reg == "R10" or reg == "R11" %}
-                                            </tr> <tr class ={{reg.0}}>
-                                        {% elif reg == "PC" %}
-                                            <td id="register"></td><td id="contents"></td></tr><tr class={{reg.0}}>
-                                        {% else %}
-                                            {% if forloop.counter0|divisibleby:3 %}
-                                                {% if reg != "R21" and reg != "R22" and reg != "R23" %}
-                                                    </tr> <tr class={{reg.0}}>
-                                                {% endif %}
+                            <table id="register-table">
+                            <tr>
+                                <th colspan="2">
+                                    REGISTERS &amp; FLAGS
+                                </td>
+                            </tr>
+                            <tr>
+                            {% for reg, cont in registers.items %}
+                                {% if registers|length > 10 %}
+                                    {% if reg == "R9" %}
+                                        <td id="register"></td><td id="contents"></td></tr><tr class ={{reg.0}}>
+                                    {% elif reg == "R10" or reg == "R11" %}
+                                        </tr> <tr class ={{reg.0}}>
+                                    {% elif reg == "PC" %}
+                                        <td id="register"></td><td id="contents"></td></tr><tr class={{reg.0}}>
+                                    {% else %}
+                                        {% if forloop.counter0|divisibleby:3 %}
+                                            {% if reg != "R21" and reg != "R22" and reg != "R23" %}
+                                                </tr> <tr class={{reg.0}}>
                                             {% endif %}
                                         {% endif %}
-                                    {% else %}
-                                        </tr> <tr class={{reg.0}}>
                                     {% endif %}
+                                {% else %}
+                                    </tr> <tr class={{reg.0}}>
+                                {% endif %}
 
-                                    {% if reg in unwritable %}
-                                        <td id="unwritable">
-                                    {% else %}
-                                        <td id="register">
-                                    {% endif %}
-                                        {{ reg }}
-                                    </td>
-                                    {% if reg in changes %}
-                                        <td id="contents" class="bg-color-yellow">
-                                    {% else %}
-                                        <td id="contents">
-                                    {% endif %}
-                                    {% if data_init == "on" %}
-                                        <input
-                                            {% if reg in unwritable %}
-                                                id="unwr-cont"
-                                                readonly = "readonly"
-                                            {% else %}
-                                                id="reg-cont"
-                                            {% endif %}
-                                            value="{{ cont }}"
-                                            name="{{ reg }}"
-                                            size="10">
-                                    {% else %}
-                                        <input
-                                            {% if reg in unwritable %}
-                                                id="unwr-cont"
-                                            {% else %}
-                                                id="reg-cont"
-                                            {% endif %}
-                                            value="{{ cont }}"
-                                            name="{{ reg }}"
-                                            size="10"
-                                            readonly="readonly"
-                                            {% if reg in changes %}
-                                                class="bg-color-yellow"
-                                            {% else %}
-                                                class="bg-color-white"
-                                            {% endif %}
-                                        onclick=convert(name,value)>
-                                    {% endif %}
-                                    </td>
-                                {% endfor %}
-                                </tr>
-                                <tr>
-                                    <table id="flags-table">
-                                        <tr>
-                                            <th colspan="4"
+                                {% if reg in unwritable %}
+                                    <td id="unwritable">
+                                {% else %}
+                                    <td id="register">
+                                {% endif %}
+                                    {{ reg }}
+                                </td>
+
+                                {% if reg in changes %}
+                                    <td id="contents" class="changed-register">
+                                {% else %}
+                                    <td id="contents">
+                                {% endif %}
+
+                                {% if data_init == "on" %}
+                                    <input
+                                        {% if reg in unwritable %}
+                                            id="unwr-cont"
+                                            readonly = "readonly"
+                                        {% else %}
+                                            id="reg-cont"
+                                        {% endif %}
+                                        value="{{ cont }}"
+                                        name="{{ reg }}"
+                                        size="10">
+                                {% else %}
+                                    <input
+                                        {% if reg in unwritable %}
+                                            id="unwr-cont"
+                                        {% else %}
+                                            id="reg-cont"
+                                        {% endif %}
+                                        value="{{ cont }}"
+                                        name="{{ reg }}"
+                                        size="10"
+                                        readonly="readonly"
+                                        {% if reg in changes %}
+                                            class="changed-register"
+                                        {% else %}
+                                            class="unchanged-register"
+                                        {% endif %}
+                                    onclick=convert(name,value)>
+                                {% endif %}
+                                </td>
+                            {% endfor %}
+                            </tr>
+                            <tr>
+                                <table id="flags-table">
+                                    <tr>
+                                        <th colspan="4"
+                                            class="align-center">
+                                            Flags
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        {% for flag in flags %}
+                                            <td id="flag"
                                                 class="align-center">
-                                                Flags
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            {% for flag in flags %}
-                                                <td id="flag"
-                                                    class="align-center">
-                                                    {{ flag }}
-                                                </td>
-                                            {% endfor %}
-                                        </tr>
-                                        <tr>
-                                            {% for flag, val in flags.items %}
-                                                <td id="contents"
-                                                    class="align-center"
+                                                {{ flag }}
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr>
+                                        {% for flag, val in flags.items %}
+                                            <td id="contents"
+                                                class="align-center"
+                                            >
+                                                <input
+                                                    id="flag-cont"
+                                                    value="{{ val }}"
+                                                    name="{{ flag }}"
+                                                    size="1"
+                                                    readonly="readonly"
                                                 >
-                                                    <input
-                                                        id="flag-cont"
-                                                        value="{{ val }}"
-                                                        name="{{ flag }}"
-                                                        size="1"
-                                                        readonly="readonly"
-                                                    >
-                                                </td>
-                                            {% endfor %}
-                                        </tr>
-                                    </table>
-                                </tr>
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                </table>
+                            </tr>
+
                             </table>
                         {% else %}
                             <!-- else there are F registers as well -->
@@ -244,7 +259,7 @@
                                             {{ reg }}
                                         </span>
 
-                                        <span class="value {% if reg in changes %}bg-color-yellow{% endif %}">
+                                        <span class="value {% if reg in changes %}changed-register{% endif %}">
                                             {% if data_init == "on" %}
                                                 <input
                                                     {% if reg in unwritable %}
@@ -268,9 +283,9 @@
                                                     size="10"
                                                     readonly="readonly"
                                                     {% if reg in changes %}
-                                                        class="bg-color-yellow"
+                                                        class="changed-register"
                                                     {% else %}
-                                                        class="bg-color-white"
+                                                        class="unchanged-register"
                                                     {% endif %}
                                                     onclick="convert(name,value)">
                                             {% endif %}
@@ -369,7 +384,7 @@
                                         {{ addr }}
                                     </td>
                                     {% if "MEM"|add:addr in changes %}
-                                        <td id="contents" class="bg-color-yellow">
+                                        <td id="contents" class="changed-memory-table">
                                     {% else %}
                                         <td id="contents">
                                     {% endif %}
@@ -380,9 +395,9 @@
                                             size="5"
                                             readonly="readonly"
                                             {% if "MEM"|add:addr in changes %}
-                                                class="bg-color-yellow"
+                                                class="changed-memory-table"
                                             {% else %}
-                                                class="bg-color-white"
+                                                class="unchanged-memory-table"
                                             {% endif %}
                                         >
                                     </td>
@@ -400,7 +415,7 @@
                                         {{ addr }}
                                     </td>
                                     {% if "STACK"|add:addr in changes %}
-                                        <td id="contents" class="bg-color-yellow">
+                                        <td id="contents" class="changed-stack">
                                     {% else %}
                                         <td id="contents">
                                     {% endif %}
@@ -419,9 +434,9 @@
                                                 size="5"
                                                 readonly="readonly"
                                                 {% if "STACK"|add:addr in changes %}
-                                                    class="bg-color-yellow"
+                                                    class="changed-stack"
                                                 {% else %}
-                                                    class="bg-color-white"
+                                                    class="unchanged-stack"
                                                 {% endif %}
                                             >
                                         {% endif %}

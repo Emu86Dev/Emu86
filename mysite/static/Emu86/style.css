@@ -541,6 +541,10 @@ input[type=button][disabled].default {
     padding:  10px;
     margin-bottom: 30px;
     background: #131313;
+
+    display: flex;          
+    gap: 20px;            
+    align-items: stretch; ;
 }
 
 .module_start h1{
@@ -553,6 +557,19 @@ input[type=button][disabled].default {
     color:#929292;
     font-weight: normal;
     font-size: 16px;
+}
+
+.module_left {
+    flex: 1;
+}
+
+/* right-side box */
+.module_start .right-box {
+    flex: 1;                /* roughly half for now */
+    background: #000;      
+    border-radius: 8px;    
+    padding: 15px;      
+    box-sizing: border-box;   
 }
 
 
@@ -981,7 +998,7 @@ td#float-cell {
     color: #c58;
 }
 
-td#contents, input#flag-cont {
+input#flag-cont {
     background: #eff;
 }
 
@@ -1173,4 +1190,59 @@ summary.menu_sum {
 
 .CodeMirror-selected {
     background-color: #1a3a3a !important;
+}
+
+.changed-stack {
+    background-color: yellow;
+}
+
+.unchanged-stack {
+    background-color: white;
+}
+
+.changed-register {
+    background-color: yellow;
+}
+
+.unchanged-register {
+    background-color: white;
+}
+
+.changed-globalvar {
+    background-color: yellow;
+}
+
+.unchanged-globalvar {
+    background-color: white;
+}
+
+.changed-localvar {
+    background-color: yellow;
+}
+
+.unchanged-localvar {
+    background-color: white;
+}
+
+.changed-memory-table {
+    background-color: yellow;
+}
+
+.unchanged-memory-table {
+    background-color: white;
+}
+
+#stack-table, #flags-table {
+  background: black;
+  border: 1px solid white;
+  border-radius: 10px; 
+  border-collapse: separate; 
+  border-spacing: 0;
+  overflow: hidden; 
+}
+
+#stack-table td {
+  border-bottom: 1px solid white;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
