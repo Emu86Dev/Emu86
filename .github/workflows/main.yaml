@@ -20,3 +20,29 @@ jobs:
       - run: chmod +x all_tests.sh
       - run: make dev_env
       - run: ./all_tests.sh
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install sshpass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+
+      - name: Deploy via SSH
+        env:
+          PA_USERNAME: ${{ secrets.PYTHONANYWHERE_USERNAME }}
+          PA_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
+        run: |
+          echo "SSHing to PythonAnywhere with username/password."
+          sshpass -p "$PA_PASSWORD" ssh \
+            -o StrictHostKeyChecking=no \
+            "$PA_USERNAME"@ssh.pythonanywhere.com << 'EOF'
+          cd /home/emu86/Emu86
+          ./myutils/prod.sh
+          EOF
