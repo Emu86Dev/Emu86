@@ -300,7 +300,11 @@ table {
 }
 
 .code-cell {
-  width: 74%;  /* percentage of table width */
+    width: 74%;  /* percentage of table width */
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    background-color: #202020;
+    vertical-align: top;
 }
 
 th {
@@ -1025,14 +1029,7 @@ input#unwr-cont {
     color: #936;
 }
 
-td#form-cell {
-    border: 1px solid #ffffff;
-    border-radius: 4px;
-    background-color: #202020;
-    width: 870px;
-    vertical-align: top;
-    /*background: #dde;*/
-}
+
 
 #user-tools {
     float: right;
