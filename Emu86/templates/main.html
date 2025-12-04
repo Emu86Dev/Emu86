@@ -128,15 +128,15 @@
                 <button type="button" onclick="switchReg()" id="viewReg"></button>
             {% endif %}
             <br>
-            <table>
+            <table class="transparent-table">
                 <tr>
                     <td id="form-cell" class="code-cell" rowspan="8">
                         {% csrf_token %}
                         {{ form.as_p }}
                     </td>
-                    <td id="registers-cell" class="registers-cell">
+                    <td id="register-cell" class="register-cell">
                         {% if flavor != "mips_asm" and flavor != "mips_mml" and flavor != "intel" and flavor != "att"%}
-                            <table id="registers-table">
+                            <table id="register-table" class="transparent-table">
                             <tr>
                                 <th colspan="2">
                                     REGISTERS &amp; FLAGS
@@ -171,7 +171,7 @@
                                 </td>
 
                                 {% if reg in changes %}
-                                    <td id="contents" class="bg-color-yellow">
+                                    <td id="contents" class="changed-register">
                                 {% else %}
                                     <td id="contents">
                                 {% endif %}
@@ -199,9 +199,9 @@
                                         size="10"
                                         readonly="readonly"
                                         {% if reg in changes %}
-                                            class="bg-color-yellow"
+                                            class="changed-register"
                                         {% else %}
-                                            class="bg-color-white"
+                                            class="unchanged-register"
                                         {% endif %}
                                     onclick=convert(name,value)>
                                 {% endif %}
@@ -210,12 +210,6 @@
                             </tr>
                             <tr>
                                 <table id="flags-table">
-                                    <tr>
-                                        <th colspan="4"
-                                            class="align-center">
-                                            Flags
-                                        </th>
-                                    </tr>
                                     <tr>
                                         {% for flag in flags %}
                                             <td id="flag"
@@ -259,7 +253,7 @@
                                             {{ reg }}
                                         </span>
 
-                                        <span class="value {% if reg in changes %}bg-color-yellow{% endif %}">
+                                        <span class="value {% if reg in changes %}changed-register{% endif %}">
                                             {% if data_init == "on" %}
                                                 <input
                                                     {% if reg in unwritable %}
@@ -283,9 +277,9 @@
                                                     size="10"
                                                     readonly="readonly"
                                                     {% if reg in changes %}
-                                                        class="bg-color-yellow"
+                                                        class="changed-register"
                                                     {% else %}
-                                                        class="bg-color-white"
+                                                        class="unchanged-register"
                                                     {% endif %}
                                                     onclick="convert(name,value)">
                                             {% endif %}
@@ -297,12 +291,6 @@
                             </tr>
                             <tr>
                                 <table id="flags-table">
-                                    <tr>
-                                        <th colspan="4"
-                                            class="align-center">
-                                            Flags
-                                        </th>
-                                    </tr>
                                     <tr>
                                         {% for flag in flags %}
                                             <td id="flag"
@@ -384,7 +372,7 @@
                                         {{ addr }}
                                     </td>
                                     {% if "MEM"|add:addr in changes %}
-                                        <td id="contents" class="bg-color-yellow">
+                                        <td id="contents" class="changed-memory-table">
                                     {% else %}
                                         <td id="contents">
                                     {% endif %}
@@ -395,9 +383,9 @@
                                             size="5"
                                             readonly="readonly"
                                             {% if "MEM"|add:addr in changes %}
-                                                class="bg-color-yellow"
+                                                class="changed-memory-table"
                                             {% else %}
-                                                class="bg-color-white"
+                                                class="unchanged-memory-table"
                                             {% endif %}
                                         >
                                     </td>
@@ -415,7 +403,7 @@
                                         {{ addr }}
                                     </td>
                                     {% if "STACK"|add:addr in changes %}
-                                        <td id="contents" class="bg-color-yellow">
+                                        <td id="contents" class="changed-stack">
                                     {% else %}
                                         <td id="contents">
                                     {% endif %}
@@ -434,9 +422,9 @@
                                                 size="5"
                                                 readonly="readonly"
                                                 {% if "STACK"|add:addr in changes %}
-                                                    class="bg-color-yellow"
+                                                    class="changed-stack"
                                                 {% else %}
-                                                    class="bg-color-white"
+                                                    class="unchanged-stack"
                                                 {% endif %}
                                             >
                                         {% endif %}
