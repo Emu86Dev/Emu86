@@ -44,14 +44,6 @@ td {
     background: #dff;
 }
 
-.registers-cell {
-  width: 26%;  /* percentage of table width */
-}
-
-.code-cell {
-  width: 74%;  /* percentage of table width */
-}
-
 td#languages {
     color: #dff;
     background: #255;

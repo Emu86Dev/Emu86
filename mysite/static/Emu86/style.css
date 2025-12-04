@@ -290,6 +290,15 @@ table {
     border-spacing: 2px 2px;
 }
 
+/* For the table holding code and regsiters. */
+.register-cell {
+  width: 26%;  /* percentage of table width */
+}
+
+.code-cell {
+  width: 74%;  /* percentage of table width */
+}
+
 th {
     text-align: center;
     color: white;
@@ -553,8 +562,6 @@ ul.messagelist {
     padding: 0;
     margin: 0;
 }
-
-
 
 ul.messagelist li {
     display: block;
