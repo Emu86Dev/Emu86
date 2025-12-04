@@ -2,6 +2,8 @@
 *~
 *.pyc
 ansible/
+act.sh
+Emu86-venv
 .*swp
 *.log
 # *.txt - Breaks docker
