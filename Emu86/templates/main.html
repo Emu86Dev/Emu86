@@ -218,7 +218,7 @@
                             <tr>
                                 <table id="flags-table">
                                     <tr>
-                                        {% for flag in flags %}
+                                        {% for flag in vm.flags %}
                                             <td id="flag"
                                                 class="align-center">
                                                 {{ flag }}
@@ -226,7 +226,7 @@
                                         {% endfor %}
                                     </tr>
                                     <tr>
-                                        {% for flag, val in flags.items %}
+                                        {% for flag, val in vm.flags.items %}
                                             <td id="contents"
                                                 class="align-center"
                                             >
@@ -299,7 +299,7 @@
                             <tr>
                                 <table id="flags-table">
                                     <tr>
-                                        {% for flag in flags %}
+                                        {% for flag in vm.flags %}
                                             <td id="flag"
                                                 class="align-center">
                                                 {{ flag }}
@@ -307,7 +307,7 @@
                                         {% endfor %}
                                     </tr>
                                     <tr>
-                                        {% for flag, val in flags.items %}
+                                        {% for flag, val in vm.flags.items %}
                                             <td id="contents"
                                                 class="align-center"
                                             >
@@ -444,7 +444,7 @@
                      <td>
                         <div class="table-wrapper">
                         <table id="stack-table">
-                            {% for label in cstack reversed %}
+                            {% for label in vm.cstack reversed %}
                                 <tr>
                                     {% if stack_change == label %}
                                         <td id="mem-loc">
