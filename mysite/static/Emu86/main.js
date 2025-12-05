@@ -536,3 +536,22 @@ function displayHelp(buttonType){
 function hideHelp(){
     document.getElementById("help-desc").classList.toggle("show");
 }
+
+function toggleBase(){
+    const baseInput = document.getElementsByName("base")[0];
+    const currentBase = baseInput.value;
+    const flavor = document.getElementsByName("flavor")[0].value;
+
+    console.log("Current base:", currentBase);
+    console.log("Flavor:", flavor);
+
+    const newBase = currentBase === "dec" ? "hex" : "dec";
+    const slug = `${flavor}-${newBase}`;
+    const newUrl = `/emu/${slug}/`;
+
+    console.log("New base:", newBase);
+    console.log("Slug:", slug);
+    console.log("New URL:", newUrl);
+
+    window.location.href = newUrl;
+}
