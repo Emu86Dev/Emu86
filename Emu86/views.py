@@ -21,7 +21,7 @@ import binascii
 
 logger = logging.getLogger(__name__)
 CODE = 'code'
-NXT_KEY = 'nxt_key'
+# NXT_KEY = 'nxt_key'
 STEP = 'step'
 CLEAR = 'clear'
 HEADER = 'header'
@@ -172,7 +172,7 @@ def create_render_data(request, vm, form, site_hdr, last_instr, error,
         'last_instr': last_instr,
         'error': error,
         'vm': vm,
-        NXT_KEY: vm.nxt_key,
+        # NXT_KEY: vm.nxt_key,
         'registers': vm.registers,
         'memory': vm.memory,
         'stack': vm.stack,
