@@ -363,7 +363,7 @@
                     <td>
                     <div class="table-wrapper">
                         <table id="memory-table">
-                            {% for addr, cont in memory.items %}
+                            {% for addr, cont in vm.memory.items %}
                                 <script>
                                     document.getElementsByName("mem_data")[0].value += "{{ addr }}:{{ cont }}, ";
                                 </script>
