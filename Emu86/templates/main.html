@@ -62,10 +62,17 @@
                         onmouseleave="hideHelp()">
                         <i class="fa-solid fa-pause"></i> Pause</button>
                 </td>
-                <td>
+                <td id="button-cell6" class="button-cell">
+                        <button name="toggle-base"
+                        type="button"
+                        title="Base Toggle"
+                        id="toggle-base-button"
+                        onclick="toggleBase()"
+                        onmouseover="displayHelp(this.name)"
+                        onmouseleave="hideHelp()">
+                        <i class="fa-solid fa-repeat"></i> {{ base }}</button>
                 </td>
-                <td>
-                </td>
+
             </tr>
         </table>
         <form id="codeForm" action="{% url 'Emu86:emu_page' slug=slug %}" method="post">
