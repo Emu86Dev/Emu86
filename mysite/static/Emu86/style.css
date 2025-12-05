@@ -544,7 +544,7 @@ input[type=button][disabled].default {
     text-transform: uppercase;
 }
 
-/* module for the welcome page interface */
+/* module for the starting page interface */
 .module_start{
     padding:  10px;
     margin-bottom: 30px;
@@ -578,35 +578,14 @@ input[type=button][disabled].default {
 .module_start .right-box {
     flex: 1.25;                /* roughly more than half*/
     background: #000;      
-    border-radius: 16px;    
+    border-radius: 8px;    
     padding: 15px;   
     margin: 5px 0px 0px 0;
     box-sizing: border-box;   
 }
 
 .module_start .right-box .title{
-    color: #6e6e6e;
-}
-
-.module_start .right-box #language-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    margin: 10px 0;
-}
-
-.module_start .right-box #language-buttons .lang-btn {
-    text-align: left;
-    border-radius: 16px;
-    padding: 10px 10px;
-}
-
-.module_start .right-box #language-buttons .lang-btn::after {
-    content: "Starter samples available";  
-    display: block;              
-    font-size: 16px;
-    color: #6e6e6e;
-    margin-top: 2px;             
+    color: #808080;
 }
 
 

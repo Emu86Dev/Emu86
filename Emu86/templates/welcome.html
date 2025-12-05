@@ -21,7 +21,16 @@
           Write assembly, run it instantly, and inspect registers, <br/>
           flags, stacks, and memory - right in the browser.
         </h2>
-
+          <div id="language-buttons">
+            <button type="button" class="lang-btn" data-lang="intel">X86-Intel</button>
+            <button type="button" class="lang-btn" data-lang="att">X86-AT&amp;T</button>
+            <button type="button" class="lang-btn" data-lang="mips_asm">MIPS Assembly</button>
+            <button type="button" class="lang-btn" data-lang="mips_mml">MIPS Mnemonic Machine Language</button>
+            <button type="button" class="lang-btn" data-lang="riscv">RISC-V</button>
+            <button type="button" class="lang-btn" data-lang="wasm">WASM</button>
+          </div>
+          
+          <input type="hidden" name="language" id="language-input" value="intel">
         <br />
         Please select your number system:
         <input
@@ -37,79 +46,68 @@
         <br />
         <input type="submit" id="subButton" value="Start coding" style="background-color:rgb(50, 0, 255);" />
       </form>
+
+      <script>
+        function SetBase() {
+          const languageInput = document.querySelector('input[name="language"]');
+          const language = languageInput.value;
+      
+          const baseRadios = document.getElementsByName("base");
+      
+          if (
+            language === "mips_asm" ||
+            language === "mips_mml" ||
+            language === "riscv"
+          ) {
+            baseRadios[0].checked = false;  
+            baseRadios[1].checked = true;   
+          } else {
+            baseRadios[0].checked = true;
+            baseRadios[1].checked = false;
+          }
+        }
+      
+        function updateAction() {
+          const lang = document.querySelector('input[name="language"]').value;
+          const base = document.querySelector('input[name="base"]:checked').value;
+      
+          const slug = `${lang}-${base}`;
+          const url = `{% url 'Emu86:emu_page' slug='SLUG' %}`.replace("SLUG", slug);
+      
+          document.getElementById("langForm").action = url;
+        }
+    
+        document.addEventListener("DOMContentLoaded", () => {
+          const langInput = document.getElementById("language-input");
+          const buttons = document.querySelectorAll(".lang-btn");
+      
+          buttons.forEach(btn => {
+            if (btn.dataset.lang === langInput.value) {
+              btn.classList.add("active");
+            }
+          });
+      
+          buttons.forEach(btn => {
+            btn.addEventListener("click", () => {
+              langInput.value = btn.dataset.lang;
+      
+              buttons.forEach(b => b.classList.remove("active"));
+              btn.classList.add("active");
+      
+              SetBase();
+              updateAction();
+            });
+          });
+      
+          SetBase();
+          updateAction();
+        });
+      </script>
     </div>
 
     <div class="right-box">
       <p3 class="title">CHOOSE A DIALECT</p3>
-
-      <div id="language-buttons">
-        <button type="button" class="lang-btn" data-lang="intel">X86-Intel</button>
-        <button type="button" class="lang-btn" data-lang="att">X86-AT&amp;T</button>
-        <button type="button" class="lang-btn" data-lang="mips_asm">MIPS Assembly</button>
-        <button type="button" class="lang-btn" data-lang="mips_mml">MIPS Mnemonic Machine Language</button>
-        <button type="button" class="lang-btn" data-lang="riscv">RISC-V</button>
-        <button type="button" class="lang-btn" data-lang="wasm">WASM</button>
-      </div>
-      
-      <input type="hidden" name="language" id="language-input" value="intel">
     </div>
-
-    <script>
-      function SetBase() {
-        const languageInput = document.querySelector('input[name="language"]');
-        const language = languageInput.value;
-    
-        const baseRadios = document.getElementsByName("base");
-    
-        if (
-          language === "mips_asm" ||
-          language === "mips_mml" ||
-          language === "riscv"
-        ) {
-          baseRadios[0].checked = false;  
-          baseRadios[1].checked = true;   
-        } else {
-          baseRadios[0].checked = true;
-          baseRadios[1].checked = false;
-        }
-      }
-    
-      function updateAction() {
-        const lang = document.querySelector('input[name="language"]').value;
-        const base = document.querySelector('input[name="base"]:checked').value;
-    
-        const slug = `${lang}-${base}`;
-        const url = `{% url 'Emu86:emu_page' slug='SLUG' %}`.replace("SLUG", slug);
-    
-        document.getElementById("langForm").action = url;
-      }
-  
-      document.addEventListener("DOMContentLoaded", () => {
-        const langInput = document.getElementById("language-input");
-        const buttons = document.querySelectorAll(".lang-btn");
-    
-        buttons.forEach(btn => {
-          if (btn.dataset.lang === langInput.value) {
-            btn.classList.add("active");
-          }
-        });
-    
-        buttons.forEach(btn => {
-          btn.addEventListener("click", () => {
-            langInput.value = btn.dataset.lang;
-    
-            buttons.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-    
-            SetBase();
-            updateAction();
-          });
-        });
-    
-        SetBase();
-        updateAction();
-      });
-    </script>
 
   </div>
 </body>
