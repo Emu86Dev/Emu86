@@ -544,7 +544,7 @@ input[type=button][disabled].default {
     text-transform: uppercase;
 }
 
-/* module for the starting page interface */
+/* module for the welcome page interface */
 .module_start{
     padding:  10px;
     margin-bottom: 30px;
@@ -578,14 +578,35 @@ input[type=button][disabled].default {
 .module_start .right-box {
     flex: 1.25;                /* roughly more than half*/
     background: #000;      
-    border-radius: 8px;    
+    border-radius: 16px;    
     padding: 15px;   
     margin: 5px 0px 0px 0;
     box-sizing: border-box;   
 }
 
 .module_start .right-box .title{
-    color: #808080;
+    color: #6e6e6e;
+}
+
+.module_start .right-box #language-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.module_start .right-box #language-buttons .lang-btn {
+    text-align: left;
+    border-radius: 16px;
+    padding: 10px 10px;
+}
+
+.module_start .right-box #language-buttons .lang-btn::after {
+    content: "Starter samples available";  
+    display: block;              
+    font-size: 16px;
+    color: #6e6e6e;
+    margin-top: 2px;             
 }
 
 
@@ -940,19 +961,65 @@ a.deletelink:focus, a.deletelink:hover {
     text-align: center;
 }
 
-.button-cell{
+#clear-button, #run-button, #pause-button, #step-button, #demo-button, #save-button {
     padding: 10px 10px;
-    text-align: center;
 }
 
-.button-cell button {
+#run-button {
+    text-align: center;
     font-size: 13px;
     margin: 10px 5px 20px 5px;
     background: black;
     border-radius: 10px;
     border: 1px solid white;
     color: white;
-    padding: 10px 10px;
+}
+
+#pause-button {
+    text-align: center;
+    font-size: 13px;
+    margin: 10px 5px 20px 5px;
+    background: black;
+    border-radius: 10px;
+    border: 1px solid white;
+    color: white;
+}
+
+
+#step-button {
+    margin: 10px 5px 20px 5px;
+    font-size: 13px;
+    color: white;
+    background: black;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+#demo-button {
+    margin: 10px 5px 20px 5px;
+    font-size: 13px;
+    background: black;
+    border-radius: 10px;
+    border: 1px solid white;
+    color: white;
+}
+
+#save-button {
+    font-size: 13px;
+    margin: 10px 1px 20px 2px;
+    color: white;
+    background: black;;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+#clear-button{
+    float: left;
+    font-size: 13px;
+    margin: 10px 10px 20px 15px;
+    background: black;
+    border-radius: 10px;
+    border: 1px solid white;
 }
 
 td#flag, td#register, td#mem-loc {
