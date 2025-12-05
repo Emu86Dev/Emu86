@@ -162,7 +162,7 @@
                                     </tr> <tr class={{reg.0}}>
                                 {% endif %}
 
-                                {% if reg in unwritable %}
+                                {% if reg in vm.unwritable %}
                                     <td id="unwritable">
                                 {% else %}
                                     <td id="register">
@@ -178,7 +178,7 @@
 
                                 {% if data_init == "on" %}
                                     <input
-                                        {% if reg in unwritable %}
+                                        {% if reg in vm.unwritable %}
                                             id="unwr-cont"
                                             readonly = "readonly"
                                         {% else %}
@@ -189,7 +189,7 @@
                                         size="10">
                                 {% else %}
                                     <input
-                                        {% if reg in unwritable %}
+                                        {% if reg in vm.unwritable %}
                                             id="unwr-cont"
                                         {% else %}
                                             id="reg-cont"
@@ -249,14 +249,14 @@
                             <tr class="R">
                                 <td colspan="2">
                                     <div class="row-wrapper">
-                                        <span class="label {% if reg in unwritable %}unwritable{% endif %}">
+                                        <span class="label {% if reg in vm.unwritable %}unwritable{% endif %}">
                                             {{ reg }}
                                         </span>
 
                                         <span class="value {% if reg in changes %}changed-register{% endif %}">
                                             {% if data_init == "on" %}
                                                 <input
-                                                    {% if reg in unwritable %}
+                                                    {% if reg in vm.unwritable %}
                                                         id="unwr-cont"
                                                         readonly="readonly"
                                                     {% else %}
@@ -267,7 +267,7 @@
                                                     size="10">
                                             {% else %}
                                                 <input
-                                                    {% if reg in unwritable %}
+                                                    {% if reg in vm.unwritable %}
                                                         id="unwr-cont"
                                                     {% else %}
                                                         id="reg-cont"
