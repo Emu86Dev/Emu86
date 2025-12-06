@@ -70,7 +70,7 @@
                         onclick="toggleBase()"
                         onmouseover="displayHelp(this.name)"
                         onmouseleave="hideHelp()">
-                        <i class="fa-solid fa-repeat"></i> {{ base }}</button>
+                        <i class="fa-solid fa-repeat"></i> {{ vm.base }}</button>
                 </td>
 
             </tr>
@@ -89,7 +89,7 @@
                 <input type="hidden" name="flavor">
             {% endif %}
 
-            {% if data_init == "on" %}
+            {% if vm.data_init == "on" %}
                 <input type="hidden" name="data_init" value="on">
             {% else %}
                 <input type="hidden" name="data_init" value="off">
@@ -99,20 +99,8 @@
             <input type="hidden" name="bit_code" value="{{ bit_code }}" >
             <input type="hidden" name="button_type" value="{{ button_type }}" >
             <input type="hidden" name="mem_data" value="">
-            <input type="hidden" name="base" value="{{ base }}">
+            <input type="hidden" name="base" value="{{ vm.base }}">
 
-            {% comment %}
-            {% if data_init == "on" %}
-                <br>
-                Set a memory location: <input type="text" id="memText">
-                <br>&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
-                Value:&ensp;&ensp;&ensp;<input type="text" id="valueText">
-                <br>&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
-                Repeat:&ensp;&ensp;<input type="text" id="repeatText" value="1">
-                <input type="button" id="setMem" value="Set" onclick="AddMem()">
-                <br> <br>
-            {% endif %}
-            {% endcomment %}
             Sample programs:
             <select id="sample" name="sample" onchange="selectSample()">
                 {% for prog_nm, descr in sample_progs.items %}
@@ -123,7 +111,7 @@
                         {% option_maybe_selected prog_nm descr sample %}
                     {% endfor %}
                 {% endif %}
-                {% if base == "dec" %}
+                {% if vm.base == "dec" %}
                     {% if vm.flavor == "intel" or vm.flavor == "att" or vm.flavor == "mips_asm"  %}
                         {% for prog_nm, descr in fp_sample_progs.items %}
                             {% option_maybe_selected prog_nm descr sample %}
@@ -177,7 +165,7 @@
                                     {{ reg }}
                                 </td>
 
-                                {% if reg in changes %}
+                                {% if reg in vm.changes %}
                                     <td id="contents" class="changed-register">
                                 {% else %}
                                     <td id="contents">
@@ -205,7 +193,7 @@
                                         name="{{ reg }}"
                                         size="10"
                                         readonly="readonly"
-                                        {% if reg in changes %}
+                                        {% if reg in vm.changes %}
                                             class="changed-register"
                                         {% else %}
                                             class="unchanged-register"
@@ -260,7 +248,7 @@
                                             {{ reg }}
                                         </span>
 
-                                        <span class="value {% if reg in changes %}changed-register{% endif %}">
+                                        <span class="value {% if reg in vm.changes %}changed-register{% endif %}">
                                             {% if data_init == "on" %}
                                                 <input
                                                     {% if reg in vm.unwritable %}
@@ -283,7 +271,7 @@
                                                     name="{{ reg }}"
                                                     size="10"
                                                     readonly="readonly"
-                                                    {% if reg in changes %}
+                                                    {% if reg in vm.changes %}
                                                         class="changed-register"
                                                     {% else %}
                                                         class="unchanged-register"
@@ -378,7 +366,7 @@
                                     <td id="mem-loc">
                                         {{ addr }}
                                     </td>
-                                    {% if "MEM"|add:addr in changes %}
+                                    {% if "MEM"|add:addr in vm.changes %}
                                         <td id="contents" class="changed-memory-table">
                                     {% else %}
                                         <td id="contents">
@@ -389,7 +377,7 @@
                                             name="{{ addr }}"
                                             size="5"
                                             readonly="readonly"
-                                            {% if "MEM"|add:addr in changes %}
+                                            {% if "MEM"|add:addr in vm.changes %}
                                                 class="changed-memory-table"
                                             {% else %}
                                                 class="unchanged-memory-table"
@@ -409,7 +397,7 @@
                                     <td id="mem-loc">
                                         {{ addr }}
                                     </td>
-                                    {% if "STACK"|add:addr in changes %}
+                                    {% if "STACK"|add:addr in vm.changes %}
                                         <td id="contents" class="changed-stack">
                                     {% else %}
                                         <td id="contents">
@@ -428,7 +416,7 @@
                                                 name="{{ addr }}"
                                                 size="5"
                                                 readonly="readonly"
-                                                {% if "STACK"|add:addr in changes %}
+                                                {% if "STACK"|add:addr in vm.changes %}
                                                     class="changed-stack"
                                                 {% else %}
                                                     class="unchanged-stack"
