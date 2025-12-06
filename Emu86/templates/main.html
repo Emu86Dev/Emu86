@@ -118,8 +118,7 @@
                 {% for prog_nm, descr in sample_progs.items %}
                     {% option_maybe_selected prog_nm descr sample %}
                 {% endfor %}
-                {% if vm.flavor != "mips_asm" and vm.flavor != "mips_mml" and
-                    vm.flavor != "riscv" %}
+                {% if vm.flavor != "mips_asm" and vm.flavor != "mips_mml" and vm.flavor != "riscv" %}
                     {% for prog_nm, descr in not_mips_risc_progs.items %}
                         {% option_maybe_selected prog_nm descr sample %}
                     {% endfor %}
@@ -132,8 +131,7 @@
                     {% endif %}
                 {% endif %}
             </select>
-            {% if vm.flavor == "intel" or vm.flavor == "att"
-                or vm.flavor == "mips_asm" or vm.flavor == "mips_mml" %}
+            {% if vm.flavor == "intel" or vm.flavor == "att" or vm.flavor == "mips_asm" or vm.flavor == "mips_mml" %}
                 <button type="button" onclick="switchReg()" id="viewReg"></button>
             {% endif %}
             <br>
@@ -144,8 +142,7 @@
                         {{ form.as_p }}
                     </td>
                     <td id="register-cell" class="register-cell">
-                        {% if vm.flavor != "mips_asm" and
-                            vm.flavor != "mips_mml" and vm.flavor != "intel" and vm.flavor != "att"%}
+                        {% if vm.flavor != "mips_asm" and vm.flavor != "mips_mml" and vm.flavor != "intel" and vm.flavor != "att"%}
                             <table id="register-table" class="transparent-table">
                             <tr>
                                 <th colspan="2">
