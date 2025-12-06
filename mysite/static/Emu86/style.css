@@ -1173,6 +1173,12 @@ summary.menu_sum {
     background-color: #1a3a3a !important;
 }
 
+/* Make the visible CodeMirror editor taller */
+.CodeMirror,
+.CodeMirror-scroll {
+    height: 100vh !important;  
+}
+
 .changed-stack {
     background-color: yellow;
 }
