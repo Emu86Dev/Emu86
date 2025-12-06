@@ -95,7 +95,7 @@
                 <input type="hidden" name="data_init" value="off">
             {% endif %}
 
-            <input type="hidden" name="start_ip" value="{{ start_ip }}" >
+            <input type="hidden" name="start_ip" value="{{ vm.start_ip }}" >
             <input type="hidden" name="bit_code" value="{{ bit_code }}" >
             <input type="hidden" name="button_type" value="{{ button_type }}" >
             <input type="hidden" name="mem_data" value="">
@@ -434,7 +434,7 @@
                         <table id="stack-table">
                             {% for label in vm.cstack reversed %}
                                 <tr>
-                                    {% if stack_change == label %}
+                                    {% if vm.stack_change == label %}
                                         <td id="mem-loc">
                                             SP
                                         </td>
