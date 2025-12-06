@@ -961,11 +961,9 @@ a.deletelink:focus, a.deletelink:hover {
     text-align: center;
 }
 
-#clear-button, #run-button, #pause-button, #step-button, #demo-button, #save-button {
-    padding: 10px 10px;
-}
 
-#run-button {
+.action-button {
+    padding: 10px 10px;
     text-align: center;
     font-size: 13px;
     margin: 10px 5px 20px 5px;
@@ -973,6 +971,10 @@ a.deletelink:focus, a.deletelink:hover {
     border-radius: 10px;
     border: 1px solid white;
     color: white;
+}
+
+#clear-button, #run-button, #pause-button, #step-button, #demo-button, #save-button {
+    padding: 10px 10px;
 }
 
 #pause-button {

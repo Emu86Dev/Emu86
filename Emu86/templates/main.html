@@ -24,6 +24,7 @@
                 </td>
                 <td id="button-cell2" class="button-cell">
                     <button name="run"
+                        class="action-button"
                         value="Run Code"
                         title="Execute all lines of code"
                         id="run-button"
@@ -53,7 +54,8 @@
                         <i class="fa-solid fa-floppy-disk"></i> Save</button>
                 </td>
                 <td id="button-cell6" class="button-cell">
-                        <button name="toggle-base"
+                    <button name="toggle-base"
+                        class="action-button"
                         type="button"
                         title="Base Toggle"
                         id="toggle-base-button"
@@ -62,7 +64,7 @@
                         onmouseleave="hideHelp()">
                         <i class="fa-solid fa-repeat"></i> {{ vm.base }}</button>
                 </td>
-                <td id="button-cell7" class="button-cell">
+                <td id="select-cell" class="button-cell">
                     Load:
                     <select id="sample" name="sample" onchange="selectSample()">
                         {% for prog_nm, descr in sample_progs.items %}
@@ -110,10 +112,11 @@
             <input type="hidden" name="button_type" value="{{ button_type }}" >
             <input type="hidden" name="mem_data" value="">
             <input type="hidden" name="base" value="{{ vm.base }}">
-
+            {% comment %}
             {% if vm.flavor == "intel" or vm.flavor == "att" or vm.flavor == "mips_asm" or vm.flavor == "mips_mml" %}
                 <button type="button" onclick="switchReg()" id="viewReg"></button>
             {% endif %}
+            {% endcomment %}
             <br>
             <table class="transparent-table">
                 <tr>
@@ -492,6 +495,7 @@
         }
         var elem = document.getElementById("viewReg");
         const flavor = document.getElementsByName('flavor')[0].value;
+        /*
         if (document.getElementsByName('curr_reg')[0].value == "R" || document.getElementsByName('curr_reg')[0].value == "") {
             document.querySelectorAll('.F').forEach(function(button) {
                 button.style.display = "none";
@@ -509,7 +513,7 @@
             });
             elem.innerHTML = "View Integer Registers";
         }
-
+        */
         function switchReg() {
             var elem = document.getElementById("viewReg");
             var flavor = document.getElementsByName("flavor")[0].value;
