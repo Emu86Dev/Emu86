@@ -158,11 +158,7 @@
                                     {{ reg }}
                                 </td>
 
-                                {% if reg in vm.changes %}
-                                    <td id="contents" class="changed-register">
-                                {% else %}
-                                    <td id="contents">
-                                {% endif %}
+                                <td id="contents">
 
                                 {% if data_init == "on" %}
                                     <input
@@ -241,7 +237,7 @@
                                             {{ reg }}
                                         </span>
 
-                                        <span class="value {% if reg in vm.changes %}changed-register{% endif %}">
+                                        <span class="value">
                                             {% if data_init == "on" %}
                                                 <input
                                                     {% if reg in vm.unwritable %}
