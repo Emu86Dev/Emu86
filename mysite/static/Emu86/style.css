@@ -961,7 +961,6 @@ a.deletelink:focus, a.deletelink:hover {
     text-align: center;
 }
 
-
 .action-button {
     padding: 10px 10px;
     text-align: center;
@@ -971,57 +970,6 @@ a.deletelink:focus, a.deletelink:hover {
     border-radius: 10px;
     border: 1px solid white;
     color: white;
-}
-
-#clear-button, #run-button, #pause-button, #step-button, #demo-button, #save-button {
-    padding: 10px 10px;
-}
-
-#pause-button {
-    text-align: center;
-    font-size: 13px;
-    margin: 10px 5px 20px 5px;
-    background: black;
-    border-radius: 10px;
-    border: 1px solid white;
-    color: white;
-}
-
-
-#step-button {
-    margin: 10px 5px 20px 5px;
-    font-size: 13px;
-    color: white;
-    background: black;
-    border-radius: 10px;
-    border: 1px solid white;
-}
-
-#demo-button {
-    margin: 10px 5px 20px 5px;
-    font-size: 13px;
-    background: black;
-    border-radius: 10px;
-    border: 1px solid white;
-    color: white;
-}
-
-#save-button {
-    font-size: 13px;
-    margin: 10px 1px 20px 2px;
-    color: white;
-    background: black;;
-    border-radius: 10px;
-    border: 1px solid white;
-}
-
-#clear-button{
-    float: left;
-    font-size: 13px;
-    margin: 10px 10px 20px 15px;
-    background: black;
-    border-radius: 10px;
-    border: 1px solid white;
 }
 
 td#flag, td#register, td#mem-loc {

@@ -15,6 +15,7 @@
                     {% csrf_token %}
                     {% endcomment %}
                     <button name="clear"
+                        class="action-button"
                         title="Clear the contents of memory and the stack."
                         id="clear-button"
                         onclick="clearButton()"
@@ -35,6 +36,7 @@
                 </td>
                 <td id="button-cell3" class="button-cell">
                     <button name="step"
+                        class="action-button"
                         value="Step Code"
                         title="Execute one instruction at a time."
                         id="step-button"
@@ -45,6 +47,7 @@
                 </td>
                 <td id="button-cell4" class="button-cell">
                     <button name="save"
+                        class="action-button"
                         value="Save Code"
                         id="save-button"
                         title="Saves the code "
@@ -112,11 +115,6 @@
             <input type="hidden" name="button_type" value="{{ button_type }}" >
             <input type="hidden" name="mem_data" value="">
             <input type="hidden" name="base" value="{{ vm.base }}">
-            {% comment %}
-            {% if vm.flavor == "intel" or vm.flavor == "att" or vm.flavor == "mips_asm" or vm.flavor == "mips_mml" %}
-                <button type="button" onclick="switchReg()" id="viewReg"></button>
-            {% endif %}
-            {% endcomment %}
             <br>
             <table class="transparent-table">
                 <tr>
@@ -471,7 +469,6 @@
     </div>
 
     <script>
-
     var sampleProgDOM = document.getElementById('sample');
     var tmpAry = new Array();
     var selectedProgram = sampleProgDOM.value; // Save the selected program
@@ -489,62 +486,11 @@
         sampleProgDOM.options[i] = op;
     }
     sampleProgDOM.value = selectedProgram; // Restore the selected program
-
         if (document.getElementsByName("button_type")[0].value == "pause") {
             SubmitForm(true, true);
         }
         var elem = document.getElementById("viewReg");
         const flavor = document.getElementsByName('flavor')[0].value;
-        /*
-        if (document.getElementsByName('curr_reg')[0].value == "R" || document.getElementsByName('curr_reg')[0].value == "") {
-            document.querySelectorAll('.F').forEach(function(button) {
-                button.style.display = "none";
-            });
-            document.querySelectorAll('.R').forEach(function(button) {
-                button.style.display = "table-row";
-            });
-            elem.innerHTML = "View Float Registers";
-        } else if (document.getElementsByName('curr_reg')[0].value == "F") {
-            document.querySelectorAll('.R').forEach(function(button) {
-                button.style.display = "none";
-            });
-            document.querySelectorAll('.F').forEach(function(button) {
-                button.style.display = "table-row";
-            });
-            elem.innerHTML = "View Integer Registers";
-        }
-        */
-        function switchReg() {
-            var elem = document.getElementById("viewReg");
-            var flavor = document.getElementsByName("flavor")[0].value;
-            if (document.querySelectorAll('.R')[0].style.display == "none") {
-                document.getElementsByName('curr_reg')[0].value = "R";
-
-                document.querySelectorAll('.F').forEach(function(button) {
-                    button.style.display = "none";
-                });
-                document.querySelectorAll('.R').forEach(function(button) {
-                    button.style.display = "table-row";
-                });
-                document.querySelectorAll('.P').forEach(function(button) {
-                    button.style.display = "table-row";
-                });
-                elem.innerHTML = "View Float Registers";
-            } else {
-                document.getElementsByName('curr_reg')[0].value = "F";
-
-                document.querySelectorAll('.R').forEach(function(button) {
-                    button.style.display = "none";
-                });
-                document.querySelectorAll('.F').forEach(function(button) {
-                    button.style.display = "table-row";
-                });
-                document.querySelectorAll('.P').forEach(function(button) {
-                    button.style.display = "table-row";
-                });
-                elem.innerHTML = "View Integer Registers";
-            }
-        }
     </script>
     <script type="text/javascript">
        window.addEventListener('DOMContentLoaded', (event) => {
