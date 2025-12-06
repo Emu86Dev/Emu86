@@ -45,17 +45,18 @@ WASM = {'wasm': 'WASM'}
 
 ALL_FLAVORS = {**MIPS, **INTEL, **RISCV, **WASM}
 
+NO_SAMPLE = 'none'
 SAMPLE_PROGS = {
     'addTwo': 'Add two numbers',
     'area': 'Area of a rectangle',
     'arithExpr': 'Arithmetic expression',
     'arithShift': 'Arithmetic shift',
     'array': 'Declare an array',
-    'avg': 'Calculate average of an array',
-    'celFah': 'Convert from Celsius to Fahrenheit',
+    'avg': 'Calc avg. of an array',
+    'celFah': 'Convert degrees C to F',
     'data': 'Use the data section',
     'fibonacci': 'A recursive fibonacci',
-    'log': 'Calculate log (base 2) of a number',
+    'log': 'Calculate log (base 2)',
     'loop': 'A simple loop',
     'modify': 'Modify an array',
     'none': '',
@@ -65,10 +66,10 @@ SAMPLE_PROGS = {
 }
 FP_SAMPLE_PROGS = {
     'addTwo_fp': 'Add two floating point numbers',
-    'area_fp': 'Area of a rectangle using floating point',
-    'celFah_fp': 'Convert floating point Celsius to Fahrenheit',
-    'data_fp': 'Accessing data in memory for floating point',
-    'power_fp': 'Raise a floating point to a power',
+    'area_fp': 'Area of a rectangle using float',
+    'celFah_fp': 'Convert fp degrees C to F',
+    'data_fp': 'Access data in memory for float',
+    'power_fp': 'Raise a float to a power',
 }
 NOT_MIPS_RISC_PROGS = {
     'dataAccess': 'Accessing data in memory',
@@ -292,7 +293,7 @@ def main_page(request, slug = None):
                                'flavor': wasm_machine.flavor,
                                'data_init': wasm_machine.data_init,
                                'base': wasm_machine.base,
-                               'sample': 'none',
+                               'sample': NO_SAMPLE,
                                'start_ip': wasm_machine.start_ip,
                                'bit_code': "",
                                'button_type': "",
@@ -334,7 +335,7 @@ def main_page(request, slug = None):
                 site_hdr += f": {WASM[language]} {base.upper()}"
             vm.flavor = language
             vm.base = base
-        sample = request.POST['sample']
+        sample = request.POST.get('sample', NO_SAMPLE)
         button = request.POST['button_type']
         if button == CLEAR:
             machine_reinit()

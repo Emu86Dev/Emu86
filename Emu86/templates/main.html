@@ -52,16 +52,6 @@
                         onmouseleave="hideHelp()">
                         <i class="fa-solid fa-floppy-disk"></i> Save</button>
                 </td>
-                <td id="button-cell5" class="button-cell">
-                        <button name="pause"
-                        value="Pause Code"
-                        title="Pauses code."
-                        id="pause-button"
-                        onclick="pauseButton()"
-                        onmouseover="displayHelp(this.name)"
-                        onmouseleave="hideHelp()">
-                        <i class="fa-solid fa-pause"></i> Pause</button>
-                </td>
                 <td id="button-cell6" class="button-cell">
                         <button name="toggle-base"
                         type="button"
@@ -71,6 +61,26 @@
                         onmouseover="displayHelp(this.name)"
                         onmouseleave="hideHelp()">
                         <i class="fa-solid fa-repeat"></i> {{ vm.base }}</button>
+                </td>
+                <td id="button-cell7" class="button-cell">
+                    Load:
+                    <select id="sample" name="sample" onchange="selectSample()">
+                        {% for prog_nm, descr in sample_progs.items %}
+                            {% option_maybe_selected prog_nm descr sample %}
+                        {% endfor %}
+                        {% if vm.flavor != "mips_asm" and vm.flavor != "mips_mml" and vm.flavor != "riscv" %}
+                            {% for prog_nm, descr in not_mips_risc_progs.items %}
+                                {% option_maybe_selected prog_nm descr sample %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if vm.base == "dec" %}
+                            {% if vm.flavor == "intel" or vm.flavor == "att" or vm.flavor == "mips_asm"  %}
+                                {% for prog_nm, descr in fp_sample_progs.items %}
+                                    {% option_maybe_selected prog_nm descr sample %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    </select>
                 </td>
 
             </tr>
@@ -101,24 +111,6 @@
             <input type="hidden" name="mem_data" value="">
             <input type="hidden" name="base" value="{{ vm.base }}">
 
-            Sample programs:
-            <select id="sample" name="sample" onchange="selectSample()">
-                {% for prog_nm, descr in sample_progs.items %}
-                    {% option_maybe_selected prog_nm descr sample %}
-                {% endfor %}
-                {% if vm.flavor != "mips_asm" and vm.flavor != "mips_mml" and vm.flavor != "riscv" %}
-                    {% for prog_nm, descr in not_mips_risc_progs.items %}
-                        {% option_maybe_selected prog_nm descr sample %}
-                    {% endfor %}
-                {% endif %}
-                {% if vm.base == "dec" %}
-                    {% if vm.flavor == "intel" or vm.flavor == "att" or vm.flavor == "mips_asm"  %}
-                        {% for prog_nm, descr in fp_sample_progs.items %}
-                            {% option_maybe_selected prog_nm descr sample %}
-                        {% endfor %}
-                    {% endif %}
-                {% endif %}
-            </select>
             {% if vm.flavor == "intel" or vm.flavor == "att" or vm.flavor == "mips_asm" or vm.flavor == "mips_mml" %}
                 <button type="button" onclick="switchReg()" id="viewReg"></button>
             {% endif %}
