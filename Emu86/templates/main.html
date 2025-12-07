@@ -123,7 +123,7 @@
                         {{ form.as_p }}
                     </td>
                     <td id="register-cell" class="register-cell">
-                        {% if vm.flavor in no_f_regs %}
+                        {% if vm.flavor not in no_f_regs %}
                             <table id="register-table" class="transparent-table">
                             <tr>
                                 <th colspan="2">

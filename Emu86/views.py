@@ -5,6 +5,9 @@ from django.shortcuts import render, redirect
 from common.constants import (
     ATT_LANG,
     INTEL_LANG,
+    MIPS_ASM,
+    MIPS_MML,
+    RISCV,
 )
 
 from .models import AdminEmail
@@ -28,8 +31,8 @@ HEADER = 'header'
 DATA_INIT = 'data_init'
 
 MIPS = {
-    'mips_asm': 'MIPS Assembly',
-    'mips_mml': 'MIPS Mnemonic Machine Language',
+    MIPS_ASM: 'MIPS Assembly',
+    MIPS_MML: 'MIPS Mnemonic Machine Language',
 }
 
 INTEL = {
@@ -39,11 +42,18 @@ INTEL = {
     ATT_LANG: 'AT&T',
 }
 
-RISCV = {'riscv': 'RISC-V'}
+RISCV_LANGS = {RISCV: 'RISC-V'}
 
 WASM = {'wasm': 'WASM'}
 
-ALL_FLAVORS = {**MIPS, **INTEL, **RISCV, **WASM}
+ALL_FLAVORS = {**MIPS, **INTEL, **RISCV_LANGS, **WASM}
+
+NO_F_REGS = [
+    ATT_LANG,
+    INTEL_LANG,
+    MIPS_ASM,
+    MIPS_MML,
+]
 
 NO_SAMPLE = 'none'
 SAMPLE_PROGS = {
@@ -59,7 +69,7 @@ SAMPLE_PROGS = {
     'log': 'Calculate log (base 2)',
     'loop': 'A simple loop',
     'modify': 'Modify an array',
-    'none': '',
+    NO_SAMPLE: '',
     'power': 'Raise a number to a power',
     'simpleFunc': 'A simple function call',
     'sqrt': 'Square root of a number',
@@ -180,6 +190,7 @@ def create_render_data(request, vm, form, site_hdr, last_instr, error,
         'fp_sample_progs': FP_SAMPLE_PROGS,
         'not_mips_risc_progs': NOT_MIPS_RISC_PROGS,
         'slug': slug,
+        'no_f_regs': NO_F_REGS,
     }
     if vm.flavor in MIPS:
         r_reg, f_reg = processRegisters(vm)
@@ -246,7 +257,7 @@ def main_page(request, slug = None):
             vm = mips_machine
         elif lang in INTEL:
             vm = intel_machine
-        elif lang in RISCV:
+        elif lang in RISCV_LANGS:
             vm = riscv_machine
         elif lang in WASM:
             vm = wasm_machine
@@ -269,7 +280,7 @@ def main_page(request, slug = None):
                 vm = mips_machine
             if lang in INTEL:
                 vm = intel_machine
-            if lang in RISCV:
+            if lang in RISCV_LANGS:
                 vm = riscv_machine
             if lang in WASM:
                 wasm_machine.flavor = lang
@@ -327,9 +338,9 @@ def main_page(request, slug = None):
             elif language in MIPS:
                 vm = mips_machine
                 site_hdr += f": {MIPS[language]} {base.upper()}"
-            elif language in RISCV:
+            elif language in RISCV_LANGS:
                 vm = riscv_machine
-                site_hdr += f": {RISCV[language]} {base.upper()}"
+                site_hdr += f": {RISCV_LANGS[language]} {base.upper()}"
             else:
                 vm = wasm_machine
                 site_hdr += f": {WASM[language]} {base.upper()}"
