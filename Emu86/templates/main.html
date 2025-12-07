@@ -79,7 +79,7 @@
                             {% endfor %}
                         {% endif %}
                         {% if vm.base == "dec" %}
-                            {% if vm.flavor == "intel" or vm.flavor == "att" or vm.flavor == "mips_asm"  %}
+                            {% if vm.flavor in has_fp_samples  %}
                                 {% for prog_nm, descr in fp_sample_progs.items %}
                                     {% option_maybe_selected prog_nm descr sample %}
                                 {% endfor %}

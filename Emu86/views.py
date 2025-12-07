@@ -51,12 +51,17 @@ ALL_FLAVORS = {**MIPS, **INTEL, **RISCV_LANGS, **WASM}
 """
 Some tables describing what features different languages have.
 """
-F_REGS = [
+F_REGS_GROUP = [
     RISCV,
 ]
 MORE_SAMPLES_GROUP = [
     ATT_LANG,
     INTEL_LANG,
+]
+HAS_FP_SAMPLES_GROUP = [
+    ATT_LANG,
+    INTEL_LANG,
+    MIPS_ASM,
 ]
 
 NO_SAMPLE = 'none'
@@ -194,8 +199,9 @@ def create_render_data(request, vm, form, site_hdr, last_instr, error,
         'fp_sample_progs': FP_SAMPLE_PROGS,
         'not_mips_risc_progs': NOT_MIPS_RISC_PROGS,
         'slug': slug,
-        'f_regs': F_REGS,
+        'f_regs': F_REGS_GROUP,
         'more_samples': MORE_SAMPLES_GROUP,
+        'has_fp_samples': HAS_FP_SAMPLES_GROUP,
     }
     if vm.flavor in MIPS:
         r_reg, f_reg = processRegisters(vm)
