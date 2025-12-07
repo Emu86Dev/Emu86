@@ -73,7 +73,7 @@
                         {% for prog_nm, descr in sample_progs.items %}
                             {% option_maybe_selected prog_nm descr sample %}
                         {% endfor %}
-                        {% if vm.flavor != "mips_asm" and vm.flavor != "mips_mml" and vm.flavor != "riscv" %}
+                        {% if vm.flavor in more_samples %}
                             {% for prog_nm, descr in not_mips_risc_progs.items %}
                                 {% option_maybe_selected prog_nm descr sample %}
                             {% endfor %}
