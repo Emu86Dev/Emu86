@@ -1,4 +1,5 @@
 import logging
+import re
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 
@@ -156,13 +157,40 @@ def welcome(request):
 
 
 def getRegisters(registers, keys, type):
-    retArray = []
+    
+    def sort_key(k: str):
+        m = re.search(r'(\d+)$', k)
+        if m:
+            prefix = k[:m.start()]
+            number = int(m.group(1))
+            return (prefix, number)
+        else:
+            return (k, 9999)
+
+    # Remove HI, LO, PC from keys
+    removed_keys = []
     for key in keys:
-        retArray.append((key, registers[key]))
+        if key in ['HI', 'LO', 'PC']:
+            removed_keys.append(key)
+
+    keys = [k for k in keys if k not in removed_keys]
+    sorted_keys = sorted(keys, key=sort_key)
+    retArray = [(key, registers[key]) for key in sorted_keys]
+
+    # Add HI, LO, PC to retArray
+    for key in removed_keys:
+        if key in registers:
+            retArray.append((key, registers[key]))
+
     if type == 'F':
-        retArray.insert(28, ('HI', registers['HI']))
-        retArray.insert(31, ('LO', registers['LO']))
-        retArray.insert(34, ('PC', registers['PC']))
+        # F mode forced to have HI, LO, PC
+        if 'HI' not in removed_keys:
+             retArray.append(('HI', registers['HI']))
+        if 'LO' not in removed_keys:
+             retArray.append(('LO', registers['LO']))
+        if 'PC' not in removed_keys:
+             retArray.append(('PC', registers['PC']))
+
     return retArray
 
 
