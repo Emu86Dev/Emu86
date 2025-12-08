@@ -1,48 +1,43 @@
-name: Run Tests
+name: Run tests
 
 on:
   push:
-    branches: [main, master]
+    branches: [master, main]
   pull_request:
+    branches: [master, main]
+  workflow_dispatch:
+
+env:
+  PYTHONPATH: /home/runner/work/Emu86/Emu86/
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+
+    environment: pa_deploy
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
         with:
-          submodules: recursive
+          python-version: "3.12"
+          architecture: "x64"
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
 
-      - run: chmod +x all_tests.sh
-      - run: make dev_env
-      - run: ./all_tests.sh
+      - uses: actions/checkout@v2
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test
-    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - name: Set up development environment.
+        run: make dev_env
 
-      - name: Install sshpass
+      - name: Run Python tests.
+        run: make all_tests
+
+      - name: Deploy to PythonAnywhere
         run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
-
-      - name: Deploy via SSH
+          chmod +x deploy.sh
+          ./deploy.sh
         env:
           PA_USERNAME: ${{ secrets.PYTHONANYWHERE_USERNAME }}
           PA_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
-        run: |
-          echo "SSHing to PythonAnywhere with username/password."
-          sshpass -p "$PA_PASSWORD" ssh \
-            -o StrictHostKeyChecking=no \
-            "$PA_USERNAME"@ssh.pythonanywhere.com << 'EOF'
-          cd /home/emu86/Emu86
-          ./myutils/prod.sh
-          EOF
