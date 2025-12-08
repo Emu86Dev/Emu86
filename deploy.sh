@@ -1,13 +1,12 @@
 #!/bin/bash
-# This shell file deploys a new version to our server.
+set -e
 
-eval "$(ssh-agent -s)" # Start ssh-agent cache
-chmod 600 ~/.ssh/id_rsa # Allow read access to the private key
-ssh-add ~/.ssh/id_rsa # Add the private key to SSH
+echo "SSHing to PythonAnywhere..."
 
-echo "SSHing to PythonAnywhere."
-ssh emu86@ssh.pythonanywhere.com << EOF
+sshpass -p "$PA_PASSWORD" ssh -o StrictHostKeyChecking=no $PA_USERNAME@ssh.pythonanywhere.com << EOF
     cd /home/emu86/Emu86
-    /home/emu86/Emu86/myutils/prod.sh
+    git pull origin master
+    ./myutils/prod.sh
 EOF
 
+echo "Deployment complete."
