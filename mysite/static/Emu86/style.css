@@ -961,15 +961,30 @@ a.deletelink:focus, a.deletelink:hover {
     text-align: center;
 }
 
-.action-button {
-    padding: 10px 10px;
+/* Styling for buttons and select dropdowns in button cells */
+.button-cell {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.button-cell button,
+.button-cell select {
+    padding: 10px 15px;
     text-align: center;
-    font-size: 13px;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
     margin: 10px 5px 20px 5px;
     background: black;
-    border-radius: 10px;
+    border-radius: 24px;
     border: 1px solid white;
     color: white;
+    cursor: pointer;
+    height: auto;
+    min-height: 44px;
+    box-sizing: border-box;
+    vertical-align: middle;
 }
 
 td#flag, td#register, td#mem-loc {
