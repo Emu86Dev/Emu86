@@ -57,6 +57,14 @@
                         <i class="fa-solid fa-floppy-disk"></i> Save</button>
                 </td>
                 <td id="button-cell6" class="button-cell">
+                    Flavor:
+                    <select id="flavor-select" name="flavor-select" onchange="changeFlavor()">
+                        {% for key, label in flavor_options.items %}
+                            <option value="{{ key }}" {% if vm.flavor == key %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td id="button-cell7" class="button-cell">
                     <button name="toggle-base"
                         class="action-button"
                         type="button"
@@ -67,6 +75,7 @@
                         onmouseleave="hideHelp()">
                         <i class="fa-solid fa-repeat"></i> {{ vm.base }}</button>
                 </td>
+                
                 <td id="select-cell" class="button-cell">
                     Load:
                     <select id="sample" name="sample" onchange="selectSample()">

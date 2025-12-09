@@ -538,20 +538,28 @@ function hideHelp(){
 }
 
 function toggleBase(){
-    const baseInput = document.getElementsByName("base")[0];
-    const currentBase = baseInput.value;
+    const currentBase = document.getElementsByName("base")[0].value;
     const flavor = document.getElementsByName("flavor")[0].value;
-
-    console.log("Current base:", currentBase);
-    console.log("Flavor:", flavor);
-
     const newBase = currentBase === "dec" ? "hex" : "dec";
-    const slug = `${flavor}-${newBase}`;
-    const newUrl = `/emu/${slug}/`;
+    rerouteSlug(flavor, newBase);
+}
 
-    console.log("New base:", newBase);
-    console.log("Slug:", slug);
-    console.log("New URL:", newUrl);
+
+
+function changeFlavor(){
+    const base = document.getElementsByName("base")[0].value;
+    const flavorSelect = document.getElementById("flavor-select");
+    const flavor = flavorSelect.value;
+
+    // Update the hidden flavor input
+    document.getElementsByName("flavor")[0].value = flavor;
+
+    rerouteSlug(flavor, base);
+}
+
+function rerouteSlug(flavor, base){
+    const slug = `${flavor}-${base}`;
+    const newUrl = `/emu/${slug}/`;
 
     window.location.href = newUrl;
 }
