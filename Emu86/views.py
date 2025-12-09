@@ -33,7 +33,7 @@ DATA_INIT = 'data_init'
 
 MIPS = {
     MIPS_ASM: 'MIPS Assembly',
-    MIPS_MML: 'MIPS Mnemonic Machine Language',
+    MIPS_MML: 'MIPS MML',
 }
 
 INTEL = {
