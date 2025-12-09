@@ -47,7 +47,8 @@ RISCV_LANGS = {RISCV: 'RISC-V'}
 
 WASM = {'wasm': 'WASM'}
 
-ALL_FLAVORS = {**MIPS, **INTEL, **RISCV_LANGS, **WASM}
+# ALL_FLAVORS = {**MIPS, **INTEL, **RISCV_LANGS, **WASM}
+ALL_FLAVORS = {**MIPS, **INTEL, **RISCV_LANGS}
 
 """
 Some tables describing what features different languages have.
