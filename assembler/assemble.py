@@ -62,6 +62,11 @@ def exec(tok_lines, vm, last_instr):
 
 
 def step_code(tok_lines, vm, error, last_instr, bit_code):
+    # Don't execute if program has already finished
+    if getattr(vm, 'execution_finished', False):
+        last_instr = "Program execution has finished."
+        return (last_instr, error, bit_code)
+
     if vm.get_ip() == 0:
         vm.set_ip(vm.get_start_ip())
 
