@@ -70,6 +70,7 @@ def step_code(tok_lines, vm, error, last_instr, bit_code):
                                             last_instr)
     else:
         last_instr = "Reached end of executable code."
+        vm.execution_finished = True
         # rewind:
         vm.set_ip(vm.start_ip)
 
@@ -146,5 +147,6 @@ def assemble(code, vm, step=False, web=True):
     except ExitProg as ep:
         last_instr = ep.msg.split(":")[0] + ": Exiting program"
         last_instr = f'Line {ep.line_num}: {last_instr}'
+        vm.execution_finished = True
         vm.set_int_ip()
     return (last_instr, error, bit_code)

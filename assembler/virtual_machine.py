@@ -65,6 +65,7 @@ class VirtualMachine:
         self.base = None
         self.stack_change = ""
         self.next_stack_change = ""
+        self.execution_finished = False
 
     def __str__(self):
         return ("Registers: " + str(self.registers) + "\n"
@@ -108,6 +109,7 @@ class VirtualMachine:
         self.cstack_init()
         self.stack_change = ""
         self.next_stack_change = ""
+        self.execution_finished = False
 
     def mem_init(self):
         self.memory.clear()

@@ -42,7 +42,8 @@
                         id="step-button"
                         onclick="stepButton()"
                         onmouseover="displayHelp(this.name)"
-                        onmouseleave="hideHelp()">
+                        onmouseleave="hideHelp()"
+                        {% if vm.execution_finished %}disabled{% endif %}>
                         <i class="fa-solid fa-forward-step"></i> Step</button>
                 </td>
                 <td id="button-cell4" class="button-cell">
@@ -122,6 +123,7 @@
             <input type="hidden" name="start_ip" value="{{ vm.start_ip }}" >
             <input type="hidden" name="bit_code" value="{{ bit_code }}" >
             <input type="hidden" name="button_type" value="{{ button_type }}" >
+            <input type="hidden" name="execution_finished" value="{{ vm.execution_finished|default:'False' }}" >
             <input type="hidden" name="mem_data" value="">
             <input type="hidden" name="base" value="{{ vm.base }}">
             <br>

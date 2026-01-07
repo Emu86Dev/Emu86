@@ -419,11 +419,14 @@ def main_page(request, slug = None):
             get_stack_contents(vm.stack, request)
             vm.data_init = request.POST[DATA_INIT]
             vm.start_ip = int(request.POST['start_ip'])
+            vm.execution_finished = request.POST.get('execution_finished', 'False') == 'True'
 
             (last_instr, error, bit_code) = assemble(request.POST[CODE],
                                                      vm, step)
     if button == STEP:
-        if (last_instr == "Reached end of executable code." or
+        if getattr(vm, 'execution_finished', False):
+            button = ""
+        elif (last_instr == "Reached end of executable code." or
                 last_instr.find("Exiting program") != -1):
             button = ""
         elif error != "":
