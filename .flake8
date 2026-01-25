@@ -1,0 +1,13 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__,
+    docs/source/conf.py,
+    old,
+    build,
+    dist,
+    venv,
+    node_modules,
+    .env,
+    .venv
+max-line-length = 120

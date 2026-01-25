@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# Specific git-hook to run flake8 on staged python files.
+#
+
+echo "Running flake8 on staged files..."
+FILES=$(git diff --name-only --cached --diff-filter=ACMR | grep '\.py$')
+
+if [ -z "$FILES" ]; then
+    echo "No python files staged."
+    exit 0
+fi
+
+# Run flake8 on the staged files
+echo "$FILES" | xargs flake8
+RESULT=$?
+
+if [ $RESULT -ne 0 ]; then
+    echo "Staged files failed flake8 check. Commit aborted."
+    exit 1
+fi
+
+echo "Flake8 check passed."
+exit 0

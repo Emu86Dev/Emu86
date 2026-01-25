@@ -173,9 +173,13 @@ github:
 	git push origin master
 
 # dev: $(SRCS) $(MIPS_SRCS) $(OBJS) tests
-dev: tests
+dev: tests install-hooks
 	pytest $(PYTESTFILES)
 	python3 manage.py runserver
 
 # prod: $(SRCS) $(MIPS_SRCS) $(OBJS) navbar tests
 prod: tests github
+
+install-hooks:
+	ln -sf ../../.githooks/pre-commit .git/hooks/pre-commit
+	chmod +x .git/hooks/pre-commit
