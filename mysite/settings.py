@@ -17,11 +17,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATICFILES_DIRS = [
-os.path.join(BASE_DIR, "mysite","static"),
+    os.path.join(BASE_DIR, "mysite", "static"),
 ]
-
-
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -32,11 +29,12 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['emu86.pythonanywhere.com',
-                 'www.emu86.org',
-                 '0.0.0.0:8000',
-                 '*'
-                ]
+ALLOWED_HOSTS = [
+    'emu86.pythonanywhere.com',
+    'www.emu86.org',
+    '0.0.0.0:8000',
+    '*'
+]
 
 
 # Application definition
@@ -50,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    
+    'django_template_check',
 ]
 
 MIDDLEWARE = [
@@ -139,9 +137,9 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] \
-                %(message)s",
-                'datefmt': "%d%b%Y %H:%M:%S"
+                    'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] "
+                              "%(message)s",
+                    'datefmt': "%d%b%Y %H:%M:%S"
          },
     },
     'handlers': {

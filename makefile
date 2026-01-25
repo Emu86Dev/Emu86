@@ -183,3 +183,7 @@ prod: tests github
 install-hooks:
 	ln -sf ../../.githooks/pre-commit .git/hooks/pre-commit
 	chmod +x .git/hooks/pre-commit
+
+template-check:
+	python3 manage.py validate_templates
+	
