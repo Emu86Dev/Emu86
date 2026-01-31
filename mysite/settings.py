@@ -48,8 +48,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'django_template_check',
 ]
+
+# prevent load failure if in prod (where the pkg is not installed)
+try:
+    import django_template_check  # noqa: F401
+    INSTALLED_APPS.append('django_template_check')
+except ImportError:
+    pass
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
