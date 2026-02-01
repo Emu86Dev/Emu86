@@ -336,6 +336,7 @@ async function SubmitForm(demo_on = false, pause = false){
         debugger;
     }
 
+    document.querySelector('input[name="sample"]').value = document.getElementById('sample').value;
     document.getElementById("codeForm").submit();
     document.getElementById("clear-button").disabled="true";
     document.getElementById("run-button").disabled="true";
