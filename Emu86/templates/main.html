@@ -491,35 +491,32 @@
         sampleProgDOM.options[i] = op;
     }
     sampleProgDOM.value = selectedProgram; // Restore the selected program
-        if (document.getElementsByName("button_type")[0].value == "pause") {
-            SubmitForm(true, true);
-        }
-        var elem = document.getElementById("viewReg");
-        const flavor = document.getElementsByName('flavor')[0].value;
-    </script>
-    <script type="text/javascript">
-       window.addEventListener('DOMContentLoaded', (event) => {
+    if (document.getElementsByName("button_type")[0].value == "pause") {
+        SubmitForm(true, true);
+    }
+    var elem = document.getElementById("viewReg");
+    const flavor = document.getElementsByName('flavor')[0].value;
+       
+    window.addEventListener('DOMContentLoaded', (event) => {
         highlightCode();
     });
-    </script>
-    <script>
-        // Turn the <textarea> into a CodeMirror editor
-        const textarea = document.getElementById('id_code');
-        // Global editor object
-        window.editor = CodeMirror.fromTextArea(textarea, {
-            lineNumbers: true,
-            mode: 'gas',
-            theme: 'monokai'
-        });
-        // Keep Django form data in sync
-        window.editor.on('change', () => {
-            textarea.value = window.editor.getValue();
-        });
-        // Helper function to update the code editor
-        function setCode(newCode) {
-            window.editor.setValue(newCode || '');
-            textarea.value = window.editor.getValue();
-            window.editor.refresh();
-        }
+    // Turn the <textarea> into a CodeMirror editor
+    const textarea = document.getElementById('id_code');
+    // Global editor object
+    window.editor = CodeMirror.fromTextArea(textarea, {
+        lineNumbers: true,
+        mode: 'gas',
+        theme: 'monokai'
+    });
+    // Keep Django form data in sync
+    window.editor.on('change', () => {
+        textarea.value = window.editor.getValue();
+    });
+    // Helper function to update the code editor
+    function setCode(newCode) {
+        window.editor.setValue(newCode || '');
+        textarea.value = window.editor.getValue();
+        window.editor.refresh();
+    }
     </script>
 {% endblock content %}
