@@ -275,13 +275,14 @@ function Savecode()
     const flav = document.getElementsByName("flavor")[0].value;
     let fileName = null;
     if (flav === "mips_asm"){
-        fileName = prompt("Please enter file name to save as, ending in .asm or .txt (for machine code): ");
+        // TODO: is it possible to simplify this (change it to a selection etc.)
+        fileName = prompt("Please enter file name to save as, ending in .asm or .txt (for machine code): ").trim();
     }
     else if (flav === "mips_mml"){
-        fileName = prompt("Please enter file name to save as, ending in .txt (for machine code): ");
+        fileName = prompt("Please enter file name to save as: ").trim() + ".txt";
     }
     else{
-        fileName = prompt("Please enter file name to save as, ending in .asm: ");
+        fileName = prompt("Please enter file name to save as: ").trim() + ".asm";
     }
     if (fileName === null){
         alert("Save cancelled");
