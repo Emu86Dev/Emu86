@@ -561,7 +561,7 @@ input[type=button][disabled].default {
 .module_start h1{
     color:#ffffff;
     font-weight: bold;
-    font-size: 32px;
+    font-size: 34px;
 }
 
 .module_start h2{
@@ -572,6 +572,10 @@ input[type=button][disabled].default {
 
 .module_left {
     flex: 1;
+}
+
+.module_left h2 {
+    font-size: 18px;
 }
 
 /* right-side box */
