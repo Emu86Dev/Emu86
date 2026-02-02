@@ -284,6 +284,15 @@
                                 </tr>
                                 {% endfor %}
                                 </tr>
+                                <tr id="regs-expand-row">
+                                    <td colspan="2">
+                                        <div style="text-align: center; margin-top: 5px;">
+                                            <button id="regs-expand-btn" class="action-button" type="button" onclick="toggleRegistersTable()" style="display: none; padding: 20px 40px; font-size: 20px;">
+                                                Show More Register
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <table id="flags-table">
                                         <tr>
@@ -519,5 +528,42 @@
         textarea.value = window.editor.getValue();
         window.editor.refresh();
     }
+
+    function toggleRegistersTable() {
+        var table = document.getElementById("registers-table");
+        var rows = table.rows;
+        var btn = document.getElementById("regs-expand-btn");
+        var isExpanded = btn.getAttribute("data-expanded") === "true";
+                                    
+        isExpanded = !isExpanded;
+        btn.setAttribute("data-expanded", isExpanded);
+        btn.innerHTML = isExpanded ? "Collapse" : "Show More Register";
+
+            for (var i = 11; i < rows.length; i++) {
+                if (rows[i].id === "regs-expand-row") continue;
+                        rows[i].style.display = isExpanded ? "" : "none";
+                                    }
+                                }
+
+                        document.addEventListener("DOMContentLoaded", function() {
+                            var table = document.getElementById("registers-table");
+                            if (!table) return;
+                            var rows = table.rows;
+                            var btn = document.getElementById("regs-expand-btn");
+                            var dataRowCount = 0;
+
+                            if (rows.length > 11) { 
+                                var hiddenCount = 0;
+                                for (var i = 11; i < rows.length; i++) {
+                                    if (rows[i].id === "regs-expand-row") continue;
+                                        rows[i].style.display = "none";
+                                        hiddenCount++;
+                                    }
+                                    if (hiddenCount > 0) {
+                                        btn.style.display = "inline-block";
+                                    }
+                            }
+                        });
     </script>
+                            
 {% endblock content %}
