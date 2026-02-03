@@ -31,4 +31,4 @@ Backend:
 - Bring back WASM features
 - Optimization
   - Convert Run/Step/Clear to AJAX calls with JSON responses (partial rendering)
-  - Move VM state from global variables to Django sessions (per-user isolation)
+  - Move VM state to Django sessions (avoid round-tripping all state in form data)
