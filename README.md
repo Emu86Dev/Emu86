@@ -21,3 +21,6 @@ Run
 ```
 make dev
 ```
+
+## Link to Progress and Goals
+[ProgressAndGoals](/ProgressAndGoals.md)
