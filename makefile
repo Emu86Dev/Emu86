@@ -160,7 +160,9 @@ mips_mml_kernel:
 riscv_kernel:
 	python3 -m kernels.riscv.install
 
-all_tests: tests template-check lint   # test_docker
+all_tests: tests    # test_docker
+
+all_tests_debugg: template-check lint 
 
 tests: FORCE
 	./all_tests.sh
