@@ -160,7 +160,7 @@ mips_mml_kernel:
 riscv_kernel:
 	python3 -m kernels.riscv.install
 
-all_tests: tests # test_docker
+all_tests: tests lint  # test_docker
 
 tests: FORCE
 	./all_tests.sh
@@ -173,17 +173,10 @@ github:
 	git push origin master
 
 # dev: $(SRCS) $(MIPS_SRCS) $(OBJS) tests
-dev: tests install-hooks
+dev: tests
 	pytest $(PYTESTFILES)
 	python3 manage.py runserver
 
 # prod: $(SRCS) $(MIPS_SRCS) $(OBJS) navbar tests
 prod: tests github
 
-install-hooks:
-	ln -sf ../../.githooks/pre-commit .git/hooks/pre-commit
-	chmod +x .git/hooks/pre-commit
-
-template-check:
-	python3 manage.py validate_templates
-	
