@@ -115,24 +115,23 @@
           {% csrf_token %} {{ form.as_p }} <input type="button" name="clear"
           value="Reinitialize" title="Clear the contents of memory and the
           stack." id="clear-button" onclick="clearButton()"
-          onmouseover="displayHelp(this.name)" onmouseleave="hideHelp()" {% if
-          button_type == "demo" %} disabled {% endif %}> <input type="button"
+          onmouseover="displayHelp(this.name)" onmouseleave="hideHelp()" 
+          {% if button_type == "demo" %}disabled{% endif %}> <input type="button"
           name="run" value="Run Code" title="Execute all lines of code"
           id="run-button" onclick="runButton()"
-          onmouseover="displayHelp(this.name)" onmouseleave="hideHelp()" {% if
-          button_type == "demo" %} disabled {% endif %}> <input type="button"
+          onmouseover="displayHelp(this.name)" onmouseleave="hideHelp()" 
+          {% if button_type == "demo" %}disabled{% endif %}> <input type="button"
           name="step" value="Step Code" title="Execute one instruction at a
           time." id="step-button" onclick="stepButton()"
-          onmouseover="displayHelp(this.name)" onmouseleave="hideHelp()" {% if
-          button_type == "demo" %} disabled {% endif %}> <input type="button"
+          onmouseover="displayHelp(this.name)" onmouseleave="hideHelp()" 
+          {% if button_type == "demo" %}disabled{% endif %}> <input type="button"
           name="save" value="Save Code" id="save-button" title="Saves the code "
           onclick="Savecode()" onmouseover="displayHelp(this.name)"
-          onmouseleave="hideHelp()" {% if button_type == "demo" %} disabled {%
-          endif %}> <input type="button" name="demo" value="Demo Code"
+          onmouseleave="hideHelp()" 
+          {% if button_type == "demo" %}disabled{%endif %}> <input type="button" name="demo" value="Demo Code"
           title="Demo code line by line." id="demo-button"
           onclick="demoButton()" onmouseover="displayHelp(this.name)"
-          onmouseleave="hideHelp()" {% if button_type == "demo" %} disabled {%
-          endif %}>
+          onmouseleave="hideHelp()" {% if button_type == "demo" %}disabled{% endif %}>
           <input
             type="button"
             name="pause"
@@ -173,21 +172,16 @@
                         "{{ key }}:{{ val }}, ";
                     </script>
                     <tr>
-                      <td id="mem-loc">{{ key }}</td>
-                      {% if "GLOBALVAR"|add:key in changes %}
-                      <td id="contents" class="changed-globlevar">
-                        {% else %}
-                      </td>
-
-                      <td id="contents">
-                        {% endif %}
-                        <!-- <td id="contents" style="height:5px"> -->
-                        <input id="mem-cont" value="{{ val }}" name="{{ addr }}"
-                        size="5" readonly="readonly" {% if "GLOBALVAR"|add:key
-                        in changes %} class="changed-globlevar" {% else %}
-                        class="unchanged-globlevar" {% endif %} >
-                      </td>
-                    </tr>
+                    <td id="mem-loc">{{ key }}</td>
+                    <td id="contents" {% if "GLOBALVAR"|add:key in changes %}class="changed-globlevar"{% endif %}>
+                      <input id="mem-cont" 
+                        value="{{ val }}" 
+                        name="{{ addr }}"
+                        size="5" 
+                        readonly="readonly" 
+                        {% if "GLOBALVAR"|add:key in changes %}class="changed-globlevar"{% else %}class="unchanged-globlevar"{% endif %}>
+              </td>
+            </tr>
                     {% endfor %}
                   </table>
                 </div>
@@ -201,19 +195,16 @@
                         "{{ key }}:{{ val }}, ";
                     </script>
                     <tr>
-                      <td id="mem-loc">{{ key }}</td>
-                      {% if "LOCALVAR"|add:key in changes %}
-                      <td id="contents" class="changed-localvar">{% else %}</td>
-
-                      <td id="contents">
-                        {% endif %}
-                        <!-- <td id="contents" style="height:5px"> -->
-                        <input id="mem-cont" value="{{ val }}" name="{{ addr }}"
-                        size="5" readonly="readonly" {% if "LOCALVAR"|add:key in
-                        changes %} class="changed-localvar" {% else %}
-                        class="unchanged-localvar" {% endif %} >
-                      </td>
-                    </tr>
+                    <td id="mem-loc">{{ key }}</td>
+                    <td id="contents" {% if "LOCALVAR"|add:key in changes %}class="changed-localvar"{% endif %}>
+                      <input id="mem-cont" 
+                        value="{{ val }}" 
+                        name="{{ addr }}"
+                        size="5" 
+                        readonly="readonly" 
+                        {% if "LOCALVAR"|add:key in changes %}class="changed-localvar"{% else %}class="unchanged-localvar"{% endif %}>
+                    </td>
+                  </tr>
                     {% endfor %}
                   </table>
                 </div>
