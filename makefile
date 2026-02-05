@@ -160,7 +160,7 @@ mips_mml_kernel:
 riscv_kernel:
 	python3 -m kernels.riscv.install
 
-all_tests: tests lint  # test_docker
+all_tests: tests template-check lint   # test_docker
 
 tests: FORCE
 	./all_tests.sh
@@ -179,4 +179,7 @@ dev: tests
 
 # prod: $(SRCS) $(MIPS_SRCS) $(OBJS) navbar tests
 prod: tests github
+
+template-check:
+	python3 manage.py validate_templates
 
