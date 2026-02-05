@@ -51,7 +51,7 @@ class Jal(Instruction):
     def fhook(self, ops, vm, line_num):
         (op1, op2) = get_two_op_imm(self.get_nm(), ops, line_num)
         current_ip = vm.get_ip()
-        if(op1.name != "X0"):
+        if (op1.name != "X0"):
             op1.set_val(current_ip, line_num)
             vm.changes.add(op1.get_nm())
         raise Jump(str(op2.get_val(line_num)), line_num)

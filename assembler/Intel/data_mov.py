@@ -67,20 +67,20 @@ class Mov(Instruction):
         val = 1
         haveaddressarg = False
         instack = False
-        if(isinstance(ops[0], Address) or isinstance(ops[0], RegAddress)):
+        if (isinstance(ops[0], Address) or isinstance(ops[0], RegAddress)):
             haveaddressarg = True
-        if(isinstance(ops[1], Address) or isinstance(ops[1], RegAddress)):
+        if (isinstance(ops[1], Address) or isinstance(ops[1], RegAddress)):
             stackarg = 1
             val = 0
             haveaddressarg = True
-        if(haveaddressarg):
+        if (haveaddressarg):
             stack = int(ops[stackarg].get_mem_addr(line_num), 16)
             stack_loc = hex(stack).split('x')[-1].upper()
             instack = vm.check_stack(stack)
-        if(stackarg == 0 and instack):
+        if (stackarg == 0 and instack):
             vm.stack[stack_loc] = ops[val].get_val(line_num)
             vm.changes.add("STACK" + hex(stack).split('x')[-1].upper())
-        elif(stackarg == 1 and instack):
+        elif (stackarg == 1 and instack):
             ops[val].set_val(vm.stack[stack_loc], line_num)
         else:
             ops[0].set_val(ops[1].get_val(line_num), line_num)

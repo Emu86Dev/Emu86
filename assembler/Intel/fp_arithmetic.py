@@ -122,7 +122,7 @@ def checkflag(val, vm):
     if overflow happens in that case it sets carry flag to one
 
     """
-    if(val > MAX_FLOAT):
+    if (val > MAX_FLOAT):
         vm.flags['CF'] = 1
         val = val - MAX_FLOAT+1
     else:

@@ -23,49 +23,49 @@ def two_op_arith(ops, vm, instr, line_num, operator):
 
 
 def checkflag(val, vm, operator):
-    if(operator == opfunc.add):
-        if(val > MAX_INT):
+    if (operator == opfunc.add):
+        if (val > MAX_INT):
             vm.flags['CF'] = 1
             vm.flags['OF'] = 1
             vm.flags['SF'] = 1
             vm.flags['ZF'] = 0
             val = (val - MAX_INT) + MIN_INT
-        elif(val == 0):
+        elif (val == 0):
             vm.flags['ZF'] = 1
         else:
             vm.flags['CF'] = 0
             vm.flags['OF'] = 0
             vm.flags['SF'] = 0
             vm.flags['ZF'] = 0
-    elif(operator == opfunc.sub):
+    elif (operator == opfunc.sub):
         vm.flags['CF'] = 0
         vm.flags['OF'] = 0
         vm.flags['SF'] = 0
         vm.flags['ZF'] = 0
-        if(val == 0):
+        if (val == 0):
             vm.flags['ZF'] = 1
-        if(val < 0):
+        if (val < 0):
             vm.flags['CF'] = 1
-        if(val < MIN_INT):
+        if (val < MIN_INT):
             vm.flags['OF'] = 1
             vm.flags['SF'] = 1
             val = MAX_INT - (MIN_INT - val) + 1
-    elif(operator == opfunc.mul):
-        if(val > MAX_INT):
+    elif (operator == opfunc.mul):
+        if (val > MAX_INT):
             vm.flags['CF'] = 1
             vm.flags['OF'] = 1
             val = val & 0x7FFFFFFF
-        elif(val < MIN_INT):
+        elif (val < MIN_INT):
             vm.flags['CF'] = 1
             vm.flags['OF'] = 1
             val = val & 0xFFFFFFFF
             val = val | 0x80000000
-    elif(operator == opfunc.and_ or
-         operator == opfunc.or_ or
-         operator == opfunc.xor):
+    elif (operator == opfunc.and_ or
+            operator == opfunc.or_ or
+            operator == opfunc.xor):
         vm.flags['CF'] = 0
         vm.flags['OF'] = 0
-        if(val == 0):
+        if (val == 0):
             vm.flags['ZF'] = 1
         else:
             vm.flags['ZF'] = 0
@@ -377,7 +377,7 @@ class Idiv(Instruction):
         lowreg = int(vm.registers['EAX'])
         dividend = hireg + lowreg
         if ops[0].get_val(line_num) == 0:
-            raise DivisionZero( line_num )
+            raise DivisionZero(line_num)
         vm.registers['EAX'] = dividend // ops[0].get_val(line_num)
         vm.registers['EDX'] = dividend % ops[0].get_val(line_num)
         vm.changes.add('EAX')

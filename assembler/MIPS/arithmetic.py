@@ -42,7 +42,7 @@ def three_op_arith_immediate(ops, vm, instr, operator, line_num):
 
 
 def check_overflow(val, vm):
-    if(val > MAX_INT):
+    if (val > MAX_INT):
         val = val - MAX_INT+1
     return val
 

@@ -152,7 +152,7 @@ class Operand(Token):
 
 class IntegerTok(Operand):
     def __init__(self, val=0, con=True):
-        if(val > MAX_INT or val < MIN_INT):
+        if (val > MAX_INT or val < MIN_INT):
             raise IntOutOfRng(str(val))
 
         super().__init__("Integer", val)

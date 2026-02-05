@@ -51,7 +51,7 @@ class Interrupt(Instruction):
 
     def fhook(self, ops, vm, line_num):
         check_num_args(self.get_nm(), ops, 1, line_num)
-        if type(ops[0]) != IntegerTok:
+        if not isinstance(ops[0], IntegerTok):
             raise InvalidOperand(str(ops[0]), line_num)
         try:
             interrupt_class = int_vectors[ops[0].get_val(line_num)]
