@@ -162,7 +162,7 @@ riscv_kernel:
 
 all_tests: tests    # test_docker
 
-all_tests_debugg: template-check lint 
+all_tests_debug: template-check lint 
 
 tests: FORCE
 	./all_tests.sh
