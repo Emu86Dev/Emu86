@@ -142,29 +142,39 @@
                                         REGISTERS &amp; FLAGS
                                     </td>
                                 </tr>
+                                <!-- Improvement required! -->
                                 <tr>
                                 {% for reg, cont in vm.registers.items %}
+                                    <!-- Case with more than 10 registers, apply special format -->
                                     {% if vm.registers|length > 10 %}
+                                    <!-- Special handling for specific registers to control row/column alignment -->
+                                        <!-- R9: pad remaining cells, then force a new row -->
                                         {% if reg == "R9" %}
                                             <td id="register"></td><td id="contents"></td></tr><tr class ={{reg.0}}>
+                                        <!-- R10 / R11: always start on a new row -->
                                         {% elif reg == "R10" or reg == "R11" %}
                                             </tr> <tr class ={{reg.0}}>
+                                        <!-- PC: force aligned new row after padding -->
                                         {% elif reg == "PC" %}
                                             <td id="register"></td><td id="contents"></td></tr><tr class={{reg.0}}>
                                         {% else %}
+                                            <!-- Break rows every 3 registers (Look like the format is removed already) -->
                                             {% if forloop.counter0|divisibleby:3 %}
                                                 {% comment %}
                                                 {% if reg not in small_regs %}
                                                 {% endcomment %}
+                                                <!-- Skip row breaks for certain registers to keep them grouped -->
                                                 {% if reg != "R21" and reg != "R22" and reg != "R23" %}
                                                     </tr> <tr class={{reg.0}}>
                                                 {% endif %}
                                             {% endif %}
                                         {% endif %}
+                                    <!-- Case with less registers, with a simple one-register-per-row layout-->
                                     {% else %}
                                         </tr> <tr class={{reg.0}}>
                                     {% endif %}
 
+                                    <!-- Register name cell: unwritable registers get different styling -->
                                     {% if reg in vm.unwritable %}
                                         <td id="unwritable">
                                     {% else %}
