@@ -546,10 +546,13 @@ input[type=button][disabled].default {
 
 /* module for the welcome page interface */
 .module_start{
-    padding:  10px;
-    margin-bottom: 30px;
-    background: #1b1b1b;
-    border-radius: 32px;
+    padding: 10px;
+    width: 93.23%; /* Apply Matt's ratio */
+    margin: 0 auto;
+    background: #1C1D20 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #0000005C;
+    border-radius: 40px;
+    opacity: 1;
 
     display: flex;          
     gap: 10px;            
