@@ -501,12 +501,8 @@ input[type=button][disabled].default {
 /* MODULES */
 
 .module {
-    /*
-    border-radius: 4px;
-    */
     padding:  10px;
     margin-bottom: 30px;
-    background: #131313;
     
 }
 
