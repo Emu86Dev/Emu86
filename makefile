@@ -27,7 +27,7 @@ DOCKER_DIR = docker
 REQ_DIR = $(DOCKER_DIR)
 PYLINT = flake8
 PYLINTFLAGS = 
-PYTHONFILES = $(shell find . -type f -name "*.py" -not -path "./utils/*" -not -path "./Emu86/migrations/*" -not -path "./mysite/*")
+PYTHONFILES = $(shell find . -type f -name "*.py" -not -path "./utils/*" -not -path "./Emu86/migrations/*" -not -path "./mysite/*" -not -path "./venv/*" -not -path "./.venv/*" -not -path "./node_modules/*")
 PYTESTFILES = pytests
 
 ESLINT = npx eslint
