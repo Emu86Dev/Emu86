@@ -9,6 +9,8 @@ from common.constants import (
     MIPS_ASM,
     MIPS_MML,
     RISCV,
+    VALID_BASES,
+    VALID_LANGS
 )
 
 from .models import AdminEmail
@@ -278,10 +280,21 @@ def main_page(request, slug = None):
     default_slug = 'intel-dec'
 
     def _parse(slug_value):
-        parts = slug_value.split("-", 1)
-        if len(parts) != 2:
+        parts = slug_value.split("-")
+        
+        # missing one arg
+        if len(parts) < 2:
             return None, None
-        return parts[0], parts[1]
+        lang, base = parts[0], parts[1]
+        
+        # invalid arg
+        if lang not in VALID_LANGS or base not in VALID_BASES:
+            return None, None
+        
+        return lang, base
+
+
+
 
 
     if request.method == 'GET':
