@@ -74,7 +74,7 @@ h1,h2,h3,h4,h5 {
 
 h1 {
     margin: 0 0 20px;
-    font-weight: 300;
+    /* font-weight: 300; */
     font-size: 2.2em;
     color: #666;
 }
@@ -936,8 +936,9 @@ a.deletelink:focus, a.deletelink:hover {
 #branding h1 {
     padding: 0;
     margin: 0 20px 0 0;
-    font-weight: 300;
-    font-size: 1.5em;
+    /* Adobe XD says medium, but 500 feels closer to the design */
+    font-weight: 500;
+    font-size: 1.25em;
     color: #ffcc33;
 }
 
