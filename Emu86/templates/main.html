@@ -301,7 +301,7 @@
                                     <td colspan="2">
                                         <div style="text-align: center; margin-top: 5px;">
                                             <button id="regs-expand-btn" class="action-button" type="button" onclick="toggleRegistersTable()" style="display: none; padding: 20px 40px; font-size: 20px;">
-                                                Show More Register
+                                                Show More Registers
                                             </button>
                                         </div>
                                     </td>
@@ -542,41 +542,33 @@
         window.editor.refresh();
     }
 
-    function toggleRegistersTable() {
-        var table = document.getElementById("registers-table");
-        var rows = table.rows;
+        function toggleRegistersTable() {
+        var registerRows = document.querySelectorAll("#registers-table tr.R");
         var btn = document.getElementById("regs-expand-btn");
         var isExpanded = btn.getAttribute("data-expanded") === "true";
-                                    
+        
         isExpanded = !isExpanded;
         btn.setAttribute("data-expanded", isExpanded);
         btn.innerHTML = isExpanded ? "Collapse" : "Show More Register";
 
-            for (var i = 11; i < rows.length; i++) {
-                if (rows[i].id === "regs-expand-row") continue;
-                        rows[i].style.display = isExpanded ? "" : "none";
-                                    }
-                                }
+        for (var i = 10; i < registerRows.length; i++) {
+             registerRows[i].style.display = isExpanded ? "" : "none";
+        }
+    }
 
-                        document.addEventListener("DOMContentLoaded", function() {
-                            var table = document.getElementById("registers-table");
-                            if (!table) return;
-                            var rows = table.rows;
-                            var btn = document.getElementById("regs-expand-btn");
-                            var dataRowCount = 0;
-
-                            if (rows.length > 11) { 
-                                var hiddenCount = 0;
-                                for (var i = 11; i < rows.length; i++) {
-                                    if (rows[i].id === "regs-expand-row") continue;
-                                        rows[i].style.display = "none";
-                                        hiddenCount++;
-                                    }
-                                    if (hiddenCount > 0) {
-                                        btn.style.display = "inline-block";
-                                    }
-                            }
-                        });
+    document.addEventListener("DOMContentLoaded", function() {
+        var registerRows = document.querySelectorAll("#registers-table tr.R");
+        var btn = document.getElementById("regs-expand-btn");
+        
+        if (registerRows.length > 10) {
+            for (var i = 10; i < registerRows.length; i++) {
+                registerRows[i].style.display = "none";
+            }
+            btn.style.display = "inline-block";
+        } else {
+            btn.style.display = "none";
+        }
+    });
     </script>
                             
 {% endblock content %}
