@@ -369,7 +369,7 @@ def main_page(request, slug = None):
 
             vm.base = base
             vm.flavor = lang
-            hex_conversion(vm)
+            hex_conversion(vm, base)
             render_data = create_render_data(request,
                                              vm,
                                              form,
@@ -449,7 +449,7 @@ def main_page(request, slug = None):
         button = ""
 
     vm.order_mem()
-    hex_conversion(vm)
+    hex_conversion(vm, base)
 
     # Reconstruct slug from vm.flavor and vm.base to ensure it's always current
     if vm.flavor and vm.base:
@@ -617,8 +617,8 @@ def get_symbol_contents(vm, request):
                         vm.locals[key_mem] = int(val_mem)
 
 
-def hex_conversion(vm):
-    if vm.base == "hex":
+def hex_conversion(vm, base):
+    if base == "hex":
         convert_reg_contents(vm.registers)
         convert_mem_contents(vm.memory)
         convert_stack_contents(vm.stack)
