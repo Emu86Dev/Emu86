@@ -234,6 +234,7 @@ def create_render_data(request, vm, form, site_hdr, last_instr, error,
         'more_samples': MORE_SAMPLES_GROUP,
         'has_fp_samples': HAS_FP_SAMPLES_GROUP,
         'flavor_options': ALL_FLAVORS,
+        'base': vm.base,
     }
     if vm.flavor in MIPS:
         r_reg, f_reg = processRegisters(vm)

@@ -74,7 +74,7 @@
                         onclick="toggleBase()"
                         onmouseover="displayHelp(this.name)"
                         onmouseleave="hideHelp()">
-                        <i class="fa-solid fa-repeat"></i> {{ vm.base|capfirst }}</button>
+                        <i class="fa-solid fa-repeat"></i> {{ base|capfirst }}</button>
                 </td>
                 
                 <td id="select-cell" class="button-cell">
@@ -88,7 +88,7 @@
                                 {% option_maybe_selected prog_nm descr sample %}
                             {% endfor %}
                         {% endif %}
-                        {% if vm.base == "dec" %}
+                        {% if base == "dec" %}
                             {% if vm.flavor in has_fp_samples  %}
                                 {% for prog_nm, descr in fp_sample_progs.items %}
                                     {% option_maybe_selected prog_nm descr sample %}
@@ -125,7 +125,7 @@
             <input type="hidden" name="button_type" value="{{ button_type }}" >
             <input type="hidden" name="execution_finished" value="{{ vm.execution_finished|default:'False' }}" >
             <input type="hidden" name="mem_data" value="">
-            <input type="hidden" name="base" value="{{ vm.base }}">
+            <input type="hidden" name="base" value="{{ base }}">
             <input type="hidden" name="sample" value="{{ sample }}">
             <br>
             <table class="transparent-table">
