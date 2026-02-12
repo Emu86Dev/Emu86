@@ -344,10 +344,13 @@ td {
 }
 
 
-th#MemStack {
+.MemStack {
     text-align: center;
     background: #435;
     color: #dbf;
+    cursor: pointer;
+    padding: 10px;
+    font-weight: bold;
 }
 
 thead th,
