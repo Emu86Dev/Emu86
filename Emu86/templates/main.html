@@ -148,14 +148,8 @@
                                     <!-- Case with more than 10 registers, apply special format -->
                                     {% if vm.registers|length > 10 %}
                                     <!-- Special handling for specific registers to control row/column alignment -->
-                                        <!-- R9: pad remaining cells, then force a new row -->
-                                        {% if reg == "R9" %}
-                                            <td id="register"></td><td id="contents"></td></tr><tr class ={{reg.0}}>
-                                        <!-- R10 / R11: always start on a new row -->
-                                        {% elif reg == "R10" or reg == "R11" %}
-                                            </tr> <tr class ={{reg.0}}>
                                         <!-- PC: force aligned new row after padding -->
-                                        {% elif reg == "PC" %}
+                                        {% if reg == "PC" %}
                                             <td id="register"></td><td id="contents"></td></tr><tr class={{reg.0}}>
                                         {% else %}
                                             <!-- Break rows every 3 registers (Look like the format is removed already) -->
