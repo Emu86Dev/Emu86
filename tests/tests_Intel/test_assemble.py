@@ -54,6 +54,7 @@ class AssembleTestCase(TestCase):
                     a = float(random.uniform(MIN_MUL, MAX_MUL))
                 if second_val == FLOAT:
                     b = float(random.uniform(MIN_MUL, MAX_MUL))
+                print(f'Using operands {a} and {b}')
                 correct = operator(a, b)
                 intel_machine.registers["ST0"] = a
                 intel_machine.registers["ST1"] = b
@@ -196,6 +197,7 @@ class AssembleTestCase(TestCase):
                 a = float(random.uniform(MIN_MUL, MAX_MUL))
                 intel_machine.registers["FRB"] = a  # source float register
                 correct = operator(a)
+                print(f'Using operand {a}')
                 """
                 if replaces == False:
                      intel_machine.registers["FRT"] = None

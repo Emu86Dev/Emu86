@@ -52,11 +52,13 @@ class AssembleTestCase(TestCase):
                     low1=MIN_TEST, high1=MAX_TEST,
                     low2=MIN_TEST, high2=MAX_TEST,):
         for i in range(0, NUM_TESTS):
-            a = random.randint(low1, high1)
-            b = random.randint(low2, high2)
             if float:
                 a = random.uniform(low1, high1)
                 b = random.uniform(low2, high2)
+            else:
+                a = random.randint(low1, high1)
+                b = random.randint(low2, high2)
+            print(f'Using operands {a} and {b}')
             correct = operator(a, b)
             if float:
                 mips_machine.registers["F8"] = a

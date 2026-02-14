@@ -41,6 +41,7 @@ class AssembleTestCase(TestCase):
         for i in range(0, NUM_TESTS):
             a = random.randint(low1, high1)
             b = random.randint(low2, high2)
+            print(f'Using operands {a} and {b}')
             correct = operator(a, b)
             intel_machine.registers["EAX"] = a
             intel_machine.registers["EBX"] = b

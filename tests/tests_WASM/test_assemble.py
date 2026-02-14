@@ -56,6 +56,7 @@ class AssembleTestCase(TestCase):
         for i in range(0, NUM_TESTS):
             a = random.randint(low1, high1)
             b = random.randint(low2, high2)
+            print(f'Using operands {a} and {b}')
             correct = operator(a, b)
             sp = wasm_machine.get_sp()
             wasm_machine.stack[hex(sp).split('x')[-1].upper()] = b

@@ -39,6 +39,7 @@ class AssembleTestCase(TestCase):
         for i in range(0, NUM_TESTS):
             a = random.randint(low1, high1)
             b = random.randint(low2, high2)
+            print(f'Using operands {a} and {b}')
             correct = operator(a, b)
             mips_machine.registers["R8"] = a
             mips_machine.registers["R9"] = b

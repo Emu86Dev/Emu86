@@ -50,6 +50,7 @@ class AssembleTestCase(TestCase):
         for _ in range(0, NUM_TESTS):
             a = random.randint(low1, high1)
             b = random.randint(low2, high2)
+            print(f'Using operands {a} and {b}')
             correct = operator(a, b)
             riscv_machine.registers["X8"] = a
             riscv_machine.registers["X9"] = b
@@ -62,6 +63,7 @@ class AssembleTestCase(TestCase):
         for _ in range(0, NUM_TESTS):
             a = abs(random.randint(low1, high1))
             b = abs(random.randint(low2, high2))
+            print(f'Using operands {a} and {b}')
             correct = operator(a, b)
             riscv_machine.registers["X8"] = a
             riscv_machine.registers["X9"] = b
