@@ -24,3 +24,8 @@ make dev
 
 ## Link to Progress and Goals
 [ProgressAndGoals](/ProgressAndGoals.md)
+
+## UI Design
+This project was originally created in 2019. We have been improving the UI since 2025 — here's a glimpse of the old interface:
+
+![Old UI](docs/old_ui.png)
