@@ -154,13 +154,7 @@
                                         {% else %}
                                             <!-- Break rows every 3 registers (Look like the format is removed already) -->
                                             {% if forloop.counter0|divisibleby:3 %}
-                                                {% comment %}
-                                                {% if reg not in small_regs %}
-                                                {% endcomment %}
-                                                <!-- Skip row breaks for certain registers to keep them grouped -->
-                                                {% if reg != "R21" and reg != "R22" and reg != "R23" %}
-                                                    </tr> <tr class={{reg.0}}>
-                                                {% endif %}
+                                                </tr> <tr class={{reg.0}}>
                                             {% endif %}
                                         {% endif %}
                                     <!-- Case with less registers, with a simple one-register-per-row layout-->
