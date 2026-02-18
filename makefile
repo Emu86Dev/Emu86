@@ -27,7 +27,30 @@ DOCKER_DIR = docker
 REQ_DIR = $(DOCKER_DIR)
 PYLINT = flake8
 PYLINTFLAGS = 
-PYTHONFILES = $(shell find . -type f -name "*.py" -not -path "./utils/*" -not -path "./Emu86/migrations/*" -not -path "./mysite/*" -not -path "./venv/*" -not -path "./.venv/*" -not -path "./node_modules/*")
+PYTHONDIRS = . \
+Emu86 \
+Emu86/templatetags \
+assembler \
+assembler/Intel \
+assembler/MIPS \
+assembler/RISCV \
+assembler/WASM \
+common \
+kernels \
+kernels/att \
+kernels/intel \
+kernels/mips_asm \
+kernels/mips_mml \
+kernels/riscv \
+myutils \
+pytests \
+selenium_tests \
+tests/tests_ATT \
+tests/tests_Intel \
+tests/tests_MIPS_ASM \
+tests/tests_MIPS_MML \
+tests/tests_RISCV \
+tests/tests_WASM
 PYTESTFILES = pytests
 
 ESLINT = npx eslint
@@ -90,7 +113,11 @@ prod_container: $(DOCKER_DIR)/Deployable $(REQ_DIR)/requirements.txt
 deploy_container:
 	docker push gcallah/$(REPO):latest
 
-lint: $(patsubst %.py,%.pylint,$(PYTHONFILES)) $(patsubst %.js,%.eslint,$(JSFILES))
+lint:
+	for dir in $(PYTHONDIRS); do \
+		echo "Linting $$dir..."; \
+		(cd $$dir && $(PYLINT) $(PYLINTFLAGS) *.py) || exit 1; \
+	done
 
 %.pylint:
 	$(PYLINT) $(PYLINTFLAGS) $*.py
