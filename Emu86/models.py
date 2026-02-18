@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.text import slugify
+
 
 HEADER_LEN = 128
 

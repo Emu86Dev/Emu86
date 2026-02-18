@@ -89,9 +89,6 @@ def run_assemble(vm, base, code):
 
 
 def main():
-    global intel_machine
-    global mips_machine
-    global riscv_machine
     reset_vms()
     base = None
     parser = argparse.ArgumentParser()

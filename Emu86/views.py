@@ -1,6 +1,6 @@
 import logging
 import re
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect
 
 from common.constants import (
@@ -9,8 +9,6 @@ from common.constants import (
     MIPS_ASM,
     MIPS_MML,
     RISCV,
-    VALID_BASES,
-    VALID_LANGS
 )
 
 from .models import AdminEmail
@@ -100,15 +98,15 @@ NOT_MIPS_RISC_PROGS = {
 }
 
 
-def get_hdr(lang = None, base=None):
+def get_hdr(lang=None, base=None):
     site_hdr = "Multi-Language Assembly Emulator"
     site_list = Site.objects.all()
     for site in site_list:
         site_hdr = site.header
         break   # since we only expect a single site record!
-    #if(lang and base):
+    # if(lang and base):
     #    site_hdr += f": {ALL_FLAVORS[lang]} {base.upper()}"
-    # Remove the extended language name on header to make sure won't 
+    # Remove the extended language name on header to make sure won't
     return site_hdr
 
 
@@ -143,9 +141,6 @@ def hex_to_float(h):
 
 
 def welcome(request):
-    global intel_machine
-    global mips_machine
-    global riscv_machine
     intel_machine.re_init()
     mips_machine.re_init()
     riscv_machine.re_init()
@@ -160,7 +155,7 @@ def welcome(request):
 
 
 def getRegisters(registers, keys, type):
-    
+
     def sort_key(k: str):
         m = re.search(r'(\d+)$', k)
         if m:
@@ -188,11 +183,11 @@ def getRegisters(registers, keys, type):
     if type == 'F':
         # F mode forced to have HI, LO, PC
         if 'HI' not in removed_keys:
-             retArray.append(('HI', registers['HI']))
+            retArray.append(('HI', registers['HI']))
         if 'LO' not in removed_keys:
-             retArray.append(('LO', registers['LO']))
+            retArray.append(('LO', registers['LO']))
         if 'PC' not in removed_keys:
-             retArray.append(('PC', registers['PC']))
+            retArray.append(('PC', registers['PC']))
 
     return retArray
 
@@ -234,7 +229,6 @@ def create_render_data(request, vm, form, site_hdr, last_instr, error,
         'more_samples': MORE_SAMPLES_GROUP,
         'has_fp_samples': HAS_FP_SAMPLES_GROUP,
         'flavor_options': ALL_FLAVORS,
-        'base': vm.base,
     }
     if vm.flavor in MIPS:
         r_reg, f_reg = processRegisters(vm)
@@ -270,7 +264,8 @@ def machine_flavor_reset(wasm_machine_flavor_status=True):
     if wasm_machine_flavor_status:
         wasm_machine.flavor = None
 
-def main_page(request, slug = None):
+
+def main_page(request, slug=None):
     last_instr = ""
     error = ""
     sample = "none"
@@ -281,29 +276,17 @@ def main_page(request, slug = None):
     default_slug = 'intel-dec'
 
     def _parse(slug_value):
-        parts = slug_value.split("-")
-        
-        # missing one arg
-        if len(parts) < 2:
+        parts = slug_value.split("-", 1)
+        if len(parts) != 2:
             return None, None
-        lang, base = parts[0], parts[1]
-        
-        # invalid arg
-        if lang not in VALID_LANGS or base not in VALID_BASES:
-            return None, None
-        
-        return lang, base
-
-
-
-
+        return parts[0], parts[1]
 
     if request.method == 'GET':
         machine_reinit()
         machine_flavor_reset()
         # slug: <processor>-<base: hex/dec>
         # if slug:
-        if slug == None:
+        if slug is None:
             return redirect('Emu86:emu_page', slug=default_slug)
         lang, base = _parse(slug)
         if not lang or not base:
@@ -349,7 +332,7 @@ def main_page(request, slug = None):
                                'last_instr': "",
                                'error': "",
                                'debug': wasm_machine.debug,
-                               NXT_KEY: wasm_machine.nxt_key,
+                               'NXT_KEY': wasm_machine.nxt_key,
                                'memory': wasm_machine.memory,
                                'stack': wasm_machine.stack,
                                'symbols': wasm_machine.symbols,
@@ -358,7 +341,7 @@ def main_page(request, slug = None):
                                'locals': wasm_machine.locals,
                                'flavor': wasm_machine.flavor,
                                'data_init': wasm_machine.data_init,
-                               'base': base,
+                               'base': wasm_machine.base,
                                'sample': NO_SAMPLE,
                                'start_ip': wasm_machine.start_ip,
                                'bit_code': "",
@@ -369,7 +352,7 @@ def main_page(request, slug = None):
 
             vm.base = base
             vm.flavor = lang
-            hex_conversion(vm, base)
+            hex_conversion(vm)
             render_data = create_render_data(request,
                                              vm,
                                              form,
@@ -418,8 +401,9 @@ def main_page(request, slug = None):
             if step:
                 key = 0
                 try:
-                    key = int(request.POST.get(NXT_KEY, 0))
-                except Exception:
+                    key = int(request.POST.get('NXT_KEY', 0))
+                except Exception as E:
+                    print(E)
                     key = 0
                 add_debug("Getting next key", vm)
                 vm.nxt_key = key
@@ -449,11 +433,11 @@ def main_page(request, slug = None):
         button = ""
 
     vm.order_mem()
-    hex_conversion(vm, base)
+    hex_conversion(vm)
 
     # Reconstruct slug from vm.flavor and vm.base to ensure it's always current
-    if vm.flavor and base:
-        slug = f"{vm.flavor}-{base}"
+    if vm.flavor and vm.base:
+        slug = f"{vm.flavor}-{vm.base}"
 
     if vm.flavor == 'wasm':
         return render(request, 'wasm.html',
@@ -462,7 +446,7 @@ def main_page(request, slug = None):
                        'last_instr': "",
                        'error': "",
                        'debug': wasm_machine.debug,
-                       NXT_KEY: wasm_machine.nxt_key,
+                       'NXT_KEY': wasm_machine.nxt_key,
                        'memory': wasm_machine.memory,
                        'stack': wasm_machine.stack,
                        'symbols': wasm_machine.symbols,
@@ -471,7 +455,7 @@ def main_page(request, slug = None):
                        'locals': wasm_machine.locals,
                        'flavor': wasm_machine.flavor,
                        'data_init': wasm_machine.data_init,
-                       'base': base,
+                       'base': wasm_machine.base,
                        'sample': 'none',
                        'start_ip': wasm_machine.start_ip,
                        'bit_code': "",
@@ -617,8 +601,8 @@ def get_symbol_contents(vm, request):
                         vm.locals[key_mem] = int(val_mem)
 
 
-def hex_conversion(vm, base):
-    if base == "hex":
+def hex_conversion(vm):
+    if vm.base == "hex":
         convert_reg_contents(vm.registers)
         convert_mem_contents(vm.memory)
         convert_stack_contents(vm.stack)
