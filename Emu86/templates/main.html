@@ -428,7 +428,7 @@
                 <summary class="MemStack">C-Stack</summary>
                 <div class="table-wrapper">
                     <table id="stack-table">
-                        {% for label in vm.cstack reversed %}
+                        {% for label in vm.c_stack reversed %}
                             <tr>
                                 {% if vm.stack_change == label %}
                                     <td id="mem-loc">
