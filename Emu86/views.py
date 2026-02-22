@@ -9,6 +9,8 @@ from common.constants import (
     MIPS_ASM,
     MIPS_MML,
     RISCV,
+    VALID_BASES,
+    VALID_LANGS,
 )
 
 from .models import AdminEmail
@@ -229,6 +231,7 @@ def create_render_data(request, vm, form, site_hdr, last_instr, error,
         'more_samples': MORE_SAMPLES_GROUP,
         'has_fp_samples': HAS_FP_SAMPLES_GROUP,
         'flavor_options': ALL_FLAVORS,
+        'base': vm.base,
     }
     if vm.flavor in MIPS:
         r_reg, f_reg = processRegisters(vm)
@@ -279,7 +282,10 @@ def main_page(request, slug=None):
         parts = slug_value.split("-", 1)
         if len(parts) != 2:
             return None, None
-        return parts[0], parts[1]
+        lang, base = parts[0], parts[1]
+        if lang not in VALID_LANGS or base not in VALID_BASES:
+            return None, None
+        return lang, base
 
     if request.method == 'GET':
         machine_reinit()
