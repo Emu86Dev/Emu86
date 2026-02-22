@@ -343,11 +343,25 @@ td {
     color: gray;
 }
 
+.mem-wrapper {
+    background: #202020;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin-top: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 74%;
+    margin-left: 13%;
+}
+
+.table-wrapper {
+    margin-bottom: 18px;
+
+}
 
 .MemStack {
     text-align: center;
-    background: #435;
-    color: #dbf;
+    color: white;
     cursor: pointer;
     padding: 10px;
     font-weight: bold;
