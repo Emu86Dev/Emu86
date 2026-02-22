@@ -279,7 +279,7 @@ def main_page(request, slug=None):
     default_slug = 'intel-dec'
 
     def _parse(slug_value):
-        parts = slug_value.split("-", 1)
+        parts = slug_value.split("-")
         if len(parts) != 2:
             return None, None
         lang, base = parts[0], parts[1]
