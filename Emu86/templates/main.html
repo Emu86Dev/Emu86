@@ -425,14 +425,14 @@
         </div>
 
             <div class="mem-wrapper"><details>
-                <summary class="MemStack">C-Stack</summary>
+                <summary class="MemStack">Call Stack</summary>
                 <div class="table-wrapper">
                     <table id="stack-table">
                         {% for label in vm.c_stack reversed %}
                             <tr>
                                 {% if vm.stack_change == label %}
                                     <td id="mem-loc">
-                                        SP
+                                        Stack Pointer (SP)
                                     </td>
                                 {% else %}
                                     <td id="mem-loc">
