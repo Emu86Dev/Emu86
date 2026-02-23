@@ -138,9 +138,9 @@
                         {% if vm.flavor in no_float_registers %}
                             <table id="register-table" class="transparent-table">
                                 <tr>
-                                    <th colspan="2">
+                                    <th colspan="6" style="text-align: center">
                                         REGISTERS &amp; FLAGS
-                                    </td>
+                                    </th>
                                 </tr>
                                 <!-- Improvement required! -->
                                 <tr>
@@ -173,7 +173,7 @@
 
                                     <td id="contents">
 
-                                    {% if data_init == "on" %}
+                                    {% if vm.data_init == "on" %}
                                         <input
                                             {% if reg in vm.unwritable %}
                                                 id="unwr-cont"
