@@ -1014,8 +1014,10 @@ td#float-cell {
     background: #dde;
 }
 
-.unwritable {
+td#unwritable {
     color: #c58;
+    background: black;
+    vertical-align: middle
 }
 
 input#flag-cont {
@@ -1028,7 +1030,6 @@ input#reg-cont, input#mem-cont, input#flag-cont, input#unwr-cont {
 }
 
 input#unwr-cont {
-    background: #eff;
     color: #936;
 }
 
