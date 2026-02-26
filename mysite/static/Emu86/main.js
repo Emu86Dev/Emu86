@@ -171,6 +171,10 @@ function selectSample()
             celFah_fp(flav.value);
         }
     }
+    
+    if (selected !== "none") {
+        clearButton();
+    }
 }
 
 function checkForScript()
