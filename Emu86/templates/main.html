@@ -206,6 +206,7 @@
                                 {% endfor %}
                                 </tr>
                                 <tr>
+                                    <td colspan="6">
                                     <table id="flags-table">
                                         <tr>
                                             {% for flag in vm.flags %}
@@ -231,6 +232,7 @@
                                             {% endfor %}
                                         </tr>
                                     </table>
+                                    </td>
                                 </tr>
                             </table>
                         {% else %}
@@ -239,7 +241,7 @@
                                 <tr>
                                     <th colspan="2">
                                         REGISTERS &amp; FLAGS
-                                    </td>
+                                    </th>
                                 </tr>
                                 {% for reg, cont in int_registers %}
                                 <tr class="R">
@@ -283,8 +285,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                {% endfor %}
-                                </tr>
+                                {% endfor %}                             
                                 <tr id="regs-expand-row">
                                     <td colspan="2">
                                         <div style="text-align: center; margin-top: 5px;">
@@ -295,6 +296,7 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2">
                                     <table id="flags-table">
                                         <tr>
                                             {% for flag in vm.flags %}
@@ -320,6 +322,7 @@
                                             {% endfor %}
                                         </tr>
                                     </table>
+                                    </td>
                                 </tr>
                             </table>
 
