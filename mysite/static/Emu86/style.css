@@ -1162,13 +1162,13 @@ summary.sum2 {
 
 summary.sum3 {
     font-size: 1.5em;
-    color: #339;
+    color: rgb(67, 67, 189);
     margin: .6em 1.2em .6em 2.8em;
 }
 
 summary.sum4 {
     font-size: 1.4em;
-    color: #825;
+    color: plum;
     margin: .4em 1.2em .4em 2.8em;
 }
 
