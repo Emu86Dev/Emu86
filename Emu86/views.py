@@ -347,7 +347,7 @@ def main_page(request, slug=None):
                                'locals': wasm_machine.locals,
                                'flavor': wasm_machine.flavor,
                                'data_init': wasm_machine.data_init,
-                               'base': wasm_machine.base,
+                               'base': base,
                                'sample': NO_SAMPLE,
                                'start_ip': wasm_machine.start_ip,
                                'bit_code': "",
@@ -442,8 +442,8 @@ def main_page(request, slug=None):
     hex_conversion(vm, base)
 
     # Reconstruct slug from vm.flavor and vm.base to ensure it's always current
-    if vm.flavor and vm.base:
-        slug = f"{vm.flavor}-{vm.base}"
+    if vm.flavor and base:
+        slug = f"{vm.flavor}-{base}"
 
     if vm.flavor == 'wasm':
         return render(request, 'wasm.html',
@@ -461,7 +461,7 @@ def main_page(request, slug=None):
                        'locals': wasm_machine.locals,
                        'flavor': wasm_machine.flavor,
                        'data_init': wasm_machine.data_init,
-                       'base': wasm_machine.base,
+                       'base': base,
                        'sample': 'none',
                        'start_ip': wasm_machine.start_ip,
                        'bit_code': "",
