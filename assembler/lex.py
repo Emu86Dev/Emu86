@@ -214,7 +214,7 @@ def split_code(code, vm):
     return words
 
 
-def sep_line(code, line_num, i, data_sec, vm, language_keys):
+def sep_line(code, line_num, i, data_sec, vm, base, language_keys):
     """
     Returns a list of tokens created
 
@@ -271,7 +271,7 @@ def sep_line(code, line_num, i, data_sec, vm, language_keys):
             if (data_type != ".float" and data_type != ".double" and
                     data_type != "REAL4" and data_type != "REAL8"):
                 data_type = ".float"
-            if vm.base == "dec":
+            if base == "dec":
                 # TODO: Screen shot to give me the
                 # floating point token class from token.py
                 analysis.append(FloatTok(data_type=data_type, val=float(word)))
@@ -286,7 +286,7 @@ def sep_line(code, line_num, i, data_sec, vm, language_keys):
                                              val=f_to_b64(float(word))))
         # Integers
         else:
-            if vm.base == "dec":
+            if base == "dec":
                 try:
                     if vm.flavor == "att":
                         analysis.append(IntegerTok(int(word), False))
@@ -386,7 +386,7 @@ def sep_line_wasm(code, line_num, i, vm, language_keys):
     return (analysis, code, line_num)
 
 
-def lex(code, vm):
+def lex(code, vm, base=None):
     """
     Lexical phase: tokenizes the code.
 
@@ -397,6 +397,9 @@ def lex(code, vm):
     Returns:
         tok_lines: the tokenized version
     """
+    # fallback: allows existing callers to omit base
+    if base is None:
+        base = vm.base
     lines = code.split("\n")
 
     pre_processed_lines = []
@@ -434,7 +437,7 @@ def lex(code, vm):
                                            vm, language_keys))
         else:
             tok_lines.append(sep_line(line, line_num, i, data_sec,
-                                      vm, language_keys))
+                                      vm, base, language_keys))
         if line == ".data":
             add_to_ip = False
             data_sec = True
