@@ -179,7 +179,7 @@
                         name="{{ addr }}"
                         size="5" 
                         readonly="readonly" 
-                        {% if "GLOBALVAR"|add:key in changes %}class="changed-globlevar"{% else %}class="unchanged-globlevar"{% endif %}>
+                        {% if "GLOBALVAR"|add:key in changes %}class="changed-globlevar mem-table-input" {% else %}class="unchanged-globlevar mem-table-input" {% endif %}>
               </td>
             </tr>
                     {% endfor %}

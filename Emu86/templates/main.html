@@ -138,9 +138,9 @@
                         {% if vm.flavor in no_float_registers %}
                             <table id="register-table" class="transparent-table">
                                 <tr>
-                                    <th colspan="6" style="text-align: center">
+                                    <th colspan="2">
                                         REGISTERS &amp; FLAGS
-                                    </th>
+                                    </td>
                                 </tr>
                                 <!-- Improvement required! -->
                                 <tr>
@@ -173,7 +173,7 @@
 
                                     <td id="contents">
 
-                                    {% if vm.data_init == "on" %}
+                                    {% if data_init == "on" %}
                                         <input
                                             {% if reg in vm.unwritable %}
                                                 id="unwr-cont"
@@ -196,9 +196,9 @@
                                             size="10"
                                             readonly="readonly"
                                             {% if reg in vm.changes %}
-                                                class="changed-register"
+                                                class="changed-register reg-table-input"
                                             {% else %}
-                                                class="unchanged-register"
+                                                class="unchanged-register reg-table-input"
                                             {% endif %}
                                         onclick=convert(name,value)>
                                     {% endif %}
@@ -206,7 +206,6 @@
                                 {% endfor %}
                                 </tr>
                                 <tr>
-                                    <td colspan="6">
                                     <table id="flags-table">
                                         <tr>
                                             {% for flag in vm.flags %}
@@ -232,7 +231,6 @@
                                             {% endfor %}
                                         </tr>
                                     </table>
-                                    </td>
                                 </tr>
                             </table>
                         {% else %}
@@ -241,7 +239,7 @@
                                 <tr>
                                     <th colspan="2">
                                         REGISTERS &amp; FLAGS
-                                    </th>
+                                    </td>
                                 </tr>
                                 {% for reg, cont in int_registers %}
                                 <tr class="R">
@@ -275,9 +273,9 @@
                                                         size="10"
                                                         readonly="readonly"
                                                         {% if reg in vm.changes %}
-                                                            class="changed-register"
+                                                            class="changed-register reg-table-input"
                                                         {% else %}
-                                                            class="unchanged-register"
+                                                            class="unchanged-register reg-table-input"
                                                         {% endif %}
                                                         onclick="convert(name,value)">
                                                 {% endif %}
@@ -285,7 +283,8 @@
                                         </div>
                                     </td>
                                 </tr>
-                                {% endfor %}                             
+                                {% endfor %}
+                                </tr>
                                 <tr id="regs-expand-row">
                                     <td colspan="2">
                                         <div style="text-align: center; margin-top: 5px;">
@@ -296,7 +295,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2">
                                     <table id="flags-table">
                                         <tr>
                                             {% for flag in vm.flags %}
@@ -322,7 +320,6 @@
                                             {% endfor %}
                                         </tr>
                                     </table>
-                                    </td>
                                 </tr>
                             </table>
 
@@ -372,9 +369,9 @@
                                         size="5"
                                         readonly="readonly"
                                         {% if "MEM"|add:addr in vm.changes %}
-                                            class="changed-memory-table"
+                                            class="changed-memory-table mem-table-input" 
                                         {% else %}
-                                            class="unchanged-memory-table"
+                                            class="unchanged-memory-table mem-table-input"
                                         {% endif %}
                                     >
                                 </td>
@@ -400,22 +397,22 @@
                                 {% endif %}
                                     {% if data_init == "on" %}
                                         <input
-                                            id="mem-cont"
+                                            id="mem-cont" class="mem-table-input"
                                             value="{{ cont }}"
                                             name="{{ addr }}"
                                             size="5"
                                         >
                                     {% else %}
                                         <input
-                                            id="mem-cont"
+                                            id="mem-cont" class="mem-table-input"
                                             value="{{ cont }}"
                                             name="{{ addr }}"
                                             size="5"
                                             readonly="readonly"
                                             {% if "STACK"|add:addr in vm.changes %}
-                                                class="changed-stack"
+                                                class="changed-stack mem-table-input"
                                             {% else %}
-                                                class="unchanged-stack"
+                                                class="unchanged-stack mem-table-input"
                                             {% endif %}
                                         >
                                     {% endif %}
@@ -428,14 +425,14 @@
         </div>
 
             <div class="mem-wrapper"><details>
-                <summary class="MemStack">Call Stack</summary>
+                <summary class="MemStack">C-Stack</summary>
                 <div class="table-wrapper">
                     <table id="stack-table">
-                        {% for label in vm.c_stack reversed %}
+                        {% for label in vm.cstack reversed %}
                             <tr>
                                 {% if vm.stack_change == label %}
                                     <td id="mem-loc">
-                                        Stack Pointer (SP)
+                                        SP
                                     </td>
                                 {% else %}
                                     <td id="mem-loc">

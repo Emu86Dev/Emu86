@@ -1265,3 +1265,18 @@ summary.menu_sum {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+.mem-table-input {
+    color: white;
+    background-color: black;
+    text-align: right;
+    float: right;
+}
+
+.reg-table-input {
+    color: white;
+    background-color: black;
+    font-size: 1.2rem;
+    text-align: left;
+    float: left;
+}
