@@ -101,7 +101,7 @@ def run_code(tok_lines, vm, error, last_instr, bit_code):
     return (last_instr, error, bit_code)
 
 
-def assemble(code, vm, step=False, web=True):
+def assemble(code, vm, step=False, web=True, base=None):
     """
         Assembles and runs code.
         Args:
@@ -116,6 +116,10 @@ def assemble(code, vm, step=False, web=True):
             next
             Error, if any.
     """
+    # fallback: allows existing callers to omit base
+    if base is None:
+        base = vm.base
+
     last_instr = ''
     error = ''
     bit_code = ''
@@ -133,7 +137,7 @@ def assemble(code, vm, step=False, web=True):
 
     # break the code into tokens:
     try:
-        tok_lines = lex(code, vm)
+        tok_lines = lex(code, vm, base)
         tok_lines = parse(tok_lines, vm, web)
 
     except Error as err:
