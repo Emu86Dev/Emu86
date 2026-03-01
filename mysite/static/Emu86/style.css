@@ -262,6 +262,10 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     text-align: right;
 }
 
+.align-center {
+    text-align: center;
+}
+
 .example {
     margin: 10px 0;
     padding: 5px 10px;
@@ -1021,7 +1025,9 @@ td#unwritable {
 }
 
 input#flag-cont {
-    background: #eff;
+    background: black;
+    color: white;
+
 }
 
 input#reg-cont, input#mem-cont, input#flag-cont, input#unwr-cont {
@@ -1251,7 +1257,7 @@ summary.menu_sum {
     background-color: white;
 }
 
-#stack-table, #flags-table {
+#stack-table {
   background: black;
   border: 1px solid white;
   border-radius: 10px; 
@@ -1280,3 +1286,21 @@ summary.menu_sum {
     text-align: left;
     float: left;
 }
+
+#flags-table {
+  background: black;
+  border: 1px solid black;
+  border-radius: 10px; 
+  border-collapse: separate; 
+  border-spacing: 0;
+  overflow: hidden; 
+}
+
+#flags-table td {
+    border-right: 2px solid #3AE501;
+}
+
+#flags-table td:last-child {
+    border-right: none;
+}
+    

@@ -202,7 +202,7 @@
                         name="{{ addr }}"
                         size="5" 
                         readonly="readonly" 
-                        {% if "LOCALVAR"|add:key in changes %}class="changed-localvar"{% else %}class="unchanged-localvar"{% endif %}>
+                        {% if "LOCALVAR"|add:key in changes %}class="changed-localvar mem-table-input"{% else %}class="unchanged-localvar mem-table-input"{% endif %}>
                     </td>
                   </tr>
                     {% endfor %}
