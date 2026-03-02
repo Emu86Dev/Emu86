@@ -207,7 +207,7 @@ function loadcode()
 }
 var instrNumbers = {};
 
-function computeLineNumber(code) {
+function computeInstrNumbers(code) {
     // skip the line number if the line is comment
     const lines = code.split('\n');
     instrNumbers = {};
