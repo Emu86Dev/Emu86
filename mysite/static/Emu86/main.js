@@ -205,6 +205,35 @@ function loadcode()
         }
     }
 }
+var instrNumbers = {};
+
+function computeLineNumber(code) {
+    // skip the line number if the line is comment
+    const lines = code.split('\n');
+    instrNumbers = {};
+    let instrNum = 0;
+    let inData = false;
+    for (let i = 0; i < lines.length; i++) {
+        let line = lines[i];
+        const semi = line.indexOf(';');
+        if (semi === 0) continue;
+
+        if (semi > 0) line = line.substring(0, semi);   // strips the comment portion if appended next to code
+
+        line = line.trim();
+        if (!line) continue;    // blank line
+        if (line === '.data') { 
+            inData = true; 
+            continue; 
+        }
+        if (line === '.text') { 
+            inData = false; 
+            continue; 
+        }
+
+        if (!inData) instrNumbers[i + 1] = ++instrNum;
+    }
+}
 
 function highlightCode(){
     const instr = document.getElementsByName("last_instr")[0];
