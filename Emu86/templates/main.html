@@ -469,6 +469,10 @@
         {% endif %}
     </div>
 
+
+{% endblock content %}
+
+{% block scripts %}
     <script>
     var sampleProgDOM = document.getElementById('sample');
     var tmpAry = new Array();
@@ -492,7 +496,7 @@
     }
     var elem = document.getElementById("viewReg");
     const flavor = document.getElementsByName('flavor')[0].value;
-       
+
     window.addEventListener('DOMContentLoaded', (event) => {
         highlightCode();
     });
@@ -501,12 +505,19 @@
     // Global editor object
     window.editor = CodeMirror.fromTextArea(textarea, {
         lineNumbers: true,
+        lineNumberFormatter: (line) => instrNumbers[line] || ' ',
         mode: 'gas',
         theme: 'monokai'
     });
+    computeInstrNumbers(window.editor.getValue());  // on init
+    window.editor.refresh();
+
     // Keep Django form data in sync
     window.editor.on('change', () => {
         textarea.value = window.editor.getValue();
+        computeInstrNumbers(window.editor.getValue());
+        window.editor.refresh();
+
     });
     // Helper function to update the code editor
     function setCode(newCode) {
@@ -519,7 +530,7 @@
         var registerRows = document.querySelectorAll("#registers-table tr.R");
         var btn = document.getElementById("regs-expand-btn");
         var isExpanded = btn.getAttribute("data-expanded") === "true";
-        
+
         isExpanded = !isExpanded;
         btn.setAttribute("data-expanded", isExpanded);
         btn.innerHTML = isExpanded ? "Collapse" : "Show More Register";
@@ -532,7 +543,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         var registerRows = document.querySelectorAll("#registers-table tr.R");
         var btn = document.getElementById("regs-expand-btn");
-        
+
         if (registerRows.length > 10) {
             for (var i = 10; i < registerRows.length; i++) {
                 registerRows[i].style.display = "none";
@@ -543,5 +554,4 @@
         }
     });
     </script>
-                            
-{% endblock content %}
+{% endblock scripts %}
