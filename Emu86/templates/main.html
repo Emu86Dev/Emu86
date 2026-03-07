@@ -164,12 +164,10 @@
 
                                     <!-- Register name cell: unwritable registers get different styling -->
                                     {% if reg in vm.unwritable %}
-                                        <td id="unwritable">
+                                        <td id="unwritable"> {{ reg }} </td>
                                     {% else %}
-                                        <td id="register">
+                                        <td id="register"> {{ reg }} </td>
                                     {% endif %}
-                                        {{ reg }}
-                                    </td>
 
                                     <td id="contents">
 
