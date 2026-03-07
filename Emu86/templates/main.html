@@ -143,23 +143,35 @@
                                     </td>
                                 </tr>
                                 <!-- Improvement required! -->
-                                <tr>
                                 {% for reg, cont in vm.registers.items %}
                                     <!-- Case with more than 10 registers, apply special format -->
                                     {% if vm.registers|length > 10 %}
                                     <!-- Special handling for specific registers to control row/column alignment -->
                                         <!-- PC: force aligned new row after padding -->
                                         {% if reg == "PC" %}
-                                            <td id="register"></td><td id="contents"></td></tr><tr class={{reg.0}}>
+                                            <tr>
+                                                <td id="register"></td><td id="contents"></td>
+                                            </tr>
+                                            <tr>
                                         {% else %}
                                             <!-- Break rows every 3 registers (Look like the format is removed already) -->
                                             {% if forloop.counter0|divisibleby:3 %}
-                                                </tr> <tr class={{reg.0}}>
+                                                {% if forloop.first %}
+                                                    <tr>
+                                                {% else %}
+                                                    </tr>
+                                                    <tr>
+                                                {% endif %}
                                             {% endif %}
                                         {% endif %}
                                     <!-- Case with less registers, with a simple one-register-per-row layout-->
                                     {% else %}
-                                        </tr> <tr class={{reg.0}}>
+                                        {% if forloop.first %}
+                                            <tr>
+                                        {% else %}
+                                            </tr>
+                                            <tr>
+                                        {% endif %}
                                     {% endif %}
 
                                     <!-- Register name cell: unwritable registers get different styling -->
