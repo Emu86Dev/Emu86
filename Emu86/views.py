@@ -308,7 +308,6 @@ def main_page(request, slug=None):
         else:
             return HttpResponseBadRequest("Unsupported language")
         vm.flavor = lang
-        vm.base = base
         site_hdr = get_hdr(lang, base)
         form = MainForm()
     else:
@@ -328,7 +327,6 @@ def main_page(request, slug=None):
                 vm = riscv_machine
             if lang in WASM:
                 wasm_machine.flavor = lang
-                wasm_machine.base = base
                 # wasm does not have registers so it should not be calling
                 # hex_conversion(wasm_machine)
                 # r_reg, f_reg = processRegisters(wasm_machine.registers)
@@ -356,7 +354,6 @@ def main_page(request, slug=None):
                                'stack_change': "",
                                })
 
-            vm.base = base
             vm.flavor = lang
             hex_conversion(vm, base)
             render_data = create_render_data(request,
@@ -390,7 +387,6 @@ def main_page(request, slug=None):
                 vm = wasm_machine
                 site_hdr += f": {WASM[language]} {base.upper()}"
             vm.flavor = language
-            vm.base = base
         sample = request.POST.get('sample', NO_SAMPLE)
         button = request.POST['button_type']
         if button == CLEAR:
@@ -443,7 +439,7 @@ def main_page(request, slug=None):
     vm.order_mem()
     hex_conversion(vm, base)
 
-    # Reconstruct slug from vm.flavor and vm.base to ensure it's always current
+    # Reconstruct slug from vm.flavor and base to ensure it's always current
     if vm.flavor and base:
         slug = f"{vm.flavor}-{base}"
 
