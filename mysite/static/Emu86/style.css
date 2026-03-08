@@ -1298,9 +1298,13 @@ summary.menu_sum {
 
 #flags-table td {
     border-right: 2px solid #3AE501;
+    font-size: 1.3rem;
 }
 
 #flags-table td:last-child {
     border-right: none;
 }
     
+#flags-table input {
+    font-size: 1.3rem;
+}

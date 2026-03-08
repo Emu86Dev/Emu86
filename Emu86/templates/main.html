@@ -218,18 +218,10 @@
                                 <tr>
                                     <table id="flags-table">
                                         <tr>
-                                            {% for flag in vm.flags %}
+                                            {% for flag, val in vm.flags.items %}
                                                 <td id="flag"
                                                     class="align-center">
-                                                    {{ flag }}
-                                                </td>
-                                            {% endfor %}
-                                        </tr>
-                                        <tr>
-                                            {% for flag, val in vm.flags.items %}
-                                                <td id="contents"
-                                                    class="align-center"
-                                                >
+                                                    {{ flag }} :
                                                     <input
                                                         id="flag-cont"
                                                         value="{{ val }}"
@@ -307,18 +299,10 @@
                                 <tr>
                                     <table id="flags-table">
                                         <tr>
-                                            {% for flag in vm.flags %}
+                                            {% for flag, val in vm.flags.items %}
                                                 <td id="flag"
                                                     class="align-center">
-                                                    {{ flag }}
-                                                </td>
-                                            {% endfor %}
-                                        </tr>
-                                        <tr>
-                                            {% for flag, val in vm.flags.items %}
-                                                <td id="contents"
-                                                    class="align-center"
-                                                >
+                                                    {{ flag }} :
                                                     <input
                                                         id="flag-cont"
                                                         value="{{ val }}"
