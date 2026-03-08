@@ -212,7 +212,7 @@ def getCurrRegister(post_body):
 
 
 def create_render_data(request, vm, form, site_hdr, last_instr, error,
-                       sample, bit_code, button, slug=None):
+                       sample, bit_code, button, slug=None, base=None):
     curr_reg = getCurrRegister(request.POST)
     render_data = {
         'form': form,
@@ -231,7 +231,7 @@ def create_render_data(request, vm, form, site_hdr, last_instr, error,
         'more_samples': MORE_SAMPLES_GROUP,
         'has_fp_samples': HAS_FP_SAMPLES_GROUP,
         'flavor_options': ALL_FLAVORS,
-        'base': vm.base,
+        'base': base,
     }
     if vm.flavor in MIPS:
         r_reg, f_reg = processRegisters(vm)
@@ -368,7 +368,8 @@ def main_page(request, slug=None):
                                              sample,
                                              bit_code,
                                              button,
-                                             slug)
+                                             slug,
+                                             base=base)
             return render(request, 'main.html', render_data)
 
         form = MainForm(request.POST)
@@ -426,7 +427,8 @@ def main_page(request, slug=None):
             vm.execution_finished = request.POST.get('execution_finished', 'False') == 'True'
 
             (last_instr, error, bit_code) = assemble(request.POST[CODE],
-                                                     vm, step)
+                                                     vm, step,
+                                                     base=base)
     if button == STEP:
         if getattr(vm, 'execution_finished', False):
             button = ""
@@ -470,7 +472,8 @@ def main_page(request, slug=None):
                        'stack_change': "",
                        })
     render_data = create_render_data(request, vm, form, site_hdr, last_instr,
-                                     error, sample, bit_code, button, slug)
+                                     error, sample, bit_code, button, slug,
+                                     base=base)
     return render(request, 'main.html', render_data)
 
 
