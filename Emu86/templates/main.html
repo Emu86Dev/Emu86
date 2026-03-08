@@ -136,84 +136,64 @@
                     </td>
                     <td id="register-cell" class="register-cell">
                         {% if vm.flavor in no_float_registers %}
-                            <table id="register-table" class="transparent-table">
+                            <table id="registers-table">
                                 <tr>
                                     <th colspan="2">
-                                        REGISTERS &amp; FLAGS
+                                        <span class="register-table-title" style="font-size: 1.3rem">REGISTERS &amp; FLAGS</span>
                                     </td>
                                 </tr>
-                                <!-- Improvement required! -->
                                 {% for reg, cont in vm.registers.items %}
-                                    <!-- Case with more than 10 registers, apply special format -->
-                                    {% if vm.registers|length > 10 %}
-                                    <!-- Special handling for specific registers to control row/column alignment -->
-                                        <!-- PC: force aligned new row after padding -->
-                                        {% if reg == "PC" %}
-                                            <tr>
-                                                <td id="register"></td><td id="contents"></td>
-                                            </tr>
-                                            <tr>
-                                        {% else %}
-                                            <!-- Break rows every 3 registers (Look like the format is removed already) -->
-                                            {% if forloop.counter0|divisibleby:3 %}
-                                                {% if forloop.first %}
-                                                    <tr>
+                                <tr class="R">
+                                    <td colspan="2">
+                                        <div class="row-wrapper">
+                                            <span class="label {% if reg in vm.unwritable %}unwritable{% endif %}">
+                                                {{ reg }}
+                                            </span>
+
+                                            <span class="value">
+                                                {% if data_init == "on" %}
+                                                    <input
+                                                        {% if reg in vm.unwritable %}
+                                                            id="unwr-cont"
+                                                            readonly="readonly"
+                                                        {% else %}
+                                                            id="reg-cont"
+                                                        {% endif %}
+                                                        value="{{ cont }}"
+                                                        name="{{ reg }}"
+                                                        size="10">
                                                 {% else %}
-                                                    </tr>
-                                                    <tr>
+                                                    <input
+                                                        {% if reg in vm.unwritable %}
+                                                            id="unwr-cont"
+                                                        {% else %}
+                                                            id="reg-cont"
+                                                        {% endif %}
+                                                        value="{{ cont }}"
+                                                        name="{{ reg }}"
+                                                        size="10"
+                                                        readonly="readonly"
+                                                        {% if reg in vm.changes %}
+                                                            class="changed-register reg-table-input"
+                                                        {% else %}
+                                                            class="unchanged-register reg-table-input"
+                                                        {% endif %}
+                                                        onclick="convert(name,value)">
                                                 {% endif %}
-                                            {% endif %}
-                                        {% endif %}
-                                    <!-- Case with less registers, with a simple one-register-per-row layout-->
-                                    {% else %}
-                                        {% if forloop.first %}
-                                            <tr>
-                                        {% else %}
-                                            </tr>
-                                            <tr>
-                                        {% endif %}
-                                    {% endif %}
-
-                                    <!-- Register name cell: unwritable registers get different styling -->
-                                    {% if reg in vm.unwritable %}
-                                        <td id="unwritable"> {{ reg }} </td>
-                                    {% else %}
-                                        <td id="register"> {{ reg }} </td>
-                                    {% endif %}
-
-                                    <td id="contents">
-
-                                    {% if data_init == "on" %}
-                                        <input
-                                            {% if reg in vm.unwritable %}
-                                                id="unwr-cont"
-                                                readonly = "readonly"
-                                            {% else %}
-                                                id="reg-cont"
-                                            {% endif %}
-                                            value="{{ cont }}"
-                                            name="{{ reg }}"
-                                            size="10">
-                                    {% else %}
-                                        <input
-                                            {% if reg in vm.unwritable %}
-                                                id="unwr-cont"
-                                            {% else %}
-                                                id="reg-cont"
-                                            {% endif %}
-                                            value="{{ cont }}"
-                                            name="{{ reg }}"
-                                            size="10"
-                                            readonly="readonly"
-                                            {% if reg in vm.changes %}
-                                                class="changed-register reg-table-input"
-                                            {% else %}
-                                                class="unchanged-register reg-table-input"
-                                            {% endif %}
-                                        onclick=convert(name,value)>
-                                    {% endif %}
+                                            </span>
+                                        </div>
                                     </td>
+                                </tr>
                                 {% endfor %}
+                                </tr>
+                                <tr id="regs-expand-row">
+                                    <td colspan="2">
+                                        <div style="text-align: center; margin-top: 5px;">
+                                            <button id="regs-expand-btn" class="action-button" type="button" onclick="toggleRegistersTable()" style="display: none; padding: 20px 40px; font-size: 20px;">
+                                                Show More Registers
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <table id="flags-table">
@@ -221,7 +201,11 @@
                                             {% for flag, val in vm.flags.items %}
                                                 <td id="flag"
                                                     class="align-center">
-                                                    {{ flag }} :
+                                                    {{ flag }}
+                                                </td>
+                                                <td id="contents"
+                                                    class="align-center"
+                                                >
                                                     <input
                                                         id="flag-cont"
                                                         value="{{ val }}"
@@ -240,7 +224,7 @@
                             <table id="registers-table">
                                 <tr>
                                     <th colspan="2">
-                                        REGISTERS &amp; FLAGS
+                                        <span class="register-table-title" style="font-size: 1.3rem">REGISTERS &amp; FLAGS</span>
                                     </td>
                                 </tr>
                                 {% for reg, cont in int_registers %}
