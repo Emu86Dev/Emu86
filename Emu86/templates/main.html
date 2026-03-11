@@ -402,38 +402,42 @@
             </details>
         </div>
 
-            <div class="mem-wrapper"><details>
-                <summary class="MemStack">C-Stack</summary>
-                <div class="table-wrapper">
-                    <table id="stack-table">
-                        {% for label in vm.cstack reversed %}
-                            <tr>
-                                {% if vm.stack_change == label %}
-                                    <td id="mem-loc">
-                                        SP
-                                    </td>
-                                {% else %}
-                                    <td id="mem-loc">
-                                    </td>
-                                {% endif %}
-                                <td id="mem-cont">
-                                    {{ label }}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        {% for sym, cont in vm.symbols.items reversed %}
-                            <tr>
-                                <td id="mem-loc">
-                                </td>
-                                <td id="mem-cont">
-                                    {{ sym }}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
+            {% if vm.flavor == INTEL_LANG %}
+                <div class="mem-wrapper">
+                    <details>
+                        <summary class="MemStack">Call Stack</summary>
+                        <div class="table-wrapper">
+                            <table id="stack-table">
+                                {% for label in vm.cstack reversed %}
+                                    <tr>
+                                        {% if vm.stack_change == label %}
+                                            <td id="mem-loc">
+                                                Stack Pointer (SP)
+                                            </td>
+                                        {% else %}
+                                            <td id="mem-loc">
+                                            </td>
+                                        {% endif %}
+                                        <td id="mem-cont">
+                                            {{ label }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                {% for sym, cont in vm.symbols.items reversed %}
+                                    <tr>
+                                        <td id="mem-loc">
+                                        </td>
+                                        <td id="mem-cont">
+                                            {{ sym }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+
+                    </details>
                 </div>
-            </details>
-        </div>
+            {% endif %}
         </form>
         <br>
 
