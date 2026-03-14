@@ -135,14 +135,14 @@
                         {{ form.as_p }}
                     </td>
                     <td id="register-cell" class="register-cell">
-                        {% if vm.flavor in no_float_registers %}
+                        {% if vm.flavor == "riscv" %} <!-- RISC-V has three columns of registers -->
                             <table id="register-table" class="transparent-table">
                                 <tr>
-                                    <th colspan="2">
+                                    <th colspan="6"> <!-- Set the colspan of the title texts -->
                                         REGISTERS &amp; FLAGS
                                     </td>
                                 </tr>
-                                <!-- Improvement required! -->
+                                
                                 {% for reg, cont in vm.registers.items %}
                                     <!-- Case with more than 10 registers, apply special format -->
                                     {% if vm.registers|length > 10 %}
