@@ -136,7 +136,7 @@
                     </td>
                     <td id="register-cell" class="register-cell">
                         {% if vm.flavor == "riscv" %} <!-- RISC-V has three columns of registers -->
-                            <table id="register-table" class="transparent-table">
+                            <table id="register-table" >
                                 <tr>
                                     <th colspan="6"> <!-- Set the colspan of the title texts -->
                                         REGISTERS &amp; FLAGS
@@ -146,7 +146,7 @@
                                 {% for reg, cont in vm.registers.items %}
                                     {% if reg == "PC" %}
                                         <tr>
-                                            <td id="register"></td><td id="contents"></td>
+                                        <td></td>
                                         </tr>
                                         <tr>
                                     {% else %}
@@ -162,13 +162,14 @@
                                     {% endif %}
 
                                     <!-- Different styling for different registers -->
-                                    {% if reg in vm.unwritable %}
-                                        <td id="unwritable"> {{ reg }} </td>
-                                    {% else %}
-                                        <td id="register"> {{ reg }} </td>
-                                    {% endif %}
 
-                                    <td id="contents">
+                                    <td>
+                                    <div class="row-wrapper">
+                                        <span class="label {% if reg in vm.unwritable %}unwritable{% endif %}">
+                                            {{ reg }}
+                                        </span>
+
+                                        <span class="value">
 
                                     {% if data_init == "on" %}
                                         <input
@@ -199,10 +200,13 @@
                                             {% endif %}
                                         onclick=convert(name,value)>
                                     {% endif %}
+                                        </span>
+                                    </div>
                                     </td>
                                 {% endfor %}
                                 </tr>
                                 <tr>
+                                    <td colspan="3">
                                     <table id="flags-table">
                                         <tr>
                                             {% for flag, val in vm.flags.items %}
@@ -220,6 +224,7 @@
                                             {% endfor %}
                                         </tr>
                                     </table>
+                                </td>
                                 </tr>
                             </table>
                         {% else %}
