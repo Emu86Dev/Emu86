@@ -1308,3 +1308,8 @@ summary.menu_sum {
 #flags-table input {
     font-size: 1.3rem;
 }
+
+#hex-button {
+    background-color: #4545E7 !important;
+
+}
