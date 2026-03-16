@@ -399,7 +399,7 @@ def lex(code, vm, base=None):
     """
     # fallback: allows existing callers to omit base
     if base is None:
-        base = vm.base
+        base = getattr(vm, 'base', None)
     lines = code.split("\n")
 
     pre_processed_lines = []

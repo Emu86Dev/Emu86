@@ -118,7 +118,7 @@ def assemble(code, vm, step=False, web=True, base=None):
     """
     # fallback: allows existing callers to omit base
     if base is None:
-        base = vm.base
+        base = getattr(vm, 'base', None)
 
     last_instr = ''
     error = ''
