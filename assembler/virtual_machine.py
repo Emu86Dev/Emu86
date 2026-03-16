@@ -62,7 +62,6 @@ class VirtualMachine:
         self.start_ip = 0
         self.ip_div = 1
         self.changes = set()
-        self.base = None
         self.stack_change = ""
         self.next_stack_change = ""
         self.execution_finished = False

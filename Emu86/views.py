@@ -149,9 +149,6 @@ def welcome(request):
     intel_machine.flavor = None
     mips_machine.flavor = None
     riscv_machine.flavor = None
-    intel_machine.base = None
-    mips_machine.base = None
-    riscv_machine.base = None
     site_hdr = get_hdr()
     return render(request, 'welcome.html', {HEADER: site_hdr})
 
