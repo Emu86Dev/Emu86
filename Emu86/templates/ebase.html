@@ -1,54 +1,96 @@
 <html>
-<head>
-    <title>
-        {% block title %}
-        {{ header }}
-        {% endblock title %}
-    </title>
-{%  load static %}
-    {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="/static/Emu86/style.css">
+  <head>
+    <title>{% block title %} {{ header }} {% endblock title %}</title>
+    {% load static %} {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="/static/Emu86/style.css" />
 
     {% endblock stylesheets %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/monokai.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Michroma&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/monokai.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
-    <script src="https://kit.fontawesome.com/560e3f390e.js" crossorigin="anonymous"></script>
-</head>
+    <script
+      src="https://kit.fontawesome.com/560e3f390e.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-
-<body class="dashboard" onload="loadcode()">
+  <body class="dashboard" onload="loadcode()">
     <div id="container">
-        <div id="header" style="display:flex; align-items:center; justify-content:space-between;">
-            <div id="branding" style="display:flex; align-items:center;">
-                <a href="/" style="display:flex; align-items:center; text-decoration:none; color:inherit;">
-                    <img src="/static/Emu86/logo_with_text.svg" alt="Logo"
-                         style="height:35px; width:auto; margin-right:5px; position:relative; top:-3px;">
-                    <h1>{{ header }}</h1>
-                </a>
-            </div>
-        
-            <div id="user-tools">
-                <a href="/" style="color:chartreuse;">Home </a>
-                &nbsp;&nbsp;
-                <a href="/help">Help</a>
-                &nbsp;&nbsp;
-                <a href="/feedback">Feedback</a>
-            </div>
+      <div
+        id="header"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        "
+      >
+        <div id="branding" style="display: flex; align-items: center">
+          <a
+            href="/"
+            style="
+              display: flex;
+              align-items: center;
+              text-decoration: none;
+              color: inherit;
+            "
+          >
+            <img
+              src="/static/Emu86/logo.svg"
+              alt="Logo"
+              style="
+                height: 25px;
+                width: auto;
+                margin-right: 5px;
+                position: relative;
+                top: -2px;
+              "
+            />
+            <h1 style="font-family: Michroma, sans-serif; color: white">EMU</h1>
+
+            <h1>{{ header }}</h1>
+          </a>
         </div>
 
-        <div id="content">
-            <div id="content-main">
-                {% block content %}
-                {% endblock content %}
-            </div>
+        <div id="user-tools">
+          <a href="/" style="color: chartreuse">Home </a>
+          &nbsp;&nbsp;
+          <a href="/help">Help</a>
+          &nbsp;&nbsp;
+          <a href="/feedback">Feedback</a>
         </div>
+      </div>
+
+      <div id="content">
+        <div id="content-main">{% block content %} {% endblock content %}</div>
+      </div>
     </div>
-    <script type="text/javascript" src="/static/Emu86/sample_functions.js"></script>
-    <script type="text/javascript" src="/static/Emu86/sample_functions_hex.js"></script>
-    <script type="text/javascript" src="/static/Emu86/sample_functions_fp.js"></script>
+    <script
+      type="text/javascript"
+      src="/static/Emu86/sample_functions.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/static/Emu86/sample_functions_hex.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/static/Emu86/sample_functions_fp.js"
+    ></script>
     <script type="text/javascript" src="/static/Emu86/main.js"></script>
     {% block scripts %}{% endblock scripts %}
-</body>
+  </body>
 </html>

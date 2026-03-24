@@ -934,7 +934,7 @@ a.deletelink:focus, a.deletelink:hover {
 #header {
     width: auto;
     height: 40px;
-    padding: 10px 40px;
+    padding: 10px 60px;
     background-color: #000000 ;
     /*background: #285D91;*/
     line-height: 40px;
@@ -1309,7 +1309,6 @@ summary.menu_sum {
     font-size: 1.3rem;
 }
 
-#hex-button {
-    background-color: #4545E7 !important;
-
+#register-table-title {
+    font-size: 10rem;
 }
