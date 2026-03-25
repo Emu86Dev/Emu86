@@ -136,43 +136,35 @@
                         {% csrf_token %}
                         {{ form.as_p }}
                     </td>
-                    <td id="register-cell" class="register-cell">
                         {% if vm.flavor == "riscv" %} <!-- RISC-V has three columns of registers -->
+                        <td id="register-cell" class="register-cell">
                             <table id="register-table" >
                                 <tr>
                                     <th colspan="6"> <!-- Set the colspan of the title texts -->
-                                        REGISTERS &amp; FLAGS
-                                    </td>
+                                        REGISTERS &amp; FLAGS                                  
                                 </tr>
-                                
-                                {% for reg, cont in vm.registers.items %}
-                                    {% if reg == "PC" %}
+                        </td>                               
+                            {% for reg, cont in vm.registers.items %}
+                                {% if reg == "PC" %}
+                                    <tr>
+                                    <td></td>
+                                    </tr>                                        
+                                {% else %}
+                                    <!-- Break rows every 3 registers -->
+                                    {% if forloop.counter0|divisibleby:3 %}
                                         <tr>
-                                        <td></td>
                                         </tr>
-                                        <tr>
-                                    {% else %}
-                                        <!-- Break rows every 3 registers -->
-                                        {% if forloop.counter0|divisibleby:3 %}
-                                            {% if forloop.first %}
-                                                <tr>
-                                            {% else %}
-                                                </tr>
-                                                <tr>
-                                            {% endif %}
-                                        {% endif %}
                                     {% endif %}
+                                {% endif %}
 
                                     <!-- Different styling for different registers -->
-
                                     <td>
                                     <div class="row-wrapper">
                                         <span class="label {% if reg in vm.unwritable %}unwritable{% endif %}">
                                             {{ reg }}
                                         </span>
 
-                                        <span class="value">
-
+                                    <span class="value">
                                     {% if data_init == "on" %}
                                         <input
                                             {% if reg in vm.unwritable %}
@@ -202,11 +194,12 @@
                                             {% endif %}
                                         onclick=convert(name,value)>
                                     {% endif %}
-                                        </span>
+                                    </span>
                                     </div>
                                     </td>
                                 {% endfor %}
                                 </tr>
+                                
                                 <tr>
                                     <td colspan="3">
                                     <table id="flags-table">
@@ -226,7 +219,7 @@
                                             {% endfor %}
                                         </tr>
                                     </table>
-                                </td>
+                                    </td>
                                 </tr>
                             </table>
                         {% else %}
