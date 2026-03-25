@@ -906,6 +906,28 @@ a.deletelink:focus, a.deletelink:hover {
     width: auto;
 }
 
+.module_help{
+    padding: 10px;
+    width: 93.23%; /* Apply Matt's ratio */
+    margin: 0 auto;
+    background: #1C1D20 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #0000005C;
+    border-radius: 40px;
+    opacity: 1;
+
+    display: flex;          
+    flex-direction: column;
+    gap: 10px;            
+    align-items: stretch;
+
+    padding: 10px 40px 40px 40px;
+}
+
+.module_help p{
+    color:#929292;
+    font-weight: normal;
+    font-size: 16px;
+}
 .help-pop{
     visibility: hidden;
     position: relative;
@@ -1152,24 +1174,34 @@ input#unwr-cont {
     padding: 10px 20px;
 }
 
+/* .module_start h2{
+    color:#929292;
+    font-weight: normal;
+    font-size: 16px;
+} */
+
 /* summary tags */
 summary.sum1 {
     font-size: 2em;
-    color: #903;
+    color: #903; 
     margin: 1em 1.2em 1em 1.2em;
 }
 
 summary.sum2 {
     font-size: 1.6em;
-    color: #937;
-    font-weight: 500;
-    margin: .8em 1.2em .8em 2em;
+    /* color: #937;
+    font-weight: 500; */
+    margin: .8em 1.2em .8em 0.8em;
+    color:#ffffff;
+    font-weight: bold;
 }
 
 summary.sum3 {
     font-size: 1.5em;
-    color: rgb(67, 67, 189);
-    margin: .6em 1.2em .6em 2.8em;
+    /* color: rgb(67, 67, 189); */
+    color:#ffffff;
+    font-weight: bold;
+    margin: .6em 1.2em .6em 1.8em;
 }
 
 summary.sum4 {
