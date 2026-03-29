@@ -34,7 +34,7 @@ def convert_stack_contents(stack):
             stack[loc] = hex_list[1]
 
 
-def display_results(last_instr, error, vm):
+def display_results(last_instr, error, vm, base):
     if vm.base == "hex":
         convert_stack_contents(vm.stack)
         convert_mem_contents(vm.memory)
@@ -71,9 +71,6 @@ def reset_vms():
     intel_machine.flavor = None
     mips_machine.flavor = None
     riscv_machine.flavor = None
-    intel_machine.base = None
-    mips_machine.base = None
-    riscv_machine.base = None
 
 
 def run_assemble(vm, base, code):
@@ -83,9 +80,8 @@ def run_assemble(vm, base, code):
     else:
         if base is None:
             base = "hex"
-    vm.base = base
-    (last_instr, error, bit_code) = assemble(code, vm.flavor, vm)
-    display_results(last_instr, error, vm)
+    (last_instr, error, bit_code) = assemble(code, vm, base=base)
+    display_results(last_instr, error, vm, base)
 
 
 def main():
