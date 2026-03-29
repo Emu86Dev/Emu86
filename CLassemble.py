@@ -35,7 +35,7 @@ def convert_stack_contents(stack):
 
 
 def display_results(last_instr, error, vm, base):
-    if vm.base == "hex":
+    if base == "hex":
         convert_stack_contents(vm.stack)
         convert_mem_contents(vm.memory)
         convert_reg_contents(vm.registers)
