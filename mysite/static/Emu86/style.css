@@ -923,11 +923,17 @@ a.deletelink:focus, a.deletelink:hover {
     padding: 10px 40px 40px 40px;
 }
 
-.module_help p{
+.module_help details > p{
     color:#929292;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 18px;
 }
+
+.module_help details details > p {
+    padding-left: 2em;
+    box-sizing: border-box;
+}
+
 .help-pop{
     visibility: hidden;
     position: relative;
