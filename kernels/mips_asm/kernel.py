@@ -93,7 +93,6 @@ class Mips_asmKernel(Kernel):
         if not silent:
             if not self.vm_machine:
                 self.vm_machine = MIPSMachine()
-                self.vm_machine.base = 'hex'
                 self.vm_machine.flavor = 'mips_asm'
 
             self.vm_machine.changes_init()
@@ -106,7 +105,7 @@ class Mips_asmKernel(Kernel):
 
             else:
                 (last_instr, error, bit_code) = assemble(code, self.vm_machine,
-                                                         web=False)
+                                                         web=False, base='hex')
                 if error == "":
                     vm_machine_info = {
                         'metadata': {}
