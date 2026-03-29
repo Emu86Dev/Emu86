@@ -926,10 +926,14 @@ a.deletelink:focus, a.deletelink:hover {
 .module_help details > p{
     color:#929292;
     font-weight: normal;
-    font-size: 18px;
 }
 
-.module_help details details > p {
+.module_help details details {
+    padding-left: 2em;
+    box-sizing: border-box;
+}
+
+.module_help details details details {
     padding-left: 2em;
     box-sizing: border-box;
 }
@@ -1207,13 +1211,15 @@ summary.sum3 {
     /* color: rgb(67, 67, 189); */
     color:#ffffff;
     font-weight: bold;
-    margin: .6em 1.2em .6em 1.8em;
+    margin: .6em 1.2em .6em 0.8em;
 }
 
 summary.sum4 {
     font-size: 1.4em;
-    color: plum;
-    margin: .4em 1.2em .4em 2.8em;
+    /*color: plum; */
+    color:#ffffff;
+    font-weight: bold;
+    margin: .4em 1.2em .4em 0.8em;
 }
 
 summary.menu_sum {
