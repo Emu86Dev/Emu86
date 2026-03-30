@@ -343,8 +343,16 @@ td {
 }
 
 .row-wrapper .value {
+    display: flex;
     text-align: left;
     color: gray;
+    min-width: 0;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.row-wrapper .value input {
+flex-grow: 1;
 }
 
 .mem-wrapper {
@@ -906,38 +914,6 @@ a.deletelink:focus, a.deletelink:hover {
     width: auto;
 }
 
-.module_help{
-    padding: 10px;
-    width: 93.23%; /* Apply Matt's ratio */
-    margin: 0 auto;
-    background: #1C1D20 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #0000005C;
-    border-radius: 40px;
-    opacity: 1;
-
-    display: flex;          
-    flex-direction: column;
-    gap: 10px;            
-    align-items: stretch;
-
-    padding: 10px 40px 40px 40px;
-}
-
-.module_help details > p{
-    color:#929292;
-    font-weight: normal;
-}
-
-.module_help details details {
-    padding-left: 2em;
-    box-sizing: border-box;
-}
-
-.module_help details details details {
-    padding-left: 2em;
-    box-sizing: border-box;
-}
-
 .help-pop{
     visibility: hidden;
     position: relative;
@@ -966,7 +942,7 @@ a.deletelink:focus, a.deletelink:hover {
 #header {
     width: auto;
     height: 40px;
-    padding: 10px 60px;
+    padding: 10px 40px;
     background-color: #000000 ;
     /*background: #285D91;*/
     line-height: 40px;
@@ -1184,42 +1160,30 @@ input#unwr-cont {
     padding: 10px 20px;
 }
 
-/* .module_start h2{
-    color:#929292;
-    font-weight: normal;
-    font-size: 16px;
-} */
-
 /* summary tags */
 summary.sum1 {
     font-size: 2em;
-    color: #903; 
+    color: #903;
     margin: 1em 1.2em 1em 1.2em;
 }
 
 summary.sum2 {
     font-size: 1.6em;
-    /* color: #937;
-    font-weight: 500; */
-    margin: .8em 1.2em .8em 0.8em;
-    color:#ffffff;
-    font-weight: bold;
+    color: #937;
+    font-weight: 500;
+    margin: .8em 1.2em .8em 2em;
 }
 
 summary.sum3 {
     font-size: 1.5em;
-    /* color: rgb(67, 67, 189); */
-    color:#ffffff;
-    font-weight: bold;
-    margin: .6em 1.2em .6em 0.8em;
+    color: rgb(67, 67, 189);
+    margin: .6em 1.2em .6em 2.8em;
 }
 
 summary.sum4 {
     font-size: 1.4em;
-    /*color: plum; */
-    color:#ffffff;
-    font-weight: bold;
-    margin: .4em 1.2em .4em 0.8em;
+    color: plum;
+    margin: .4em 1.2em .4em 2.8em;
 }
 
 summary.menu_sum {
@@ -1353,6 +1317,16 @@ summary.menu_sum {
     font-size: 1.3rem;
 }
 
-#register-table-title {
-    font-size: 10rem;
+.reg-width-badge-wrapper {
+    flex-shrink: 0;
+}
+
+.reg-width-badge {
+    font-size: 11px;
+    line-height: 1.2;
+    color: #4f46e5;
+    background: #e5e7eb;
+    border: 1px solid #4f46e5;
+    border-radius: 9999px;
+    padding: 2px 8px;
 }
