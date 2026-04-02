@@ -287,8 +287,9 @@ table {
 .toolbar {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
-    padding: 8px 12px;
+    padding: 12px 20px;
     background: #000;
     border-top: 1px solid #ffffff;
     border-bottom: 1px solid #ffffff;
@@ -305,7 +306,7 @@ table {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 16px;
+    padding: 14px 24px;
     border: 1px solid white;
     border-radius: 24px;
     background: black;
@@ -351,7 +352,7 @@ table {
 }
 
 .toolbar-select {
-    padding: 8px 14px;
+    padding: 14px 24px;
     border: 1px solid white;
     border-radius: 24px;
     background: black;
@@ -362,6 +363,8 @@ table {
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
+    height: 48px;
+    box-sizing: border-box;
     padding-right: 28px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -373,7 +376,7 @@ table {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 16px;
+    padding: 14px 24px;
     border: 1px solid white;
     border-radius: 24px;
     background: black;
@@ -1099,29 +1102,6 @@ a.deletelink:focus, a.deletelink:hover {
 }
 
 /* Styling for buttons and select dropdowns in button cells */
-.button-cell {
-    font-weight: 500;
-    font-size: 14px;
-}
-
-.button-cell button,
-.button-cell select {
-    padding: 10px 15px;
-    text-align: center;
-    font-family: inherit;
-    font-weight: inherit;
-    font-size: inherit;
-    margin: 10px 5px 20px 5px;
-    background: black;
-    border-radius: 24px;
-    border: 1px solid white;
-    color: white;
-    cursor: pointer;
-    height: auto;
-    min-height: 44px;
-    box-sizing: border-box;
-    vertical-align: middle;
-}
 
 td#flag, td#register, td#mem-loc {
     color: white;
