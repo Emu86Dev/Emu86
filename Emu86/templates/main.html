@@ -4,104 +4,95 @@
 
 {% block content %}
     <div class="module">
-        <table class="button-table">
-            <tr>
-                <td id="emu-cell" class="button-cell">
-                    <img src="/static/Emu86/logo.svg" alt="Logo"
-                     style="height:48px; width:auto; margin-right:5px; position:relative; top:-3px;">
-                </td>
-                <td id="button-cell1" class="button-cell">
-                    {% comment %}
-                    {% csrf_token %}
-                    {% endcomment %}
-                    <button name="clear"
-                        class="action-button"
-                        title="Clear the contents of memory and the stack."
-                        id="clear-button"
-                        onclick="clearButton()"
-                        onmouseover="displayHelp(this.name)"
-                        onmouseleave="hideHelp()">
-                        <i class="fa-solid fa-rotate-left"></i> Reinit</button>
-                </td>
-                <td id="button-cell2" class="button-cell">
-                    <button name="run"
-                        class="action-button"
-                        value="Run Code"
-                        style="background-color: #4545E7"
-                        title="Execute all lines of code"
-                        id="run-button"
-                        onclick="runButton()"
-                        onmouseover="displayHelp(this.name)"
-                        onmouseleave="hideHelp()">
-                        <i class="fa-solid fa-play"></i> Run</button>
-                </td>
-                <td id="button-cell3" class="button-cell">
-                    <button name="step"
-                        class="action-button"
-                        value="Step Code"
-                        title="Execute one instruction at a time."
-                        id="step-button"
-                        onclick="stepButton()"
-                        onmouseover="displayHelp(this.name)"
-                        onmouseleave="hideHelp()"
-                        {% if vm.execution_finished %}disabled{% endif %}>
-                        <i class="fa-solid fa-forward-step"></i> Step</button>
-                </td>
-                <td id="button-cell4" class="button-cell">
-                    <button name="save"
-                        class="action-button"
-                        value="Save Code"
-                        id="save-button"
-                        title="Saves the code "
-                        onclick="Savecode()"
-                        onmouseover="displayHelp(this.name)"
-                        onmouseleave="hideHelp()">
-                        <i class="fa-solid fa-floppy-disk"></i> Save</button>
-                </td>
-                <td id="button-cell6" class="button-cell">
-                    Flavor:
-                    <select id="flavor-select" name="flavor-select" onchange="changeFlavor()">
-                        {% for key, label in flavor_options.items %}
-                            <option value="{{ key }}" {% if vm.flavor == key %}selected{% endif %}>{{ label }}</option>
-                        {% endfor %}
-                    </select>
-                </td>
-                <td id="button-cell7" class="button-cell">
-                    <button name="toggle-base"
-                        class="action-button"
-                        type="button"
-                        style="background-color: #4545E7"
-                        title="Base Toggle"
-                        id="toggle-base-button"
-                        onclick="toggleBase()"
-                        onmouseover="displayHelp(this.name)"
-                        onmouseleave="hideHelp()">
-                        <i class="fa-solid fa-repeat"></i> {{ base|capfirst }}</button>
-                </td>
-                
-                <td id="select-cell" class="button-cell">
-                    Load:
-                    <select id="sample" name="sample" onchange="selectSample()">
-                        {% for prog_nm, descr in sample_progs.items %}
+        <div class="toolbar">
+            <img src="/static/Emu86/logo.svg" alt="Logo" class="toolbar-logo">
+
+            <button name="run"
+                class="toolbar-btn toolbar-btn-primary"
+                value="Run Code"
+                title="Execute all lines of code"
+                id="run-button"
+                onclick="runButton()"
+                onmouseover="displayHelp(this.name)"
+                onmouseleave="hideHelp()">
+                <i class="fa-solid fa-play"></i> Run
+            </button>
+
+            <button name="step"
+                class="toolbar-btn"
+                value="Step Code"
+                title="Execute one instruction at a time."
+                id="step-button"
+                onclick="stepButton()"
+                onmouseover="displayHelp(this.name)"
+                onmouseleave="hideHelp()"
+                {% if vm.execution_finished %}disabled{% endif %}>
+                <i class="fa-solid fa-forward-step"></i> Step
+            </button>
+
+            <button name="clear"
+                class="toolbar-btn"
+                title="Clear the contents of memory and the stack."
+                id="clear-button"
+                onclick="clearButton()"
+                onmouseover="displayHelp(this.name)"
+                onmouseleave="hideHelp()">
+                <i class="fa-solid fa-rotate-left"></i> Reset
+            </button>
+
+            <div class="toolbar-sep"></div>
+
+            <span class="toolbar-label">Dialect</span>
+            <select id="flavor-select" name="flavor-select" class="toolbar-select" onchange="changeFlavor()">
+                {% for key, label in flavor_options.items %}
+                    <option value="{{ key }}" {% if vm.flavor == key %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+
+            <span class="toolbar-label">Base</span>
+            <button name="toggle-base"
+                class="toolbar-btn toolbar-btn-primary"
+                type="button"
+                title="Base Toggle"
+                id="toggle-base-button"
+                onclick="toggleBase()"
+                onmouseover="displayHelp(this.name)"
+                onmouseleave="hideHelp()">
+                <i class="fa-solid fa-circle"></i> {{ base|capfirst }}
+            </button>
+
+            <div class="toolbar-select-btn">
+                <i class="fa-regular fa-folder-open"></i> Load Sample
+                <select id="sample" name="sample" onchange="selectSample()">
+                    {% for prog_nm, descr in sample_progs.items %}
+                        {% option_maybe_selected prog_nm descr sample %}
+                    {% endfor %}
+                    {% if vm.flavor in more_samples %}
+                        {% for prog_nm, descr in not_mips_risc_progs.items %}
                             {% option_maybe_selected prog_nm descr sample %}
                         {% endfor %}
-                        {% if vm.flavor in more_samples %}
-                            {% for prog_nm, descr in not_mips_risc_progs.items %}
+                    {% endif %}
+                    {% if base == "dec" %}
+                        {% if vm.flavor in has_fp_samples %}
+                            {% for prog_nm, descr in fp_sample_progs.items %}
                                 {% option_maybe_selected prog_nm descr sample %}
                             {% endfor %}
                         {% endif %}
-                        {% if base == "dec" %}
-                            {% if vm.flavor in has_fp_samples  %}
-                                {% for prog_nm, descr in fp_sample_progs.items %}
-                                    {% option_maybe_selected prog_nm descr sample %}
-                                {% endfor %}
-                            {% endif %}
-                        {% endif %}
-                    </select>
-                </td>
+                    {% endif %}
+                </select>
+            </div>
 
-            </tr>
-        </table>
+            <button name="save"
+                class="toolbar-btn"
+                value="Save Code"
+                id="save-button"
+                title="Saves the code"
+                onclick="Savecode()"
+                onmouseover="displayHelp(this.name)"
+                onmouseleave="hideHelp()">
+                <i class="fa-solid fa-floppy-disk"></i> Save/Share
+            </button>
+        </div>
         <form id="codeForm" action="{% url 'Emu86:emu_page' slug=slug %}" method="post">
             <br>
             <input type="hidden" name="nxt_key">
