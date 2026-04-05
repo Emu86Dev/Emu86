@@ -26,10 +26,9 @@ class TestPrograms(TestCase):
 
     def run_mips_test_code(self, filnm):
         mips_machine.re_init()
-        mips_machine.base = "hex"
         mips_machine.flavor = "mips_mml"
         test_code = self.read_test_code(TEST_DIR_NAME + filnm)
-        assemble(test_code, mips_machine)
+        assemble(test_code, mips_machine, base='hex')
 
     def test_loop(self):
         self.run_mips_test_code("loop.asm")

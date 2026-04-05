@@ -33,10 +33,9 @@ class TestPrograms(TestCase):
 
     def run_mips_test_code(self, filenm):
         mips_machine.re_init()
-        mips_machine.base = "hex"
         mips_machine.flavor = "mips_asm"
         test_code = self.read_test_code(TEST_DIR_NAME + filenm)
-        assemble(test_code, mips_machine)
+        assemble(test_code, mips_machine, base='hex')
 
     # def convert_hex_float(self, string):
     #     lst = string.split(".")
