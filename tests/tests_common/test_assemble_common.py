@@ -35,7 +35,8 @@ class AssembleTestCase(TestCase):
                     operator, instr,
                     result_reg_name=None,
                     low1=MIN_TEST, high1=MAX_TEST,
-                    low2=MIN_TEST, high2=MAX_TEST,):
+                    low2=MIN_TEST, high2=MAX_TEST,
+                    base=None):
       """
       This common test_two_op was written by looking at the same
       fn across the other test_assemble files. 
@@ -52,11 +53,11 @@ class AssembleTestCase(TestCase):
           machine.registers[operand2] = b
           match machine.flavor:
             case 'intel':
-              assemble(instr + f" {operand1.lower()}, {operand2.lower()}", machine)
+              assemble(instr + f" {operand1.lower()}, {operand2.lower()}", machine, base=base)
               self.assertEqual(machine.registers[operand1], correct)
             case 'att':
-              assemble(instr + f" %{operand2.lower()}, %{operand1.lower()}", machine)
+              assemble(instr + f" %{operand2.lower()}, %{operand1.lower()}", machine, base=base)
               self.assertEqual(machine.registers[operand1], correct)
             case _: # Works for MIPS variants and RISC
-              assemble("40000" + instr + f" {operand1}, {operand2}, {result_reg_name}", machine)
+              assemble("40000" + instr + f" {operand1}, {operand2}, {result_reg_name}", machine, base=base)
               self.assertEqual(machine.registers[result_reg_name], correct)

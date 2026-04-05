@@ -25,7 +25,6 @@ MAX_MUL = 10000  # right now we don't want to overflow!
 MIN_MUL = -10000  # right now we don't want to overflow!
 REGISTER_SIZE = BITS
 
-wasm_machine.base = "dec"
 wasm_machine.flavor = "wasm"
 LINE_NUM = 1
 
@@ -44,7 +43,7 @@ class AssembleTestCase(TestCase):
             sp = wasm_machine.get_sp()
             wasm_machine.stack[hex(sp).split('x')[-1].upper()] = a
             wasm_machine.inc_sp(LINE_NUM)
-            assemble(instr, wasm_machine)
+            assemble(instr, wasm_machine, base='dec')
             wasm_machine.dec_sp(LINE_NUM)
             sp = wasm_machine.get_sp()
             position = hex(sp).split('x')[-1].upper()
@@ -64,7 +63,7 @@ class AssembleTestCase(TestCase):
             sp = wasm_machine.get_sp()
             wasm_machine.stack[hex(sp).split('x')[-1].upper()] = a
             wasm_machine.inc_sp(LINE_NUM)
-            assemble(instr, wasm_machine)
+            assemble(instr, wasm_machine, base='dec')
             wasm_machine.dec_sp(LINE_NUM)
             position = hex(wasm_machine.get_sp()).split('x')[-1].upper()
             self.assertEqual(wasm_machine.stack[position], correct)
@@ -82,7 +81,7 @@ class AssembleTestCase(TestCase):
             sp = wasm_machine.get_sp()
             wasm_machine.stack[hex(sp).split('x')[-1].upper()] = a
             wasm_machine.inc_sp(LINE_NUM)
-            assemble(instr, wasm_machine)
+            assemble(instr, wasm_machine, base='dec')
             wasm_machine.dec_sp(LINE_NUM)
             sp = wasm_machine.get_sp()
             position = hex(sp).split('x')[-1].upper()
