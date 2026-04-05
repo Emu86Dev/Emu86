@@ -2,33 +2,25 @@
 {% block content %}
     <div class="module">
 
-        
-
-                <form id="feedback-form" align="left" method="get" action="#" data-to="stevenkang2016@gmail.com"></form>
+            <form id="feedback-form" align="left" method="get" action="#" data-to="test@nyu.edu">
                 <br>Your name:
-                <input type="text" name="realname"><br>
+                <input type="text" id="feedback-realname" name="realname"><br>
 
                 <br>Your email:
-                <input type="text" name="email"><br>
+                <input type="text" id="feedback-email" name="email"><br>
                 <br> Subject:
-                <input type ="text" name="subject" wrap="hard"><br>
+                <input type="text" id="feedback-subject" name="subject" wrap="hard"><br>
                 <br>Your feedback:<br>
-                <textarea name="body" rows="15" cols="50" wrap="hard" placeholder="Enter your feedback..."></textarea><br>
+                <textarea id="feedback-body" name="body" rows="15" cols="50" wrap="hard" placeholder="Enter your feedback..."></textarea><br>
 
-                <br><input type = "submit" value= "Submit">
-
+                <br><input type="submit" value="Submit">
 
             </form>
-            
-            
-
-        
-
-
 
     </div>
 
 {% endblock content %}
+
 {% block scripts %}
 <script type="text/javascript" src="/static/Emu86/feedback.js"></script>
 {% endblock scripts %}

@@ -14,12 +14,13 @@
         return null;
     }
 
-    function getFieldValue(form, name) {
-        var el = form && form.elements ? form.elements[name] : null;
+        function getFieldValue(form, name) {
+        if (!form || !form.querySelector) return '';
+        var el = form.querySelector('[name="' + name + '"]');
         return el && typeof el.value === 'string' ? el.value : '';
     }
 
-    function openMailto(form) {
+        function openMailto(form) {
         if (!form) return;
         var to = (form.getAttribute('data-to') || '').trim();
         if (!to) {
@@ -27,13 +28,21 @@
             return;
         }
 
-        var subject = encodeURIComponent(getFieldValue(form, 'subject').trim());
-        var bodyEnc = encodeURIComponent(
-            'From: ' + getFieldValue(form, 'realname') +
-            '\nEmail: ' + getFieldValue(form, 'email') +
-            '\n\n' + getFieldValue(form, 'body')
-        );
-        var href = 'mailto:' + to + '?subject=' + subject + '&body=' + bodyEnc;
+        var fd = new FormData(form);
+        var realname = String(fd.get('realname') || '');
+        var email = String(fd.get('email') || '');
+        var subjectRaw = String(fd.get('subject') || '').trim();
+        var message = String(fd.get('body') || '');
+        alert("realname: " + realname + " email: " + email + " subject: " + subjectRaw + " message: " + message);
+        var bodyRaw =
+            'From: ' + realname +
+            '\r\nEmail: ' + email +
+            '\r\n\r\n' + message;
+
+        var parts = [];
+        if (subjectRaw) parts.push('subject=' + encodeURIComponent(subjectRaw));
+        if (bodyRaw) parts.push('body=' + encodeURIComponent(bodyRaw));
+        var href = 'mailto:' + to + (parts.length ? ('?' + parts.join('&')) : '');
         window.location.href = href;
     }
 
@@ -57,6 +66,36 @@
             e.preventDefault();
             openMailto(targetForm);
         }, true);
+        
+    }
+        function fieldById(id) {
+        var el = document.getElementById(id);
+        return el && typeof el.value === 'string' ? el.value : '';
+    }
+
+    function openMailto(form) {
+        if (!form) return;
+        var to = (form.getAttribute('data-to') || '').trim();
+        if (!to) {
+            alert('Feedback address is not configured.');
+            return;
+        }
+
+        var fd = new FormData(form);
+        var realname = String(fd.get('realname') || fieldById('feedback-realname') || '');
+        var email = String(fd.get('email') || fieldById('feedback-email') || '');
+        var subjectRaw = String(fd.get('subject') || fieldById('feedback-subject') || '').trim();
+        var message = String(fd.get('body') || fieldById('feedback-body') || '');
+        var bodyRaw =
+            'From: ' + realname +
+            '\r\nEmail: ' + email +
+            '\r\n\r\n' + message;
+
+        var parts = [];
+        if (subjectRaw) parts.push('subject=' + encodeURIComponent(subjectRaw));
+        if (bodyRaw) parts.push('body=' + encodeURIComponent(bodyRaw));
+        var href = 'mailto:' + to + (parts.length ? ('?' + parts.join('&')) : '');
+        window.location.href = href;
     }
 
     if (document.readyState === 'loading') {
