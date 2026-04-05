@@ -2,9 +2,9 @@
 {% block content %}
     <div class="module">
 
-        <body>
+        
 
-            <form align ="left" method="get" action="mailto:{{ emails }}"  >
+                <form id="feedback-form" align="left" method="get" action="#" data-to="stevenkang2016@gmail.com"></form>
                 <br>Your name:
                 <input type="text" name="realname"><br>
 
@@ -19,11 +19,16 @@
 
 
             </form>
+            
+            
 
-        </body>
+        
 
 
 
     </div>
 
 {% endblock content %}
+{% block scripts %}
+<script type="text/javascript" src="/static/Emu86/feedback.js"></script>
+{% endblock scripts %}
