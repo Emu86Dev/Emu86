@@ -127,8 +127,8 @@
                         {% csrf_token %}
                         {{ form.as_p }}
                     </td>
-                    <td id="register-cell" class="register-cell">
-                        {% if vm.flavor == "riscv" %} <!-- RISC-V has three columns of registers -->
+                    {% if vm.flavor == "riscv" %} <!-- RISC-V has three columns of registers -->
+                        <td id="register-cell" class="register-cell" rowspan="8">
                             <table id="register-table">
                                 <tr>
                                     <th colspan="6"> <!-- Set the colspan of the title texts -->
@@ -136,69 +136,61 @@
                                     </th>
                                 </tr>
 
-                                {% for reg, cont in vm.registers.items %}
-                                    {% if reg == "PC" %}
-                                        <tr>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                    {% else %}
-                                        <!-- Break rows every 3 registers -->
-                                        {% if forloop.counter0|divisibleby:3 %}
-                                            {% if forloop.first %}
-                                                <tr>
-                                            {% else %}
-                                                </tr>
-                                                <tr>
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endif %}
-
-                                    <!-- Different styling for different registers -->
-                                    <td>
-                                        <div class="row-wrapper">
-                                            <span class="label {% if reg in vm.unwritable %}unwritable{% endif %}">
-                                                {{ reg }}
-                                            </span>
-
-                                            <span class="value">
-                                            {% if data_init == "on" %}
-                                                <input
-                                                    {% if reg in vm.unwritable %}
-                                                        id="unwr-cont"
-                                                        readonly = "readonly"
-                                                    {% else %}
-                                                        id="reg-cont"
-                                                    {% endif %}
-                                                    value="{{ cont }}"
-                                                    name="{{ reg }}"
-                                                    size="10">
-                                            {% else %}
-                                                <input
-                                                    {% if reg in vm.unwritable %}
-                                                        id="unwr-cont"
-                                                    {% else %}
-                                                        id="reg-cont"
-                                                    {% endif %}
-                                                    value="{{ cont }}"
-                                                    name="{{ reg }}"
-                                                    size="10"
-                                                    readonly="readonly"
-                                                    {% if reg in vm.changes %}
-                                                        class="changed-register reg-table-input"
-                                                    {% else %}
-                                                        class="unchanged-register reg-table-input"
-                                                    {% endif %}
-                                                onclick=convert(name,value)>
-                                            {% endif %}
-                                            <span class="reg-width-badge-wrapper"><span class="reg-width-badge">32-bit</span></span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                {% endfor %}
-                                {% if vm.registers %}
+                            {% for reg, cont in vm.registers.items %}
+                                {% if reg == "PC" %}
+                                    <tr>
+                                        <td></td>
                                     </tr>
+                                {% else %}
+                                    <!-- Break rows every 3 registers -->
+                                    {% if forloop.counter0|divisibleby:3 %}
+                                        <tr>
+                                        </tr>
+                                    {% endif %}
                                 {% endif %}
+
+                                <!-- Different styling for different registers -->
+                                <td>
+                                    <div class="row-wrapper">
+                                        <span class="label {% if reg in vm.unwritable %}unwritable{% endif %}">
+                                            {{ reg }}
+                                        </span>
+
+                                        <span class="value">
+                                        {% if data_init == "on" %}
+                                            <input
+                                                {% if reg in vm.unwritable %}
+                                                    id="unwr-cont"
+                                                    readonly = "readonly"
+                                                {% else %}
+                                                    id="reg-cont"
+                                                {% endif %}
+                                                value="{{ cont }}"
+                                                name="{{ reg }}"
+                                                size="10">
+                                        {% else %}
+                                            <input
+                                                {% if reg in vm.unwritable %}
+                                                    id="unwr-cont"
+                                                {% else %}
+                                                    id="reg-cont"
+                                                {% endif %}
+                                                value="{{ cont }}"
+                                                name="{{ reg }}"
+                                                size="10"
+                                                readonly="readonly"
+                                                {% if reg in vm.changes %}
+                                                    class="changed-register reg-table-input"
+                                                {% else %}
+                                                    class="unchanged-register reg-table-input"
+                                                {% endif %}
+                                            onclick=convert(name,value)>
+                                        {% endif %}
+                                        <span class="reg-width-badge-wrapper"><span class="reg-width-badge">32-bit</span></span>
+                                        </span>
+                                    </div>
+                                </td>
+                                {% endfor %}
 
                                 <tr>
                                     <td colspan="3">
@@ -222,8 +214,9 @@
                                     </td>
                                 </tr>
                             </table>
-                        {% else %}
-                            <!-- else there are F registers as well -->
+                        </td>
+                    {% else %}
+                        <td id="register-cell" class="register-cell" rowspan="8">
                             <table id="registers-table">
                                 <tr>
                                     <th colspan="2">
@@ -305,11 +298,8 @@
                                     </td>
                                 </tr>
                             </table>
-
-
+                        </td>
                         {% endif %}
-                    </td>
-
                 </tr>
 
               </table>
