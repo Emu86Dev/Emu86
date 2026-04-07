@@ -4,7 +4,8 @@ Test our assembly interpreter.
 """
 
 import sys
-sys.path.append(".") # noqa
+
+sys.path.append(".")  # noqa
 import random
 
 import operator as opfunc
@@ -19,8 +20,8 @@ from assembler.assemble import assemble
 
 NUM_TESTS = 100
 MAX_SHIFT = BITS // 2
-MIN_TEST = MIN_INT // 10   # right now we don't want to overflow!
-MAX_TEST = MAX_INT // 10   # right now we don't want to overflow!
+MIN_TEST = MIN_INT // 10  # right now we don't want to overflow!
+MAX_TEST = MAX_INT // 10  # right now we don't want to overflow!
 MAX_MUL = 10000  # right now we don't want to overflow!
 MIN_MUL = -10000  # right now we don't want to overflow!
 REGISTER_SIZE = BITS
@@ -35,13 +36,19 @@ class AssembleTestCase(TestCase):
     # Two Operand Tests #
     #####################
 
-    def two_op_test(self, operator, instr,
-                    low1=MIN_TEST, high1=MAX_TEST,
-                    low2=MIN_TEST, high2=MAX_TEST):
+    def two_op_test(
+        self,
+        operator,
+        instr,
+        low1=MIN_TEST,
+        high1=MAX_TEST,
+        low2=MIN_TEST,
+        high2=MAX_TEST,
+    ):
         for i in range(0, NUM_TESTS):
             a = random.randint(low1, high1)
             b = random.randint(low2, high2)
-            print(f'Using operands {a} and {b}')
+            print(f"Using operands {a} and {b}")
             correct = operator(a, b)
             intel_machine.registers["EAX"] = a
             intel_machine.registers["EBX"] = b
@@ -55,9 +62,9 @@ class AssembleTestCase(TestCase):
         self.two_op_test(opfunc.sub, "sub")
 
     def test_imul(self):
-        self.two_op_test(opfunc.mul, "imul",
-                         low1=MIN_MUL, high1=MAX_MUL,
-                         low2=MIN_MUL, high2=MAX_MUL)
+        self.two_op_test(
+            opfunc.mul, "imul", low1=MIN_MUL, high1=MAX_MUL, low2=MIN_MUL, high2=MAX_MUL
+        )
 
     def test_and(self):
         self.two_op_test(opfunc.and_, "and")
@@ -69,14 +76,15 @@ class AssembleTestCase(TestCase):
         self.two_op_test(opfunc.xor, "xor")
 
     def test_shl(self):
-        self.two_op_test(opfunc.lshift, "shl",
-                         low1=MIN_MUL, high1=MAX_MUL,
-                         low2=0, high2=MAX_SHIFT)
+        self.two_op_test(
+            opfunc.lshift, "shl", low1=MIN_MUL, high1=MAX_MUL, low2=0, high2=MAX_SHIFT
+        )
 
     def test_shr(self):
-        self.two_op_test(opfunc.rshift, "shr",
-                         low1=MIN_MUL, high1=MAX_MUL,
-                         low2=0, high2=MAX_SHIFT)
+        self.two_op_test(
+            opfunc.rshift, "shr", low1=MIN_MUL, high1=MAX_MUL, low2=0, high2=MAX_SHIFT
+        )
+
     ###################
     # Single Op Tests #
     ###################
@@ -109,10 +117,10 @@ class AssembleTestCase(TestCase):
 
     def test_push_and_pop(self):
         # Note: size(correct_stack) = size(stack + memory)
-        correct_stack = [None]*(STACK_TOP+1)
+        correct_stack = [None] * (STACK_TOP + 1)
 
         # Traverse the stack registers.
-        for i in range(STACK_TOP, STACK_BOTTOM-1, -1):
+        for i in range(STACK_TOP, STACK_BOTTOM - 1, -1):
             a = random.randint(MIN_TEST, MAX_TEST)
             correct_stack[i] = a
             intel_machine.registers["EAX"] = a
@@ -139,7 +147,7 @@ class AssembleTestCase(TestCase):
             a = random.randint(MIN_TEST, MAX_TEST)
             d = random.randint(MIN_TEST, MAX_TEST)
             b = 0
-            while(b == 0):    # Divisor can't be zero.
+            while b == 0:  # Divisor can't be zero.
                 b = random.randint(MIN_TEST, MAX_TEST)
             correct_quotient = (opfunc.lshift(d, REGISTER_SIZE) + a) // b
             correct_remainder = (opfunc.lshift(d, REGISTER_SIZE) + a) % b
@@ -169,6 +177,16 @@ class AssembleTestCase(TestCase):
         self.assertEqual(intel_machine.flags["SF"], 1)
 
 
-if __name__ == '__main__':
+##########
+# AssembleTestCaseATT = AssembleTestCase(
+#     machine=intel_machine,
+#     register_names=["EAX", "EBX"],
+#     stack_top=STACK_TOP,
+#     stack_bottom=STACK_BOTTOM,
+# )
+##########
+
+
+if __name__ == "__main__":
     main()
     pass
