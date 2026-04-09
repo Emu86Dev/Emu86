@@ -1,7 +1,9 @@
 <html>
   <head>
     <title>{% block title %} {{ header }} {% endblock title %}</title>
-    {% load static %} {% block stylesheets %}
+    {% load static %}
+    <link rel="icon" type="image/svg+xml" href="{% static 'Emu86/logo.svg' %}" />
+    {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="/static/Emu86/style.css" />
 
     {% endblock stylesheets %}
