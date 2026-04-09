@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.urls import include, path
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path("", include('Emu86.urls')),
     #url(r'^Emu86/', include('Emu86.urls')),
     path("admin/", admin.site.urls),
+    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
 ]
