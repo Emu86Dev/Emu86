@@ -26,7 +26,6 @@ MAX_MUL = 10000  # right now we don't want to overflow!
 MIN_MUL = -10000  # right now we don't want to overflow!
 REGISTER_SIZE = BITS
 
-intel_machine.base = "dec"
 intel_machine.flavor = "att"
 
 
@@ -52,7 +51,7 @@ class AssembleTestCase(TestCase):
             correct = operator(a, b)
             intel_machine.registers["EAX"] = a
             intel_machine.registers["EBX"] = b
-            assemble(instr + " %ebx, %eax", intel_machine)
+            assemble(instr + " %ebx, %eax", intel_machine, base='dec')
             self.assertEqual(intel_machine.registers["EAX"], correct)
 
     def test_add(self):
@@ -94,7 +93,7 @@ class AssembleTestCase(TestCase):
             a = random.randint(MIN_TEST, MAX_TEST)
             correct = operator(a)
             intel_machine.registers["EAX"] = a
-            assemble(instr + " %eax", intel_machine)
+            assemble(instr + " %eax", intel_machine, base='dec')
             self.assertEqual(intel_machine.registers["EAX"], correct)
 
     def test_not(self):
@@ -124,10 +123,10 @@ class AssembleTestCase(TestCase):
             a = random.randint(MIN_TEST, MAX_TEST)
             correct_stack[i] = a
             intel_machine.registers["EAX"] = a
-            assemble("push %eax", intel_machine)
+            assemble("push %eax", intel_machine, base='dec')
 
         for i in range(STACK_BOTTOM, STACK_TOP + 1):
-            assemble("pop %ebx", intel_machine)
+            assemble("pop %ebx", intel_machine, base='dec')
             self.assertEqual(intel_machine.registers["EBX"], correct_stack[i])
 
     ##################
@@ -139,7 +138,7 @@ class AssembleTestCase(TestCase):
             a = random.randint(MIN_TEST, MAX_TEST)
             correct = a
             intel_machine.registers["EAX"] = a
-            assemble("mov $" + str(a) + ", %eax", intel_machine)
+            assemble("mov $" + str(a) + ", %eax", intel_machine, base='dec')
             self.assertEqual(intel_machine.registers["EAX"], correct)
 
     def test_idiv(self):
@@ -154,7 +153,7 @@ class AssembleTestCase(TestCase):
             intel_machine.registers["EAX"] = a
             intel_machine.registers["EDX"] = d
             intel_machine.registers["EBX"] = b
-            assemble("idiv %ebx", intel_machine)
+            assemble("idiv %ebx", intel_machine, base='dec')
             self.assertEqual(intel_machine.registers["EAX"], correct_quotient)
             self.assertEqual(intel_machine.registers["EDX"], correct_remainder)
 
@@ -163,7 +162,7 @@ class AssembleTestCase(TestCase):
         intel_machine.registers["EBX"] = 1
         intel_machine.flags["ZF"] = 0
         intel_machine.flags["SF"] = 0
-        assemble("cmp %ebx, %eax", intel_machine)
+        assemble("cmp %ebx, %eax", intel_machine, base='dec')
         self.assertEqual(intel_machine.flags["ZF"], 1)
         self.assertEqual(intel_machine.flags["SF"], 0)
 
@@ -172,7 +171,7 @@ class AssembleTestCase(TestCase):
         intel_machine.registers["EBX"] = 1
         intel_machine.flags["ZF"] = 0
         intel_machine.flags["SF"] = 0
-        assemble("cmp %ebx, %eax", intel_machine)
+        assemble("cmp %ebx, %eax", intel_machine, base='dec')
         self.assertEqual(intel_machine.flags["ZF"], 0)
         self.assertEqual(intel_machine.flags["SF"], 1)
 
