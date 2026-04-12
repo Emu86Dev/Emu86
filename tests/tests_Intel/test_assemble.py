@@ -33,7 +33,6 @@ REGISTER_SIZE = BITS
 INT = 0
 FLOAT = 1
 BIT_WISE = 3
-intel_machine.base = "dec"
 intel_machine.flavor = "intel"
 
 
@@ -58,7 +57,7 @@ class AssembleTestCase(TestCase):
                 correct = operator(a, b)
                 intel_machine.registers["ST0"] = a
                 intel_machine.registers["ST1"] = b
-                assemble(instr + " st0, st1", intel_machine)
+                assemble(instr + " st0, st1", intel_machine, base='dec')
                 self.assertAlmostEqual(intel_machine.registers["ST0"], correct)
             elif op_type == BIT_WISE:
                 a = abs(a)
@@ -86,7 +85,7 @@ class AssembleTestCase(TestCase):
 
                 intel_machine.registers["EAX"] = a
                 intel_machine.registers["EBX"] = b
-                assemble(instr + " eax, ebx", intel_machine)
+                assemble(instr + " eax, ebx", intel_machine, base='dec')
                 if instr in ['bt', 'btc']:
                     self.assertAlmostEqual(intel_machine.flags["CF"], correct)
                     return
@@ -99,7 +98,7 @@ class AssembleTestCase(TestCase):
                 correct = operator(a, b)
                 intel_machine.registers["EAX"] = a
                 intel_machine.registers["EBX"] = b
-                assemble(instr + " eax, ebx", intel_machine)
+                assemble(instr + " eax, ebx", intel_machine, base='dec')
                 self.assertEqual(intel_machine.registers["EAX"], correct)
 
     def set_bit_operation(self, v, index, x):
@@ -217,7 +216,7 @@ class AssembleTestCase(TestCase):
                 a = random.randint(MIN_TEST, MAX_TEST)
                 intel_machine.registers["EAX"] = a
                 correct = operator(a)
-                assemble(instr + " eax", intel_machine)
+                assemble(instr + " eax", intel_machine, base='dec')
                 self.assertEqual(intel_machine.registers["EAX"], correct)
 
     def test_not(self):
@@ -253,10 +252,10 @@ class AssembleTestCase(TestCase):
             a = random.randint(MIN_TEST, MAX_TEST)
             correct_stack[i] = a
             intel_machine.registers["EAX"] = a
-            assemble("push eax", intel_machine)
+            assemble("push eax", intel_machine, base='dec')
 
         for i in range(STACK_BOTTOM, STACK_TOP + 1):
-            assemble("pop ebx", intel_machine)
+            assemble("pop ebx", intel_machine, base='dec')
             self.assertEqual(intel_machine.registers["EBX"], correct_stack[i])
 
     ##################
@@ -268,7 +267,7 @@ class AssembleTestCase(TestCase):
             a = random.randint(MIN_TEST, MAX_TEST)
             correct = a
             intel_machine.registers["EAX"] = a
-            assemble("mov eax, " + str(a), intel_machine)
+            assemble("mov eax, " + str(a), intel_machine, base='dec')
             self.assertEqual(intel_machine.registers["EAX"], correct)
 
     def test_idiv(self):
@@ -283,7 +282,7 @@ class AssembleTestCase(TestCase):
             intel_machine.registers["EAX"] = a
             intel_machine.registers["EDX"] = d
             intel_machine.registers["EBX"] = b
-            assemble("idiv ebx", intel_machine)
+            assemble("idiv ebx", intel_machine, base='dec')
             self.assertEqual(intel_machine.registers["EAX"],
                              correct_quotient)
             self.assertEqual(intel_machine.registers["EDX"],
@@ -294,7 +293,7 @@ class AssembleTestCase(TestCase):
         intel_machine.registers["EBX"] = 1
         intel_machine.flags["ZF"] = 0
         intel_machine.flags["SF"] = 0
-        assemble("cmp eax, ebx", intel_machine)
+        assemble("cmp eax, ebx", intel_machine, base='dec')
         self.assertEqual(intel_machine.flags["ZF"], 1)
         self.assertEqual(intel_machine.flags["SF"], 0)
 
@@ -303,7 +302,7 @@ class AssembleTestCase(TestCase):
         intel_machine.registers["EBX"] = 1
         intel_machine.flags["ZF"] = 0
         intel_machine.flags["SF"] = 0
-        assemble("cmp eax, ebx", intel_machine)
+        assemble("cmp eax, ebx", intel_machine, base='dec')
         self.assertEqual(intel_machine.flags["ZF"], 0)
         self.assertEqual(intel_machine.flags["SF"], 1)
 
