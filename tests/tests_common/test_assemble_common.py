@@ -27,11 +27,12 @@ REGISTER_SIZE = BITS
 
 
 class AssembleTestCase(TestCase):
-    def __init__(self, machine, register_names, stack_top, stack_bottom):
+    def __init__(self, machine, register_names, stack_top, stack_bottom, base=None):
         self.machine = machine
         self.register_names = register_names
         self.stack_top = stack_top
         self.stack_bottom = stack_bottom
+        self.base = base
 
     #####################
     # Two Operand Tests #
@@ -64,19 +65,21 @@ class AssembleTestCase(TestCase):
             match self.machine.flavor:
                 case "intel":
                     assemble(
-                        instr + f" {operand1.lower()}, {operand2.lower()}", self.machine
+                        instr + f" {operand1.lower()}, {operand2.lower()}", self.machine, base=self.base
                     )
                     self.assertEqual(self.machine.registers[operand1], correct)
                 case "att":
                     assemble(
                         instr + f" %{operand2.lower()}, %{operand1.lower()}",
                         self.machine,
+                        base=self.base
                     )
                     self.assertEqual(self.machine.registers[operand1], correct)
                 case _:  # Works for MIPS variants and RISC
                     assemble(
                         "40000" + instr + f" {operand1}, {operand2}, {result_reg_name}",
                         self.machine,
+                        base=self.base
                     )
                     self.assertEqual(self.machine.registers[result_reg_name], correct)
 
@@ -119,7 +122,7 @@ class AssembleTestCase(TestCase):
             a = random.randint(MIN_TEST, MAX_TEST)
             correct = operator(a)
             self.machine.registers["EAX"] = a
-            assemble(instr + " %eax", self.machine)
+            assemble(instr + " %eax", self.machine, base=self.base)
             self.assertEqual(self.machine.registers["EAX"], correct)
 
     def test_not(self):
@@ -149,10 +152,10 @@ class AssembleTestCase(TestCase):
             a = random.randint(MIN_TEST, MAX_TEST)
             correct_stack[i] = a
             self.machine.registers["EAX"] = a
-            assemble("push %eax", self.machine)
+            assemble("push %eax", self.machine, base=self.base)
 
         for i in range(self.stack_bottom, self.stack_top + 1):
-            assemble("pop %ebx", self.machine)
+            assemble("pop %ebx", self.machine, base=self.base)
             self.assertEqual(self.machine.registers["EBX"], correct_stack[i])
 
     ##################
@@ -164,7 +167,7 @@ class AssembleTestCase(TestCase):
             a = random.randint(MIN_TEST, MAX_TEST)
             correct = a
             self.machine.registers["EAX"] = a
-            assemble("mov $" + str(a) + ", %eax", self.machine)
+            assemble("mov $" + str(a) + ", %eax", self.machine, base=self.base)
             self.assertEqual(self.machine.registers["EAX"], correct)
 
     def test_idiv(self):
@@ -179,7 +182,7 @@ class AssembleTestCase(TestCase):
             self.machine.registers["EAX"] = a
             self.machine.registers["EDX"] = d
             self.machine.registers["EBX"] = b
-            assemble("idiv %ebx", self.machine)
+            assemble("idiv %ebx", self.machine, base=self.base)
             self.assertEqual(self.machine.registers["EAX"], correct_quotient)
             self.assertEqual(self.machine.registers["EDX"], correct_remainder)
 
@@ -188,7 +191,7 @@ class AssembleTestCase(TestCase):
         self.machine.registers["EBX"] = 1
         self.machine.flags["ZF"] = 0
         self.machine.flags["SF"] = 0
-        assemble("cmp %ebx, %eax", self.machine)
+        assemble("cmp %ebx, %eax", self.machine, base=self.base)
         self.assertEqual(self.machine.flags["ZF"], 1)
         self.assertEqual(self.machine.flags["SF"], 0)
 
@@ -197,6 +200,6 @@ class AssembleTestCase(TestCase):
         self.machine.registers["EBX"] = 1
         self.machine.flags["ZF"] = 0
         self.machine.flags["SF"] = 0
-        assemble("cmp %ebx, %eax", self.machine)
+        assemble("cmp %ebx, %eax", self.machine, base=self.base)
         self.assertEqual(self.machine.flags["ZF"], 0)
         self.assertEqual(self.machine.flags["SF"], 1)
