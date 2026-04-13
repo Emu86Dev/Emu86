@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 import sys
-sys.path.append(".") # noqa
 import random
 
 from assembler.virtual_machine import intel_machine
 from unittest import TestCase, main
 from assembler.assemble import assemble, MAX_INSTRUCTIONS
-
+sys.path.append(".") # noqa
 
 FIRST_INST_ADDRESS = 1
 # Edge case (yet to deal with): for the below instructions,
@@ -43,7 +42,7 @@ class TestControlFlow(TestCase):
             zero_flag = random.getrandbits(1)
             intel_machine.flags["ZF"] = zero_flag
             assemble("je test_label", intel_machine, base='dec')
-            if(zero_flag):
+            if (zero_flag):
                 self.assertEqual(intel_machine.get_ip(), label_addr)
             else:
                 self.assertEqual(intel_machine.get_ip(), 1)
@@ -59,7 +58,7 @@ class TestControlFlow(TestCase):
             zero_flag = random.getrandbits(1)
             intel_machine.flags["ZF"] = zero_flag
             assemble("jne test_label", intel_machine, base='dec')
-            if(not zero_flag):
+            if (not zero_flag):
                 self.assertEqual(intel_machine.get_ip(), label_addr)
             else:
                 self.assertEqual(intel_machine.get_ip(), 1)
@@ -77,7 +76,7 @@ class TestControlFlow(TestCase):
             intel_machine.flags["SF"] = sign_flag
             intel_machine.flags["ZF"] = zero_flag
             assemble("jg test_label", intel_machine, base='dec')
-            if((not zero_flag) and (not sign_flag)):
+            if ((not zero_flag) and (not sign_flag)):
                 self.assertEqual(intel_machine.get_ip(), label_addr)
             else:
                 self.assertEqual(intel_machine.get_ip(), 1)
@@ -93,7 +92,7 @@ class TestControlFlow(TestCase):
             sign_flag = random.getrandbits(1)
             intel_machine.flags["SF"] = sign_flag
             assemble("jge test_label", intel_machine, base='dec')
-            if(not sign_flag):
+            if (not sign_flag):
                 self.assertEqual(intel_machine.get_ip(), label_addr)
             else:
                 self.assertEqual(intel_machine.get_ip(), 1)
@@ -109,7 +108,7 @@ class TestControlFlow(TestCase):
             sign_flag = random.getrandbits(1)
             intel_machine.flags["SF"] = sign_flag
             assemble("jl test_label", intel_machine, base='dec')
-            if(sign_flag):
+            if (sign_flag):
                 self.assertEqual(intel_machine.get_ip(), label_addr)
             else:
                 self.assertEqual(intel_machine.get_ip(), 1)
@@ -127,7 +126,7 @@ class TestControlFlow(TestCase):
             intel_machine.flags["SF"] = sign_flag
             intel_machine.flags["ZF"] = zero_flag
             assemble("jle test_label", intel_machine, base='dec')
-            if(zero_flag or sign_flag):
+            if (zero_flag or sign_flag):
                 self.assertEqual(intel_machine.get_ip(), label_addr)
             else:
                 self.assertEqual(intel_machine.get_ip(), 1)

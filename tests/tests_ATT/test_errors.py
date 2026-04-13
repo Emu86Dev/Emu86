@@ -4,7 +4,6 @@ Test our assembly interpreter.
 """
 
 import sys
-sys.path.append(".") # noqa
 
 from unittest import TestCase, main
 
@@ -16,6 +15,7 @@ from assembler.errors import INVALID_NUM_ARGS, INVALID_MEM_LOC
 from assembler.errors import MISSING_COMMA, MISSING_DATA, INVALID_TOKEN
 from assembler.errors import REG_UNWRITABLE, STACK_OVERFLOW, STACK_UNDERFLOW
 from assembler.errors import UNKNOWN_NM, INVALID_CONSTANT_VAL, INT_OUT_OF_RNG
+sys.path.append(".") # noqa
 
 
 intel_machine.base = "dec"

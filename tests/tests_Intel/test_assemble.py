@@ -5,9 +5,7 @@ Test our assembly interpreter.
 
 import sys
 import random
-sys.path.append(".") # noqa
-# sys.path.insert(0,'/Users/nikhilvaidyamath/Desktop/
-# devops1/Emu86/assembler/Intel/fp_arithmetic.py')
+
 
 import operator as opfunc
 import functools
@@ -20,6 +18,9 @@ from assembler.virtual_machine import intel_machine, STACK_TOP, STACK_BOTTOM
 from assembler.assemble import assemble
 from assembler.Intel.fp_arithmetic import convert_hex_to_decimal
 from assembler.Intel.fp_arithmetic import convert_dec_to_hex
+sys.path.append(".") # noqa
+# sys.path.insert(0,'/Users/nikhilvaidyamath/Desktop/
+# devops1/Emu86/assembler/Intel/fp_arithmetic.py')
 # from assembler.Intel.math_operations import Mathops
 
 NUM_TESTS = 100

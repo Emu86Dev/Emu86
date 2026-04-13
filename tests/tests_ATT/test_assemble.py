@@ -4,8 +4,6 @@ Test our assembly interpreter.
 """
 
 import sys
-
-sys.path.append(".")  # noqa
 import random
 
 import operator as opfunc
@@ -16,6 +14,7 @@ from unittest import TestCase, main
 from assembler.tokens import MAX_INT, MIN_INT, BITS
 from assembler.virtual_machine import intel_machine, STACK_TOP, STACK_BOTTOM
 from assembler.assemble import assemble
+sys.path.append(".")  # noqa
 
 
 NUM_TESTS = 100

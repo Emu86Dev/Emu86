@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 import sys
-sys.path.append(".") # noqa
+
 
 from assembler.virtual_machine import intel_machine
 
 from unittest import TestCase, main
 
 from assembler.assemble import assemble
+sys.path.append(".") # noqa
 
 """
 Test entire programs.
