@@ -5,5 +5,6 @@
 set -e
 
 export TDIR="tests"
+export PYTHONPATH="$(pwd):${PYTHONPATH}"
 
 for test_file in $TDIR/*/test_*.py; do echo "$test_file"; python3 "$test_file"; done
