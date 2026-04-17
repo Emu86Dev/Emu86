@@ -312,4 +312,8 @@ def check_num_args(instr, ops, correct_num, line_num, type_ins=0):
 
 
 def is_notvalidstring(instr):
-    match = re.match("^(\d{0,3})\.(\d{0,3})\.(\d{0,3})\.(\d{0,3})$", instr) # noqa!
+    """
+    Seems to be deprecated/not in use
+    """
+    return bool(
+        re.match(r"^(\d{0,3})\.(\d{0,3})\.(\d{0,3})\.(\d{0,3})$", instr))

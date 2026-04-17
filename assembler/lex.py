@@ -8,6 +8,7 @@ from .tokens import Register, NewSymbol, Section
 from .tokens import QuestionTok, PlusTok, MinusTok
 from .tokens import StringTok, IntegerTok, OpenBracket, CloseBracket
 from .tokens import Comma, OpenParen, CloseParen, FloatTok
+from .virtual_machine import VirtualMachine
 
 # for floating point to binary and back
 import struct
@@ -16,7 +17,7 @@ import binascii
 SYM_RE = "([A-Za-z_][A-Za-z0-9_]*)"
 sym_match = re.compile(SYM_RE)
 
-FP_RE = "([0-9]+\.[0-9]+)"  # noqa
+FP_RE = r"([0-9]+\.[0-9]+)"
 fp_match = re.compile(FP_RE)
 
 LABEL_RE = SYM_RE + ":"
@@ -214,7 +215,19 @@ def split_code(code, vm):
     return words
 
 
-def sep_line(code, line_num, i, data_sec, vm, base, language_keys):
+def word_is_float(word: str) -> bool:
+    return re.match(fp_match, word) is not None
+
+
+def sep_line(
+    code: str,
+    line_num: int,
+    i: int,
+    data_sec: bool,
+    vm: type[VirtualMachine],
+    base: str,
+    language_keys: dict
+) -> (list, str, int):
     """
     Returns a list of tokens created
 
@@ -266,7 +279,7 @@ def sep_line(code, line_num, i, data_sec, vm, base, language_keys):
         elif re.match(sym_match, word) is not None:
             analysis.append(NewSymbol(word, vm))
         # Floating Points
-        elif re.match(fp_match, word) is not None:
+        elif word_is_float(word):
             # default is float (single precision) if user doesnt say
             if (data_type != ".float" and data_type != ".double" and
                     data_type != "REAL4" and data_type != "REAL8"):
