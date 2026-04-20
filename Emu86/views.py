@@ -146,9 +146,9 @@ def welcome(request):
     intel_machine.re_init()
     mips_machine.re_init()
     riscv_machine.re_init()
-    intel_machine.flavor = None
-    mips_machine.flavor = None
-    riscv_machine.flavor = None
+    intel_machine.flavor = "intel"
+    mips_machine.flavor = "mips_asm"
+    riscv_machine.flavor = "riscv"
     site_hdr = get_hdr()
     return render(request, 'welcome.html', {HEADER: site_hdr})
 
@@ -258,11 +258,11 @@ def machine_reinit(wasm_machine_init_status=True):
 
 
 def machine_flavor_reset(wasm_machine_flavor_status=True):
-    intel_machine.flavor = None
-    riscv_machine.flavor = None
-    mips_machine.flavor = None
+    intel_machine.flavor = "intel"
+    riscv_machine.flavor = "riscv"
+    mips_machine.flavor = "mips_asm"
     if wasm_machine_flavor_status:
-        wasm_machine.flavor = None
+        wasm_machine.flavor = "wasm"
 
 
 def main_page(request, slug=None):
