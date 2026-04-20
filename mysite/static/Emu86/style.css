@@ -1467,9 +1467,6 @@ summary.menu_sum {
     font-size: 1.3rem;
 }
 
-.reg-width-badge-wrapper {
-    flex-shrink: 0;
-}
 
 .reg-width-badge {
     font-size: 11px;
@@ -1479,4 +1476,7 @@ summary.menu_sum {
     border: 1px solid #4f46e5;
     border-radius: 9999px;
     padding: 2px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: center;
 }
