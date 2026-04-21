@@ -340,7 +340,7 @@ table {
     width: 1px;
     height: 32px;
     background: #444;
-    margin: 0 4px 0 -8px;
+    margin: 0 4px;
     flex-shrink: 0;
 }
 
