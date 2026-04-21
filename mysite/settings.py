@@ -27,7 +27,8 @@ STATICFILES_DIRS = [
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# default DEBUG = True (unless specified as False in Prod)
+DEBUG = os.environ.get('DJANGO_DEBUG') != 'False'
 
 ALLOWED_HOSTS = [
     'emu86.pythonanywhere.com',
