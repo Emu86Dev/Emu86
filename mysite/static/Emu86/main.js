@@ -553,24 +553,30 @@ function inStack(location){
     return false;
 }
 
-function displayHelp(buttonType){
-    const messages = {
-        clear: "Reset register and memory values.",
-        step: "Execute one instruction at a time.",
-        run: "Execute all lines of code.",
-        demo: "Demo code line by line.",
-        save: "Save code as a file.",
-        pause: "Pauses code."
-    }
+// function displayHelp(buttonType){
+//     const messages = {
+//         clear: "Reset register and memory values.",
+//         step: "Execute one instruction at a time.",
+//         run: "Execute all lines of code.",
+//         demo: "Demo code line by line.",
+//         save: "Save code as a file.",
+//         pause: "Pauses code."
+//     }
 
-    const spanNode = document.getElementById("help-desc");
-    spanNode.classList.toggle("show");
-    spanNode.textContent = messages[buttonType];
-}
+//     const spanNode = document.getElementById("help-desc");
+//     spanNode.classList.toggle("show");
+//     spanNode.textContent = messages[buttonType];
+// }
 
-function hideHelp(){
-    document.getElementById("help-desc").classList.toggle("show");
-}
+// function hideHelp(){
+//     document.getElementById("help-desc").classList.toggle("show");
+// }
+
+// Stubs: main.html / wasm.html still reference these on mouseover/mouseleave.
+// If the real implementations above stay commented out, these avoid ReferenceError.
+function displayHelp() {}
+
+function hideHelp() {}
 
 function toggleBase(){
     const currentBase = document.getElementsByName("base")[0].value;
