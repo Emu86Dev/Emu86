@@ -157,7 +157,7 @@
                                         </span>
 
                                         <span class="value">
-                                        {% if data_init == "on" %}
+                                        {% if vm.data_init == "on" %}
                                             <input
                                                 {% if reg in vm.unwritable %}
                                                     id="unwr-cont"
@@ -232,7 +232,7 @@
                                                 </span>
 
                                                 <span class="value">
-                                                    {% if data_init == "on" %}
+                                                    {% if vm.data_init == "on" %}
                                                         <input
                                                             {% if reg in vm.unwritable %}
                                                                 id="unwr-cont"
@@ -368,7 +368,7 @@
                                 {% else %}
                                     <td id="contents">
                                 {% endif %}
-                                    {% if data_init == "on" %}
+                                    {% if vm.data_init == "on" %}
                                         <input
                                             id="mem-cont" class="mem-table-input"
                                             value="{{ cont }}"
