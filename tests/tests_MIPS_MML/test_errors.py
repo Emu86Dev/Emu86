@@ -2,24 +2,22 @@
 """
 Test our assembly interpreter.
 """
-
-import sys
-sys.path.append(".") # noqa
-
-
 from unittest import TestCase, main
 
 from assembler.virtual_machine import mips_machine
 from assembler.assemble import assemble
+from assembler.errors import INVALID_NUM_ARGS, INVALID_MEM_LOC, MISSING_COMMA
+from assembler.errors import INVALID_TOKEN, REG_UNWRITABLE, INT_OUT_OF_RNG
+import sys
+sys.path.append(".") # noqa
+
+
 # UNKNOWN_ERR should NOT show up, so we won't write a test case for it.
 # from assembler.errors import UNKNOWN_ERR, INVALID_INSTR, INVALID_OPRND
 # from assembler.errors import INVALID_NUM_ARGS, INVALID_MEM_LOC, INVALID_REG
 # from assembler.errors import MISSING_COMMA, MISSING_DATA, INVALID_TOKEN
 # from assembler.errors import REG_UNWRITABLE, STACK_OVERFLOW, STACK_UNDERFLOW
 # from assembler.errors import UNKNOWN_NM, MISSING_PC, INT_OUT_OF_RNG
-
-from assembler.errors import INVALID_NUM_ARGS, INVALID_MEM_LOC, MISSING_COMMA
-from assembler.errors import INVALID_TOKEN, REG_UNWRITABLE, INT_OUT_OF_RNG
 
 mips_machine.flavor = "mips_mml"
 LINE_ONE_MSG = 'Line 1: '

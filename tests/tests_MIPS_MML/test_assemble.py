@@ -5,8 +5,6 @@ Test our assembly interpreter.
 
 import sys
 import random
-sys.path.append(".") # noqa
-
 import operator as opfunc
 
 from unittest import TestCase, main
@@ -14,6 +12,8 @@ from unittest import TestCase, main
 from assembler.tokens import MAX_INT, MIN_INT, BITS
 from assembler.virtual_machine import mips_machine
 from assembler.assemble import assemble
+sys.path.append(".") # noqa
+
 
 NUM_TESTS = 100
 MAX_SHIFT = BITS // 2

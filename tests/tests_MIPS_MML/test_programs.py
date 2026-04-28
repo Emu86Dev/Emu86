@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-import sys
-sys.path.append(".") # noqa
-
 from assembler.virtual_machine import mips_machine
 from unittest import TestCase, main
 from assembler.assemble import assemble
+import sys
+sys.path.append(".") # noqa
+
 NUM_TESTS = 1000
 
 """
