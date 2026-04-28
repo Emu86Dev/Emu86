@@ -1190,7 +1190,7 @@ input#flag-cont {
 
 input#reg-cont, input#mem-cont, input#flag-cont, input#unwr-cont {
     border: none;
-    padding: 0px, 0px, 0px, 0px
+    padding: 0;
 }
 
 input#unwr-cont {
@@ -1457,6 +1457,9 @@ summary.menu_sum {
 #flags-table td {
     border-right: 2px solid #3AE501;
     font-size: 1.3rem;
+    line-height: 1.2;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 #flags-table td:last-child {
@@ -1464,7 +1467,13 @@ summary.menu_sum {
 }
     
 #flags-table input {
-    font-size: 1.3rem;
+    font: inherit;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
 }
 
 
