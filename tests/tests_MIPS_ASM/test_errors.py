@@ -2,10 +2,6 @@
 """
 Test our assembly interpreter.
 """
-
-import sys
-sys.path.append(".") # noqa
-
 from unittest import TestCase, main
 
 from assembler.virtual_machine import mips_machine
@@ -17,6 +13,9 @@ from assembler.errors import MISSING_COMMA, MISSING_DATA, INVALID_TOKEN
 from assembler.errors import MISSING_PC, INT_OUT_OF_RNG
 from assembler.errors import TOO_BIG_FOR_SINGLE, TOO_BIG_FOR_DOUBLE
 from assembler.errors import NOT_EVEN_REGISTER
+import sys
+sys.path.append(".") # noqa
+
 
 mips_machine.flavor = "mips_asm"
 LINE_ONE_MSG = 'Line 1: '

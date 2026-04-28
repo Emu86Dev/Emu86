@@ -4,12 +4,11 @@ import sys
 import struct
 import codecs
 import binascii
-
-sys.path.append(".") # noqa
-
 from assembler.virtual_machine import mips_machine
 from unittest import TestCase, main
 from assembler.assemble import assemble
+
+sys.path.append(".") # noqa
 
 NUM_TESTS = 1000
 

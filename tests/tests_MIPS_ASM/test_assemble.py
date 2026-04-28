@@ -2,10 +2,6 @@
 """
 Test our assembly interpreter.
 """
-import sys
-import random
-sys.path.append(".") # noqa
-
 import operator as opfunc
 
 from unittest import TestCase, main
@@ -13,9 +9,13 @@ from unittest import TestCase, main
 from assembler.tokens import MAX_INT, MIN_INT, BITS
 from assembler.virtual_machine import mips_machine
 from assembler.assemble import assemble
-
 # for floating point to binary and back
 import struct
+import sys
+import random
+sys.path.append(".") # noqa
+
+
 
 getBin = lambda x: x > 0 and str(bin(x))[2:] or "-" + str(bin(x))[3:] # noqa 
 
