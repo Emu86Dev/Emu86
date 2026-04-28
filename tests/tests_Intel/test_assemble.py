@@ -276,7 +276,7 @@ class AssembleTestCase(TestCase):
             a = random.randint(MIN_TEST, MAX_TEST)
             d = random.randint(MIN_TEST, MAX_TEST)
             b = 0
-            while(b == 0):    # Divisor can't be zero.
+            while (b == 0):    # Divisor can't be zero.
                 b = random.randint(MIN_TEST, MAX_TEST)
             correct_quotient = (opfunc.lshift(d, REGISTER_SIZE) + a) // b
             correct_remainder = (opfunc.lshift(d, REGISTER_SIZE) + a) % b
