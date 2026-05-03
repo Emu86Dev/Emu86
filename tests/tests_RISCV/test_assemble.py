@@ -200,35 +200,6 @@ class AssembleTestCase(TestCase):
             self.assertEqual(riscv_machine.registers["X10"], correct)
 
 
-'''
-    def test_slt_eq(self):
-        riscv_machine.registers["R8"] = 1
-        riscv_machine.registers["R9"] = 1
-        riscv_machine.base = "hex"
-        assemble("40000 SLT R10, R8, R9", 'riscv', riscv_machine)
-        self.assertEqual(riscv_machine.registers["R10"], 0)
-
-    def test_slt_l(self):
-        riscv_machine.registers["R8"] = 0
-        riscv_machine.registers["R9"] = 1
-        riscv_machine.base = "hex"
-        assemble("40000 SLT R10, R8, R9", 'riscv', riscv_machine)
-        self.assertEqual(riscv_machine.registers["R10"], 1)
-
-    def test_slti_eq(self):
-        riscv_machine.registers["R9"] = 1
-        riscv_machine.base = "hex"
-        assemble("40000 SLTI R10, R9, 1", 'riscv', riscv_machine)
-        self.assertEqual(riscv_machine.registers["R10"], 0)
-
-    def test_slti_l(self):
-        riscv_machine.registers["R9"] = 0
-        riscv_machine.base = "hex"
-        assemble("40000 SLTI R10, R9, 1", 'riscv', riscv_machine)
-        self.assertEqual(riscv_machine.registers["R10"], 1)
-
-'''
-
 
 if __name__ == '__main__':
     main()
