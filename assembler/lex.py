@@ -410,9 +410,6 @@ def lex(code, vm, base=None):
     Returns:
         tok_lines: the tokenized version
     """
-    # fallback: allows existing callers to omit base
-    if base is None:
-        base = getattr(vm, 'base', None)
     lines = code.split("\n")
 
     pre_processed_lines = []

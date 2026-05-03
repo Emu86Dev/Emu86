@@ -116,10 +116,6 @@ def assemble(code, vm, step=False, web=True, base=None):
             next
             Error, if any.
     """
-    # fallback: allows existing callers to omit base
-    if base is None:
-        base = getattr(vm, 'base', None)
-
     last_instr = ''
     error = ''
     bit_code = ''
