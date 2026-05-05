@@ -1169,7 +1169,7 @@ a.deletelink:focus, a.deletelink:hover {
 
 /* Styling for buttons and select dropdowns in button cells */
 
-td#flag, td#register, td#mem-loc {
+td.flag, td#register, td#mem-loc {
     color: white;
     background: black;
     vertical-align: middle
@@ -1185,13 +1185,13 @@ td#unwritable {
     vertical-align: middle
 }
 
-input#flag-cont {
+input[id^="flag-cont-"] {
     background: black;
     color: white;
 
 }
 
-input#reg-cont, input#mem-cont, input#flag-cont, input#unwr-cont {
+input#reg-cont, input[id^="mem-cont-"], input[id^="flag-cont-"], input#unwr-cont {
     border: none;
     padding: 0;
 }

@@ -197,11 +197,10 @@
                                         <table id="flags-table">
                                             <tr>
                                                 {% for flag, val in vm.flags.items %}
-                                                    <td id="flag"
-                                                        class="align-center">
+                                                    <td class="flag align-center">
                                                         {{ flag }} :
                                                         <input
-                                                            id="flag-cont"
+                                                            id="flag-cont-{{ flag|lower }}"
                                                             value="{{ val }}"
                                                             name="{{ flag }}"
                                                             size="1"
@@ -281,11 +280,10 @@
                                         <table id="flags-table">
                                             <tr>
                                                 {% for flag, val in vm.flags.items %}
-                                                    <td id="flag"
-                                                        class="align-center">
+                                                    <td class="flag align-center">
                                                         {{ flag }} :
                                                         <input
-                                                            id="flag-cont"
+                                                            id="flag-cont-{{ flag|lower }}"
                                                             value="{{ val }}"
                                                             name="{{ flag }}"
                                                             size="1"
@@ -336,7 +334,7 @@
                                     <td id="contents">
                                 {% endif %}
                                     <input
-                                        id="mem-cont"
+                                        id="mem-cont-data-{{ addr }}"
                                         value="{{ cont }}"
                                         name="{{ addr }}"
                                         size="5"
@@ -370,14 +368,14 @@
                                 {% endif %}
                                     {% if vm.data_init == "on" %}
                                         <input
-                                            id="mem-cont" class="mem-table-input"
+                                            id="mem-cont-stack-{{ addr }}" class="mem-table-input"
                                             value="{{ cont }}"
                                             name="{{ addr }}"
                                             size="5"
                                         >
                                     {% else %}
                                         <input
-                                            id="mem-cont" class="mem-table-input"
+                                            id="mem-cont-stack-{{ addr }}" class="mem-table-input"
                                             value="{{ cont }}"
                                             name="{{ addr }}"
                                             size="5"
