@@ -976,7 +976,10 @@ a.deletelink:focus, a.deletelink:hover {
 }
 
 #content {
-    padding: 20px 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: clamp(16px, 4vw, 72px);
+    padding-right: clamp(16px, 4vw, 72px);
 }
 
 .dashboard #content {
