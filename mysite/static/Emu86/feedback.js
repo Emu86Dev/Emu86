@@ -20,32 +20,6 @@
         return el && typeof el.value === 'string' ? el.value : '';
     }
 
-        function openMailto(form) {
-        if (!form) return;
-        var to = (form.getAttribute('data-to') || '').trim();
-        if (!to) {
-            alert('Feedback address is not configured.');
-            return;
-        }
-
-        var fd = new FormData(form);
-        var realname = String(fd.get('realname') || '');
-        var email = String(fd.get('email') || '');
-        var subjectRaw = String(fd.get('subject') || '').trim();
-        var message = String(fd.get('body') || '');
-        alert("realname: " + realname + " email: " + email + " subject: " + subjectRaw + " message: " + message);
-        var bodyRaw =
-            'From: ' + realname +
-            '\r\nEmail: ' + email +
-            '\r\n\r\n' + message;
-
-        var parts = [];
-        if (subjectRaw) parts.push('subject=' + encodeURIComponent(subjectRaw));
-        if (bodyRaw) parts.push('body=' + encodeURIComponent(bodyRaw));
-        var href = 'mailto:' + to + (parts.length ? ('?' + parts.join('&')) : '');
-        window.location.href = href;
-    }
-
     function bindFeedbackForm() {
         var form = document.getElementById('feedback-form');
         if (!form) return;
