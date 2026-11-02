@@ -153,8 +153,10 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'Emu86.log',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'Emu86.log'),
+            'maxBytes': 10 * 1024 * 1024,
+            'backupCount': 3,
             'formatter': 'verbose'
         },
     },
@@ -162,7 +164,7 @@ LOGGING = {
         'django': {
             'handlers': ['file'],
             'propagate': True,
-            'level': 'DEBUG',
+            'level': 'INFO',
         },
         'Emu86': {
             'handlers': ['file'],
